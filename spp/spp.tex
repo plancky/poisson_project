@@ -27,7 +27,7 @@
 %\addbibresource{spect.bib} %Import the bibliography file
 
 \usepackage[section]{placeins}
-
+\pagestyle{empty}
 %\titleformat{\section}{\vspace{-4pt}\scshape\raggedright\large}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
 \newcommand{\newsection}[1]{\section{\sffamily{\bfseries{#1}}}}
 \newcommand{\bd}[1]{\textbf{\textit{#1}}}
@@ -41,7 +41,7 @@
 		\large{\textcolor{greyish}{Shashvat Jain PHY1114, Brahmanand Mishra PHY1184, Akarsh Shukla PHY1216}}\\[3mm]
 		\begin{abstract}
 			\noindent
-			Poisson's equation is a Second-order linear partial differential equation that is all around you, with its ability to model steady-state scalar fields such as gravitational and electric potential fields, temperature and pressure fields, as boundary value problems, it is often found in the toolbox of any physicist or engineer studying aerodynamics, thermal physics, electrostatics or magnetostatics. That’s not all, the same equation is used in geophysics, image processing, caustics engineering, stress and strain modeling, Markov decision processes, to name a few.\\ \noindent
+			Poisson's equation is a Second-order linear partial differential equation that is all around you, with its ability to model steady-state scalar fields such as gravitational and electric potential fields, temperature and pressure fields, as boundary value problems, it is often found in the toolbox of any physicist or engineer studying aerodynamics, thermal physics, electrostatics or magnetostatics. That’s not all, the same equation is used in geophysics, image processing, caustics engineering, stress and strain modeling, Markov decision processes, to name a few.\\ \noindent
 			It would be a waste to let go of this opportunity to better understand Poisson's equation.  
 		\end{abstract}	
 	\end{center}
@@ -49,13 +49,13 @@
 	\newsection{PROJECT SYNOPSIS}
 	\noindent
 	We have already solved the Poisson’s equation for electrostatic potential in our Electromagnetism paper last semester, although what we were taught was good enough to get us to the solution, it felt as if the equation held more than what we could see and there is only one way to find out, that is, by understanding the working of some numerical methods that bypass the difficult math of PDEs and analyzing the graphs that are obtained. Fortunately, we will do both in our project.\\
-	The general form of poisson's equation in euclidean space is given here,
+	The general form of Poisson's equation in Euclidean space is given here,
 	\[
 		\scalebox{1.3}{$\nabla^2 \varphi(\vec{r}) = f(\vec{r})$}
 	\]
 	where, $f(\vec{r})$, $\varphi(\vec{r})$ are the functions of position vector $\vec{r}$. $f(\vec{r})$ is given and $\varphi(\vec{r})$ is sought. 
 	\noindent
-	There are several computational/numerical methods available for finding the solution to the poisson's equation 
+	There are several computational/numerical methods available for finding the solution to the Poisson's equation 
 	\begin{itemize}
 		\setlength\itemsep{0.01mm}
 		\item Finite differences followed by 
@@ -87,14 +87,15 @@
 	\end{itemize}
 
 	\newsection{OUTCOME}
-	{Our main goal is to be able to easily interpret the solution of the poisson’s equation in its generality by visualising this special equation for electrostatic potential for different conditions and studying the numerical methods. \\[2mm] \noindent}
+	{Our main goal is to be able to easily interpret the solution of the poisson’s equation in its generality by visualising this special equation for electrostatic potential for different conditions and studying the numerical methods. \\[2mm] \noindent
+}
 	{\bd{What we do not hope to achieve ?}\\[2mm] \noindent We would surely like to understand and analyse the result of our computation but we would not like to delve in the theoretical aspects of different methods involved in solving different partial equations due to the vastness of the topic and the limited nature of time.} \\[1mm]
 
 	\newsection{TIMELINE}
 	\begin{itemize}
 		\item \bd{Week 1 to 2 - UNDERSTANDING PERIOD} - This will include stage 1 \& 2 from our plan of action.
-		\item \bd{Week 3 to 5 - CODING PERIOD} - During this time we will code the numerical methods and graph the solutions for the report. (stage 3)
-		\item \bd{Week 6 to 7 - FINAL REPORT GENERATION AND CLEANUP} - This period will be spent on the final report generation, this includes explaining all that we have learnt in the report. stage(4 \& 5)
+		\item \bd{Week 3 to 6 - CODING PERIOD} - During this time we will code the numerical methods and graph the solutions for the report. (stage 3)
+		\item \bd{Week 7 to 8 - FINAL REPORT GENERATION AND CLEANUP} - This period will be spent on the final report generation, this includes explaining all that we have learnt in the report. stage(4 \& 5)
 	\end{itemize}	
 	
 \end{document}
