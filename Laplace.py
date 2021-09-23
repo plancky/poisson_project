@@ -2,6 +2,7 @@ from mpl_toolkits import mplot3d
 import numpy as np
 import matplotlib.pyplot as plt
 from numpy.lib.function_base import average
+import time as t
 
 
 def gauss1d(x):
@@ -24,8 +25,7 @@ def sor2d(x,overcf=1.93):
     for f in range(50):
         for i in range(1,k-1):
             for j in range(1,m-1):
-                correction =  (x[i-1][j]+x[i+1][j]+x[i][j+1]+x[i][j-1])/4 - x[i][j] 
-                x[i][j] += correction* overcf
+                x[i][j] += ((x[i-1][j]+x[i+1][j]+x[i][j+1]+x[i][j-1])/4 - x[i][j]) * overcf
     return(x)
 
 def sor2dpoisson(x,overcf=1.93,charge=[43,52,2]):
@@ -35,15 +35,14 @@ def sor2dpoisson(x,overcf=1.93,charge=[43,52,2]):
     for f in range(50):
         for i in range(1,k-1):
             for j in range(1,m-1):
-                correction =  (x[i-1][j]+x[i+1][j]+x[i][j+1]+x[i][j-1] + h[i][j])/4 - x[i][j] 
-                x[i][j] += correction*overcf
+                x[i][j] += ((x[i-1][j]+x[i+1][j]+x[i][j+1]+x[i][j-1] + h[i][j])/4 - x[i][j]) *overcf
     return(x)
 
 if __name__ == "__main__":
 
     #starting potentials 
-    INPUT=np.ones((100,))*5
-    INPUT2D = np.ones((100,100)) 
+    INPUT=np.ones((100,),dtype="single")*5
+    INPUT2D = np.ones((100,100),dtype="single") 
     ##Dirichlet Boundary values
     boundary_var = [1,0]
     boundary_var2d = np.ones(100,)*0
@@ -59,7 +58,9 @@ if __name__ == "__main__":
     X, Y = np.meshgrid(x, y)
     #print(func2d(INPUT2D))
     #ax.plot_surface(X,Y,sor2dpoisson(INPUT2D), rstride=1, cstride=1,cmap='winter', edgecolor='none')
-
+    t0 = t.time()
     plt.pcolormesh(sor2dpoisson(INPUT2D))
-
+    t1= t.time()
+    print(t1-t0)
+    
     plt.show()
