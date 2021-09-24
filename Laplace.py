@@ -12,40 +12,33 @@ def gauss1d(x):
             y[i]=(y[i-1]+y[i+1])/2
     return(y)
 
-def gauss2d(x):
-    k,m = x.shape[0],x.shape[1]
-    for f in range(500):
-        for i in range(1,k-1):
-            for j in range(1,m-1):
-                x[i][j]= (x[i-1][j]+x[i+1][j]+x[i][j+1]+x[i][j-1])/4
-    return(x)
-
-def sor2d(x,overcf=1.93):
-    k,m = x.shape[0],x.shape[1]
-    for f in range(50):
-        for i in range(1,k-1):
-            for j in range(1,m-1):
-                x[i][j] += ((x[i-1][j]+x[i+1][j]+x[i][j+1]+x[i][j-1])/4 - x[i][j]) * overcf
-    return(x)
-
-def sor2dpoisson(x,overcf=1.93,charge=[43,52,2]):
+def sor2dpoisson(x,overcf=1.9,charge=[3,2,2]):
     k,m = x.shape[0],x.shape[1]
     h = np.zeros(x.shape)
-    h[charge[0],charge[1]] = charge[2]
-    for f in range(50):
+    if h is not None :
+        h[charge[0],charge[1]] = charge[2]
+    for f in range(1000):
+        new_x= np.array(x)    #IMP : duplicates array and avoids linking 
         for i in range(1,k-1):
             for j in range(1,m-1):
-                x[i][j] += ((x[i-1][j]+x[i+1][j]+x[i][j+1]+x[i][j-1] + h[i][j])/4 - x[i][j]) *overcf
-    return(x)
+                new_x[i][j] += ((new_x[i-1][j]+new_x[i+1][j]+new_x[i][j+1]+new_x[i][j-1] + h[i][j])/4 - new_x[i][j]) * overcf
+    
+        if np.allclose(x,new_x,atol=1e-5):
+            print(f)
+            break
+        else:
+            x = new_x
+            
+    return(new_x)
 
 if __name__ == "__main__":
-
+    gd = 50
     #starting potentials 
-    INPUT=np.ones((100,),dtype="single")*5
-    INPUT2D = np.ones((100,100),dtype="single") 
+    INPUT=np.ones((gd,),dtype="single")*5
+    INPUT2D = np.ones((gd,gd),dtype="single") 
     ##Dirichlet Boundary values
     boundary_var = [1,0]
-    boundary_var2d = np.ones(100,)*0
+    boundary_var2d = np.ones(gd,)*0
     INPUT2D[0],INPUT2D[-1] = boundary_var2d ,boundary_var2d /2
     INPUT[0],INPUT[-1] = boundary_var[0],boundary_var[-1]
     
@@ -53,8 +46,8 @@ if __name__ == "__main__":
     #ax = plt.axes(projection="3d")
     #x=np.linspace(5,100,100)
     #plt.plot(x,gauss1d(INPUT))
-    x = np.linspace(-5,5,100)
-    y = np.linspace(-5,5,100)
+    x = np.linspace(-5,5,gd)
+    y = np.linspace(-5,5,gd)
     X, Y = np.meshgrid(x, y)
     #print(func2d(INPUT2D))
     #ax.plot_surface(X,Y,sor2dpoisson(INPUT2D), rstride=1, cstride=1,cmap='winter', edgecolor='none')
@@ -62,5 +55,5 @@ if __name__ == "__main__":
     plt.pcolormesh(sor2dpoisson(INPUT2D))
     t1= t.time()
     print(t1-t0)
-    
+
     plt.show()
