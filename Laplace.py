@@ -6,19 +6,33 @@ import time as t
 
 
 class Mesh:
-    def __init__(self,x,y):
-        self.input2d=np.zeros((x,y),dtype="single")
-        self.xdim,self.ydim=x,y
-    def dirichlet(self,x):
-        self.input2d[0],self.input2d[-1] = x[0] , x[1]
-        self.input2d.T[0],self.input2d.T[-1] =  x[2] ,x[3]
+    def __init__(self,x=(0,1),y=(0,1),h=0.1,gtype="2D"):
+        self.x_dim,self.y_dim=int((x[1]-x[0])//h +1),int((y[1]-y[0])//h +1) 
+        self.y_dom=np.linspace(y[0],y[1],self.y_dim)
+        self.x_dom=np.linspace(x[0],x[1],self.x_dim)
+        self.gtype= gtype 
+        if self.gtype == "1D":
+            self.grid=np.zeros((self.x_dim,),dtype="single")
+        elif self.gtype == "2D":
+            self.grid=np.zeros((self.y_dim,self.x_dim),dtype="single")
+
+    def dirichlet(self,x,excluded = "y"):
+        if self.gtype=="2D" and len(x)==4:
+            if excluded != "x":
+                self.grid[0,:],self.grid[-1,:] = x[0] , x[1]
+            if excluded !="y":
+                self.grid[:,0],self.grid[:,-1] =  x[2] ,x[3]
+        elif self.gtype == "1D" and len(x)==2:
+            self.grid[0],self.grid[-1] = x[0] , x[1]
+        else:
+            raise ValueError("Expected {0} but recieved {1} Boundary conditions.".format(self.gtype[0],len(x)))
     def get(self):
-        return(self.input2d)
+        return(self.grid)
 
 
 def gauss1d(x):
     y = np.array(x)
-    for j in range(10000):
+    for j in range(500):
         for i in range(1,len(y)-1):
             y[i]=(y[i-1]+y[i+1])/2
     return(y)
@@ -55,16 +69,19 @@ def sor2dpoisson(x,overcf=1.9,charge=np.array([[25,20,-4],[25,24,4]])):
     return(new_x)
 
 if __name__ == "__main__":
+
     t0 = t.time()
-    mymesh = Mesh(50,50)
-    bound = np.ones((mymesh.xdim,))
-    mymesh.dirichlet([bound*0,bound*0,bound*2,bound*-2])
-    INPUT2D = mymesh.get()
-    pfield = sor2dpoisson(INPUT2D)
+    mm = Mesh((0,3),(0,6),h=0.1)
+    bound_x = np.ones((mm.x_dim,))
+    bound_y = np.ones((mm.y_dim,))
+    mm.dirichlet([bound_x*2,bound_x*-2,bound_y*2,bound_y*-2],excluded="x")
+    INPUT2D = mm.get()
+    #print(INPUT2D)
+    X, Y = np.meshgrid(mm.x_dom,mm.y_dom)
+    #print(mm.x_dom)
+    
+    pfield = sor2dpoisson(INPUT2D,charge= None)
     vect= np.gradient(-1*pfield)
-    x = np.linspace(0,mymesh.xdim,mymesh.xdim)
-    y = np.linspace(0,mymesh.xdim,mymesh.xdim)
-    X, Y = np.meshgrid(x, y)
     plt.contourf(X,Y,pfield,38,cmap="coolwarm")
     t1= t.time()
     print(t1-t0)
