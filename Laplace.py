@@ -51,6 +51,7 @@ def sor2dpoisson(x,overcf=1.9,charge=np.array([[25,20,-4],[25,24,4]])):
             for j in range(1,m-1):
                 left = new_x[i][j-1]
                 right = new_x[i][j+1]
+                ##Neumann 0 wrt y-axis at y_upper and y_lower bounds 
                 if i == k-1 :
                     up = new_x[i-1][j]
                 else :
@@ -74,7 +75,7 @@ if __name__ == "__main__":
     mm = Mesh((0,3),(0,6),h=0.1)
     bound_x = np.ones((mm.x_dim,))
     bound_y = np.ones((mm.y_dim,))
-    mm.dirichlet([bound_x*2,bound_x*-2,bound_y*2,bound_y*-2],excluded="x")
+    mm.dirichlet([None,None,bound_y*2,bound_y*-2],excluded="x")
     INPUT2D = mm.get()
     #print(INPUT2D)
     X, Y = np.meshgrid(mm.x_dom,mm.y_dom)

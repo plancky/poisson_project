@@ -1,0 +1,65 @@
+\documentclass[letterpaper,11pt]{report}
+\usepackage[a4paper, total={6.5in, 11in}]{geometry}
+\usepackage{amsmath}
+\setlength{\parindent}{-1pt}
+\numberwithin{equation}{section}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{tabularx}
+\newcommand{\pa}{\partial}
+
+%%%%%%%%%%%
+\begin{document}    
+\section{Finite Differences}
+Poisson's equation is given by,
+\begin{equation}
+    -\nabla^2 u(x,y) = \rho(x,y)    
+\end{equation}
+
+The laplacian in euclidean geometry is defined as the sum of second derivatives of the function $u(x,y)$ with each of the independent variables.
+In 2D we have,
+\begin{equation}
+    \nabla^2 u(x,y) = \frac{\pa ^2 u}{\pa x^2} + \frac{\pa ^2 u}{\pa y^2} = u_{xx} + u_{yy}    
+\end{equation}
+
+{\Large Difference Quotient}
+
+    Forward
+    \[
+        u_x = \lim_{h \rightarrow 0} \frac{u(x+h,y) - u(x,y)}{h}
+    \] 
+    Backward
+    \[
+        u_x = \lim_{h \rightarrow 0} \frac{u(x,y) - u(x-h,y)}{h}
+    \]
+    Centered
+    \[
+        u_x = \lim_{h \rightarrow 0} \frac{u(x+\frac{h}{2},y) - u(x-\frac{h}{2},y)}{h}
+    \]
+
+    Second Derivative
+    \begin{align*}
+        u_{xx} &= \lim_{h \rightarrow 0} \frac{u_x(x+\frac{h}{2},y) - u_x(x-\frac{h}{2},y)}{h} \\
+        &= \lim_{h \rightarrow 0} \frac{\frac{u(x+h,y) - u(x,y)}{h} - \frac{(u(x,y)- u(x-h,y))}{h}}{h}\\
+        &= \lim_{h \rightarrow 0}\frac{u(x+h,y)-2 u(x,y) + u(x-h,y)}{h^2}
+    \end{align*}
+    Considering h to be sufficiently small we obtain the finite Difference approximation introducing the error term that will be ascertained later,
+    \begin{equation}
+        u_{xx} \approx \frac{u(x+h,y)-2 u(x,y) + u(x-h,y)}{h^2}
+    \end{equation}
+
+    If Domain of the function is confined to a Region R and discritized by considering a set of points lying on the intersections of the square mesh given below,
+    
+    \begin{align*}
+        u_{xx}(jh,kh)
+    \end{align*}
+    \\[2mm] the Finite Difference approximations are then applied to each and every point on the grid to obtain a system of linear equations which can then be solved explicity for less number of points or implicitly using iterative relaxation methods.
+    \\[2mm]
+
+
+    {\Large Error}
+    
+    
+    
+     
+\end{document}
