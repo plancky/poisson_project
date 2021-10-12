@@ -1,0 +1,94 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+
+\title{ Successive Over Relaxation Method}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+This method is a variant of \textbf{Guass- siedel law} for solving a linear system of equation by iterative method , resulting in faster convergence. The main purpose of this method is to solve the linear systems automatically on the digital systems.These methods were designed for computation by \textbf{human calculators}.\linebreak
+
+\hspace*{5mm}\textit{This method was introduced by  \textbf{David M. Young Jr.} and by \textbf{Stanley P. Frankel} in $1950$}
+
+\section{ Mathematic Form}
+
+Suppose, we have $n$ numbers of linear equations with $x$ as unknown.
+So , it can also be written as:
+\begin{equation} \label{eq1}
+AX = {b}
+\end{equation}
+where, \linebreak
+\hspace*{10mm}
+\[ A=
+\begin{bmatrix}
+a_{11} & a_{12} & a_{13} &  & . & . & . & a_{1n}\\
+a_{21} & a_{22} & a_{23} & . & . & . & . & a_{2n}\\
+a_{31} & a_{32} & a_{33} & . & . & . & . & a_{3n}\\
+. & . & . & . & . & . & . & .\\ 
+. & . & . & . & . & . & . & .\\
+a_{n1} & a_{n2} & a_{n3} & . & . & . & . & a_{nn}\\ 
+\end{bmatrix}
+,
+\] 
+X=
+$\begin{bmatrix}
+x_{1}\\
+x_{2}\\
+x_{3}\\
+.\\
+.\\
+.\\
+x_{n}\\
+
+\end{bmatrix}$
+\hspace*{3mm}
+and b=
+$\begin{bmatrix}
+b_{1}\\
+b_{2}\\
+b_{3}\\
+.\\
+.\\
+.\\
+b_{n}\\
+
+\end{bmatrix}$\linebreak
+
+Now breaking matrix A in $D$ (\textsc{ diagonal component}), $L$ (\textsc{Lower triangular matrix}) and  $U$ (\textsc{upper triangular matrix})\linebreak  
+Therefore, A can be written as-
+\begin{equation} \label{eq2}
+A = D + L + U
+\end{equation}
+where,
+\hspace*{10mm}
+$D={\begin{bmatrix}a_{11}&0&\cdots &0\\0&a_{22}&\cdots &0\\\vdots &\vdots &\ddots &\vdots \\0&0&\cdots &a_{nn}\end{bmatrix}},\quad L={\begin{bmatrix}0&0&\cdots &0\\a_{21}&0&\cdots &0\\\vdots &\vdots &\ddots &\vdots \\a_{n1}&a_{n2}&\cdots &0\end{bmatrix}}$\linebreak
+
+and
+\hspace{8mm}
+$\quad U={\begin{bmatrix}0&a_{12}&\cdots &a_{1n}\\0&0&\cdots &a_{2n}\\\vdots &\vdots &\ddots &\vdots \\0&0&\cdots &0\end{bmatrix}}.$
+
+Now, equation (1) can  be written as -
+\begin{equation} \label{eq3}
+(D+\omega L)\mathbf {x} =\omega \mathbf {b} -[\omega U+(\omega -1)D]\mathbf {x} 
+\end{equation}
+Here , the constant $\omega$ is called the relaxation factor.\linebreak
+As, we already mentioned that it is a iterative method so we can solve the left hand side of the above equation  for $\mathbf{x}$ using the previous value of $\mathbf{x}$ from the right hand side.
+
+Now using \textbf{iteration } it can be written as :
+
+$\mathbf {x} ^{(k+1)}=(D+\omega L)^{-1}{\big (}\omega \mathbf {b} -[\omega U+(\omega -1)D]\mathbf {x} ^{(k)}{\big )}=L_{w}\mathbf {x} ^{(k)}+\mathbf {c}$
+
+where,\linebreak 
+\hspace*{10mm}\textbf{$X^k$} is the $n^{th}$ approximation. \linebreak 
+\hspace*{10mm}\textbf{$X^{k+1}$} is the next approximation to $n^{th}$. \linebreak
+
+Now,by using \textbf{forward substitution} it can be written as:
+\[
+x_{i}^{k+1}=(1-\omega )x_{i}^{k}+{\frac {\omega }{a_{ii}}}\left(b_{i}-\sum _{j<i}a_{ij}x_{j}^{(k+1)}-\sum _{j>i}a_{ij}x_{j}^{(k)}\right)\]
+\[where ,\quad i=1,2,\ldots ,n.
+\]
+\end{document}
+

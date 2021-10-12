@@ -1,0 +1,86 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath} 
+
+\title{Guass- seidel Method :-}
+\begin{document}
+\maketitle
+\section{Introduction }
+It is an iterative method that is used to solve a \textbf{system of linear equations }. This method is applicable on the matrices which have \textbf{ strictly diagonal dominant}(that means their diagonal elements must be \textbf{greater} than the sum of the other elements in that particular row), or \textbf{symmetric}(as we all know that the matrix whose transpose is the matrix itself) and \textbf{positive definite} ( that means the matrix which multiplied with a non zero column matrix and its transpose simultaneously gives all positive number).
+
+\textit{This method was given by German mathematician Guass and siedel and was published in 1874}
+
+\section{Mathematic Form}
+
+Suppose, we have $n$ numbers of linear equations with $x$ as unknown.
+So , it can also be written as:
+\begin{equation} \label{eq1}
+AX = {b}
+\end{equation}
+
+Now breaking matrix A in $L$ (\textsc{Lower triangular matrix}) and  $U$ (\textsc{upper triangular matrix})   .
+Therefore, A can be written as :
+\begin{equation} \label{eq2}
+A = L + U
+\end{equation}
+
+where,\linebreak
+\hspace*{10mm} \textbf {L}  is the matrix whose upper part of the  diagonal is zero.\linebreak
+\[ L=
+\begin{bmatrix}
+a_{11} & 0 & 0 & . & . & . & . & 0\\
+a_{21} & a_{22} & 0 & . & . & . & . & 0\\
+a_{31} & a_{32} & a_{33} & . & . & . & . & 0\\
+. & . & . & . & 0 & . & . & 0\\ 
+. & . & . & . & . & . & 0 & 0\\
+a_{n1} & a_{n2} & a_{n3} & . & . & . & . & a_{nn}\\ 
+
+\end{bmatrix}
+\]
+\hspace*{13mm}\textbf{U} is the matrix whose lower part of the main diagonal is zero .\linebreak
+\[ U =
+\begin{bmatrix}
+0 & a_{12} & a_{13} & . & . & . & . & a_{1n}\\
+0 & 0 & a_{23} & . & . & . & . & a_{2n}\\
+0 & 0 & 0 & a_{34} & . & . & . & a_{3n}\\
+. & . & . & . & . & . & . & .\\ 
+. & . & . & . & . & . & . & .\\
+0 & 0 & 0 & . & . & . & . & 0\\ 
+\end{bmatrix}
+\]
+Now, equation (1) can  be written as -
+\begin{equation} \label{eq3}
+( L + U)X =  b
+\end{equation}
+
+so,\linebreak
+\[ LX= b - UX\]
+Now using \textbf{iteration } it can be written as :-
+\begin{equation} \label{eq4}
+LX^n+1 = b- UX^n
+\end{equation}
+
+where,\linebreak 
+\hspace*{10mm}\textbf{$X^n$} is the $n^{th}$ approximation. \linebreak 
+\hspace*{10mm}\textbf{$X^{n+1}$} is the next approximation to $n^{th}$. \linebreak
+
+from equation(4) :-
+\begin{equation}\label{5}
+X^{n+1} = L^{-1} [ b - U x^{n}] 
+\end{equation}\
+Now, we can use \textbf{ forward substitution} in which  previous values are used to find the next values.
+
+Now, equation(5) can be written as -
+\[ X^{n+1} = L^{-1}b - L^{-1}(U)X^{n}]\]
+Now , let $ c = L^{-1}$ and $ d = x^{n}$
+substituting these terms in the above equation-
+\begin{equation}\label{6}
+X^{n+1} = c + d(x^{n)}
+\end{equation}
+
+This equation obtained is the general form of the Guass- siedel Method of finite difference.
+
+\section{Discussion}
+The advantage of the Guass- siedel method is that it uses the first unknown to find the second and then first and second to find the third unknown that is why it is also known as successive displacement method.
+
+\end{document}
