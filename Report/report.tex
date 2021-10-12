@@ -1,0 +1,78 @@
+\documentclass[11pt]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+%%%Margins and Indent 
+\setlength{\parindent}{-1pt}
+\usepackage{geometry}
+\geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=15mm,
+ right = 15mm,
+ bottom=20mm ,
+ top=20mm,}
+ 
+%%% Font
+\usepackage{amsmath}
+
+
+\numberwithin{equation}{section}
+\usepackage{tabularx}
+\newcommand{\pa}{\partial}
+
+%%%%%%%%%%%
+\begin{document}
+\section{\sffamily Finite Difference Methods}
+Finite Difference Methods(FDM) are used for approximating the solution of partial differential equations over a set of finite points, arranged in a geometrical structure called a \textbf{mesh}%
+\footnote[1]{An object which consists of points which are spaced in a specific geometrical pattern is referred to as a \textbf{mesh} and each point in this mesh is called a \textbf{node}. The distance between any two adjacent nodes in a mesh with uniform spacing is called its \textbf{meshsize}}%
+, in the continous domain of solution. The methods involve the idea of reducing the given PDE, by means of truncated taylor series approximation of the derivatives, to a difference equation which is much easier to digest numerically. 
+\subsection{Finite Difference Approximations}
+The quality of the solution depends on the quality of approximations made to the derivatives.
+%%%
+Consider this one-dimensional structured mesh of nodes $(x_0,x_1,x_2,..,x_i,..,x_n)$ at which the solution $U(x_i)$  is to be found, such that the difference $h = x_{i+1} - x_i $ is constant throughout the mesh and $x_i = x_0 + ih$\\
+Let $U_i$ represent the solution at the $i$-th node and 
+\begin{equation*}
+    \left. \frac{\partial U}{\partial x} \right|_{x_ i} = U_{x}(x_0 + ih) \equiv U_{x}|_i
+\end{equation*} 
+\begin{equation*}
+    \left. \frac{\partial^2 U}{\partial x^2} \right|_{x_ i} = U_{xx}(x_0 + ih) \equiv U_{xx}|_i
+\end{equation*}
+
+The first order derivative can be defined as,
+{\raggedright 
+\begin{align*}
+    &\text{} \hspace{1cm} U_x|_i = \lim_{h \to 0} \frac{U_{i+1} - U_i}{h}  \\
+    &\text{or,} \hspace{1cm} U_x|_i = \lim_{h \to 0} \frac{U_{i} - U_{i-1}}{h}  \\
+    &\text{or,} \hspace{1cm} U_x|_i = \lim_{h \to 0} \frac{U_{i+1} - U_{i-1}}{2h}  
+\end{align*}
+}
+
+Finite difference approximations are obtained by dropping the limit and can be written as, 
+ 
+\begin{flalign*}
+    &\text{Forward Difference} \hspace{1cm} U_x|_i \approx \frac{U_{i+1} - U_i}{h} \equiv \delta^+_{h} U_i  \\
+    &\text{Backward Difference} \hspace{1cm} U_x|_i \approx \frac{U_{i} - U_{i-1}}{h} \equiv \delta^-_{h} U_i \\
+    &\text{Central Difference} \hspace{1cm} U_x|_i \approx \frac{U_{i+1} - U_{i-1}}{2h} \equiv \delta_{2h} U_i 
+\end{flalign*}
+Where $\delta^+_{h} , \delta^-_{h} , \delta_{2h}$ are called the \textbf{first-order finite diference operators} and the expansion is called the \textbf{finite difference quotient}, each representing forward,backward and centered respectively.
+Second and Higher order finite difference Quotients can also be obtained,
+\begin{align*}
+    U_{xx}|_i &= \lim_{h \to 0} \frac{U_x(x_i+\frac{h}{2},y) - U_x(x_i-\frac{h}{2},y)}{h} \\
+    &= \lim_{h \to 0} \frac{1}{h} \left[{\frac{U(x+h,y) - U(x,y)}{h} - \frac{(U(x,y)- u(x-h,y))}{h}}\right]\\
+    &= \lim_{h \to 0}\frac{U_{i+1}-2 U_i + U_{i-1}}{h^2} \\
+    &\approx \boxed{\delta^2_h U_i \equiv \frac{1}{h^2}(U_{i+1}-2 U_i + U_{i-1})} \hspace{1cm} \text{[Central second-order Difference]}
+\end{align*}
+\vfill
+\section{Basic Trucation Error Analysis}
+\section{Iterative Methods}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\section{Problems}
+Analysis  
+
+
+\end{document}
+%%%%%%%%%%%
