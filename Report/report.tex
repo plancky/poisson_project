@@ -21,6 +21,8 @@
 \numberwithin{equation}{section}
 \usepackage{tabularx}
 \newcommand{\pa}{\partial}
+\newcommand{\mcm}[1]{\mathcal{#1}}
+\newcommand{\bo}{\mcm{O}}
 
 %%%%%%%%%%%
 \begin{document}
@@ -52,20 +54,47 @@ The first order derivative can be defined as,
 Finite difference approximations are obtained by dropping the limit and can be written as, 
  
 \begin{flalign*}
-    &\text{Forward Difference} \hspace{1cm} U_x|_i \approx \frac{U_{i+1} - U_i}{h} \equiv \delta^+_{h} U_i  \\
-    &\text{Backward Difference} \hspace{1cm} U_x|_i \approx \frac{U_{i} - U_{i-1}}{h} \equiv \delta^-_{h} U_i \\
-    &\text{Central Difference} \hspace{1cm} U_x|_i \approx \frac{U_{i+1} - U_{i-1}}{2h} \equiv \delta_{2h} U_i 
+    &\text{Forward Difference} \hspace{1cm} U_x|_i \approx \frac{U_{i+1} - U_i}{h} \equiv \delta^+_{x} U_i  \\
+    &\text{Backward Difference} \hspace{1cm} U_x|_i \approx \frac{U_{i} - U_{i-1}}{h} \equiv \delta^-_{x} U_i \\
+    &\text{Central Difference} \hspace{1cm} U_x|_i \approx \frac{U_{i+1} - U_{i-1}}{2h} \equiv \delta_{2x} U_i 
 \end{flalign*}
-Where $\delta^+_{h} , \delta^-_{h} , \delta_{2h}$ are called the \textbf{first-order finite diference operators} and the expansion is called the \textbf{finite difference quotient}, each representing forward,backward and centered respectively.
+Where $\delta^+_{x} , \delta^-_{x} , \delta_{2x}$ are called the \textbf{first-order finite diference operators} and the expansion is called the \textbf{finite difference quotient}, each representing forward,backward and centered respectively.
 Second and Higher order finite difference Quotients can also be obtained,
 \begin{align*}
-    U_{xx}|_i &= \lim_{h \to 0} \frac{U_x(x_i+\frac{h}{2},y) - U_x(x_i-\frac{h}{2},y)}{h} \\
-    &= \lim_{h \to 0} \frac{1}{h} \left[{\frac{U(x+h,y) - U(x,y)}{h} - \frac{(U(x,y)- u(x-h,y))}{h}}\right]\\
+    U_{xx}|_i &= \lim_{h \to 0} \frac{U_x(x_i+\frac{h}{2}) - U_x(x_i-\frac{h}{2})}{h} \\
+    &= \lim_{h \to 0} \frac{1}{h} \left[{\frac{U(x+h) - U(x)}{h} - \frac{(U(x)- U(x-h))}{h}}\right]\\
     &= \lim_{h \to 0}\frac{U_{i+1}-2 U_i + U_{i-1}}{h^2} \\
-    &\approx \boxed{\delta^2_h U_i \equiv \frac{1}{h^2}(U_{i+1}-2 U_i + U_{i-1})} \hspace{1cm} \text{[Central second-order Difference]}
+    &\approx \boxed{\delta^2_x U_i \equiv \frac{1}{h^2}(U_{i+1}-2 U_i + U_{i-1})} \hspace{1cm} \text{[Central second-order Difference]}
 \end{align*}
 \vfill
-\section{Basic Trucation Error Analysis}
+\subsection{Local Truncation Error of Finite Difference Approximations}
+The \textit{'error'} that accompanies \textit{'approximations'} in the method must be acccounted for. In this section, the truncation error in the derivative approximations is ascertained which will later help us deduce the error in PDE's solved using these approximations.
+\\[2mm]
+\textbf{The local truncation error for derivative approximations} is defined here as the difference between the exact value of the derivate and the approximated value at node $i$, it can be calculated using Taylor series expansions about $i$,\\[2mm]
+For First-order Forward difference operator, 
+\begin{align*}
+    \tau &\equiv \delta _ x^{+} U_ i - {U_ x}|_ i \\
+    &= \frac{1}{{\scriptstyle \Delta } x}\left( U_ {i+1} - U_{i}\right) - {U_ x}|_i \\
+    &= \frac{1}{{\scriptstyle \Delta } x}\left[ \left( U_ i + {\scriptstyle \Delta } x{U_ x}|_ i + \frac{1}{2}{\scriptstyle \Delta } x^2{U_{xx}}|_ i + \mcm{O}({\scriptstyle \Delta } x^3)\right) - U_i \right] - {U_ x}|_ i \\
+    &= \frac{1}{2}{\scriptstyle \Delta } x{U_{xx}}|_ i + \mcm{O}({\scriptstyle \Delta } x^2) = \mcm{O}(\Delta x)
+\end{align*}
+For First-order Backward difference operator, 
+\begin{align*}s
+    \tau &\equiv \delta _ x^{-} U_ i - {U_ x}|_ i \\
+    &= \frac{1}{{\scriptstyle \Delta } x}\left( U_ i - U_{i-1}\right) - {U_ x}|_i \\
+    &= \frac{1}{{\scriptstyle \Delta } x}\left[ U_ i - \left( U_ i - {\scriptstyle \Delta } x{U_ x}|_ i + \frac{1}{2}{\scriptstyle \Delta } x^2{U_{xx}}|_ i + \mcm{O}({\scriptstyle \Delta } x^3)\right)\right] - {U_ x}|_ i \\
+    &= -\frac{1}{2}{\scriptstyle \Delta } x{U_{xx}}|_ i + \mcm{O}({\scriptstyle \Delta } x^2) = \mcm{O}(\Delta x)  
+\end{align*}
+For First-order Central difference operator,
+\begin{align*}
+    \tau &\equiv \delta _ {2x} U_ i - {U_ x}|_ i \\
+    &= \frac{1}{{2 \scriptstyle \Delta } x}\left( U_ {i+1} - U_{i-1}\right) - {U_ x}|_i \\
+    &= \frac{1}{{2 \scriptstyle \Delta } x}[ \left( U_ i + {\scriptstyle \Delta } x{U_ x}|_ i + \frac{1}{2}{\scriptstyle \Delta } x^2{U_{xx}}|_ i + \frac{1}{6}{\scriptstyle \Delta } x^3{U_{xxx}}|_ i + \frac{1}{12}{\scriptstyle \Delta } x^4{U_{xxxx}}|_ i + \mcm{O}({\scriptstyle \Delta } x^5)\right) \\
+    &\qquad - \left( U_ i - {\scriptstyle \Delta } x{U_ x}|_ i + \frac{1}{2}{\scriptstyle \Delta } x^2{U_{xx}}|_ i - \frac{1}{6}{\scriptstyle \Delta } x^3{U_{xxx}}|_ i + \frac{1}{12}{\scriptstyle \Delta } x^4{U_{xxxx}}|_ i +\mcm{O}({\scriptstyle \Delta } x^5)\right)] - {U_ x}|_ i \\
+    &= -\frac{1}{6}\Delta x^2 U_{xxx_ i} + \mcm{O}(\Delta x^4) = \mcm{O}(\Delta x^2)
+\end{align*}
+where in the above expressions we assume that the Higher order derivatives of $U$ at $i$ are well defined. For a fairly small $\Delta x$ (less than 1) we can confidently say that $\bo(\Delta x^2)$ is samller than $\bo(\Delta x)$\footnote{The definition of the "big $\bo$" notation says that if for given functions $f(x)$ and $g(x)$ for $x \in S$ where S is some subset of $\mathbf{R}$, there exists a positive constant A such that $|f(x)| \leq A|g(x)|$ $\forall$ $x \in S$, we say that $f(x)$ is the "big $\bo$" of $g(x)$ or that $f(x)$ is of order of $g(x)$, mathematically given by $f(x) = \bo(g(x))$} .Thus we note that the centered difference approximation (second-order approximation) approximates the derivative more accurately than either of the \textit{one-sided diferences}\footnote{Forward and Backward differences are also called one-sided differences}
+
 \section{Iterative Methods}
 
 
