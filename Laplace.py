@@ -4,6 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import time as t
 
+from numpy.core.function_base import linspace
+
 
 class Mesh:
     def __init__(self,x=(0,1),y=(0,1),h=0.1,gtype="2D"):
@@ -30,13 +32,34 @@ class Mesh:
         return(self.grid)
 
 
-def gauss1d(x):
-    y = np.array(x)
-    for j in range(500):
+def gauss1d(x,an):
+    lst=[]
+    for j in range(20000):
+        y = np.array(x)
         for i in range(1,len(y)-1):
             y[i]=(y[i-1]+y[i+1])/2
-    return(y)
+        lst.append(np.round_(y-an,6))
+        if np.allclose(x,y,atol=1e-8):
+            print(j)
+            break
+        else:
+            x = y 
+    return(y,lst)
 
+def ne1d(x,an,g):
+    lst=[]
+    h= g[1] - g[0]
+    for j in range(20000):
+        y = np.array(x)
+        for i in range(1,len(y)-1):
+            y[i]=(y[i-1]+y[i+1]-2 *(h**2)*(np.pi**2)*np.sin(np.pi*g[i]))/(2 + (np.pi*h)**2)
+        lst.append(np.round_(y-an,6))
+        if np.allclose(x,y,atol=1e-8):
+            print(j)
+            break
+        else:
+            x = y 
+    return(y,lst)
 #@jit("f8[:,:](f8[:,:],f4,f8[:,:])",nopython=True,nogil=True)
 def sor2dpoisson(x,overcf=1.9,charge=np.array([[25,20,-4],[25,24,4]])):
     k,m = x.shape[0],x.shape[1]
@@ -72,6 +95,18 @@ def sor2dpoisson(x,overcf=1.9,charge=np.array([[25,20,-4],[25,24,4]])):
 if __name__ == "__main__":
 
     t0 = t.time()
+    '''
+    m = Mesh((0,1),h=0.01,gtype="1D")
+    mesh = m.get()
+    mesh[0],mesh[-1] = 0,-1
+    f = lambda x : -1*x 
+    B = gauss1d(mesh,f(m.x_dom))
+    #print(f(m.x_dom))
+    #plt.plot(m.x_dom,B[0])
+    for j in B[1]:
+        plt.plot(m.x_dom,j)
+    plt.show()
+    '''
     mm = Mesh((0,3),(0,6),h=0.1)
     bound_x = np.ones((mm.x_dim,))
     bound_y = np.ones((mm.y_dim,))
@@ -84,8 +119,6 @@ if __name__ == "__main__":
     pfield = sor2dpoisson(INPUT2D,charge= None)
     vect= np.gradient(-1*pfield)
     plt.contourf(X,Y,pfield,38,cmap="coolwarm")
-    t1= t.time()
-    print(t1-t0)
 
     #plt.quiver(X,Y,vect[1],vect[0])
     #fig = plt.figure()
@@ -96,5 +129,7 @@ if __name__ == "__main__":
     #x=np.linspace(5,100,100)
     #plt.plot(x,gauss1d(INPUT))
 
-
+    
+    t1= t.time()
+    print(t1-t0)
 
