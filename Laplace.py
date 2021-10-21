@@ -34,16 +34,15 @@ class Mesh:
 
 def gauss1d(x,an):
     lst=[]
+    y=np.array([x])
     for j in range(20000):
-        y = np.array(x)
-        for i in range(1,len(y)-1):
-            y[i]=(y[i-1]+y[i+1])/2
-        lst.append(np.round_(y-an,6))
-        if np.allclose(x,y,atol=1e-8):
+        np.append(y,y[-1])
+        for i in range(1,len(y[-1])-1):
+            y[-1][i]=(y[-1][i-1]+y[-1][i+1])/2
+        lst.append(np.round_(y[-1]-an,6))
+        if np.allclose(y[-1],y[-2],atol=1e-8):
             print(j)
             break
-        else:
-            x = y 
     return(y,lst)
 
 def ne1d(x,an,g):
