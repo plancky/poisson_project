@@ -1,11 +1,8 @@
-from mpl_toolkits import mplot3d
-from numba import jit
+#from mpl_toolkits import mplot3d
+#from numba import jit
 import numpy as np
 import matplotlib.pyplot as plt
 import time as t
-
-from numpy.core.function_base import linspace
-
 
 class Mesh:
     def __init__(self,x=(0,1),y=(0,1),h=0.1,gtype="2D"):
@@ -14,9 +11,9 @@ class Mesh:
         self.x_dom=np.linspace(x[0],x[1],self.x_dim)
         self.gtype= gtype 
         if self.gtype == "1D":
-            self.grid=np.zeros((self.x_dim,),dtype="single")
+            self.grid=np.ones((self.x_dim,),dtype="single")
         elif self.gtype == "2D":
-            self.grid=np.zeros((self.y_dim,self.x_dim),dtype="single")
+            self.grid=np.ones((self.y_dim,self.x_dim),dtype="single")
 
     def dirichlet(self,x,excluded = "y"):
         if self.gtype=="2D" and len(x)==4:
@@ -33,32 +30,30 @@ class Mesh:
 
 
 def gauss1d(x,an):
-    lst=[]
-    y=np.array([x])
+    y=np.array((x,),dtype=float)
     for j in range(20000):
-        np.append(y,y[-1])
+        y=np.vstack((y,y[-1]))
         for i in range(1,len(y[-1])-1):
             y[-1][i]=(y[-1][i-1]+y[-1][i+1])/2
-        lst.append(np.round_(y[-1]-an,6))
-        if np.allclose(y[-1],y[-2],atol=1e-8):
+        er = max(abs((y[-1]-y[-2])/y[-1])[1:-1])
+        if er<=0.5e-14 and y.shape[0]>=2:
             print(j)
             break
-    return(y,lst)
+    return(y[-1])
 
-def ne1d(x,an,g):
-    lst=[]
+def ne1d(x,g):
     h= g[1] - g[0]
-    for j in range(20000):
-        y = np.array(x)
-        for i in range(1,len(y)-1):
-            y[i]=(y[i-1]+y[i+1]-2 *(h**2)*(np.pi**2)*np.sin(np.pi*g[i]))/(2 + (np.pi*h)**2)
-        lst.append(np.round_(y-an,6))
-        if np.allclose(x,y,atol=1e-8):
+    y=np.array((x,),dtype=float)
+    for j in range(int(5e+4)):
+        y=np.vstack((y,y[-1]))
+        for i in range(1,len(y[-1])-1):
+            y[-1][i]=(y[-1][i-1]+y[-1][i+1]+2*(h**2)*(np.pi**2)*np.sin(np.pi*g[i]))/(2 + (np.pi*h)**2)
+        er = max(abs((y[-1]-y[-2])/y[-1])[1:-1])
+        if er<=0.5e-8 and y.shape[0]>=2:
             print(j)
             break
-        else:
-            x = y 
-    return(y,lst)
+    return(y[-1])
+
 #@jit("f8[:,:](f8[:,:],f4,f8[:,:])",nopython=True,nogil=True)
 def sor2dpoisson(x,overcf=1.9,charge=np.array([[25,20,-4],[25,24,4]])):
     k,m = x.shape[0],x.shape[1]
@@ -94,16 +89,18 @@ def sor2dpoisson(x,overcf=1.9,charge=np.array([[25,20,-4],[25,24,4]])):
 if __name__ == "__main__":
 
     t0 = t.time()
-    '''
-    m = Mesh((0,1),h=0.01,gtype="1D")
+    
+    m = Mesh((0,1),h=0.1,gtype="1D")
     mesh = m.get()
     mesh[0],mesh[-1] = 0,-1
     f = lambda x : -1*x 
     B = gauss1d(mesh,f(m.x_dom))
-    #print(f(m.x_dom))
-    #plt.plot(m.x_dom,B[0])
-    for j in B[1]:
-        plt.plot(m.x_dom,j)
+    print(max(abs(f(m.x_dom)-B)))
+    plt.plot(m.x_dom,B)
+    #for j in B[1]:
+    #    plt.plot(m.x_dom,j)
+    t1= t.time()
+    print(t1-t0)
     plt.show()
     '''
     mm = Mesh((0,3),(0,6),h=0.1)
@@ -127,8 +124,5 @@ if __name__ == "__main__":
     plt.show()
     #x=np.linspace(5,100,100)
     #plt.plot(x,gauss1d(INPUT))
-
-    
-    t1= t.time()
-    print(t1-t0)
+    '''
 
