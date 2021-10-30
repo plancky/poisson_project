@@ -1,0 +1,11 @@
+\contentsline {section}{\numberline {1} Finite Difference Method}{2}{}%
+\contentsline {subsection}{\numberline {1.1}Finite Difference Approximations}{2}{}%
+\contentsline {subsection}{\numberline {1.2}Local Truncation Error of Finite Difference Approximations}{3}{}%
+\contentsline {subsection}{\numberline {1.3}Reducing PDE to a discretised Difference equation}{4}{}%
+\contentsline {subsubsection}{\numberline {1.3.1}Truncation error analysis of discretised PDE}{4}{}%
+\contentsline {section}{\numberline {2}Iterative methods to solve linear algebraic equations}{4}{}%
+\contentsline {subsection}{\numberline {2.1}Jacobi Method}{4}{}%
+\contentsline {subsection}{\numberline {2.2}Gauss-Seidel Method}{4}{}%
+\contentsline {subsection}{\numberline {2.3}Relaxation methods and Successive Over-Relaxation(SOR)}{4}{}%
+\contentsline {section}{\numberline {3}Model Problem}{4}{}%
+\contentsline {section}{\numberline {4}Main Problem}{4}{}%

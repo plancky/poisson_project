@@ -1,0 +1,46 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+%%%Margins and Indent 
+\setlength{\parindent}{-1pt}
+\usepackage{geometry}
+\geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=15mm,
+ right = 15mm,
+ bottom=15mm ,
+ top=15mm,}
+ 
+%%% Font
+\usepackage{amsmath,accents}
+%%%
+\usepackage{graphicx}
+\usepackage{caption}
+
+\numberwithin{equation}{section}
+\usepackage{tabularx}
+\newcommand{\pa}{\partial}
+\newcommand{\mcm}[1]{\mathcal{#1}}
+\newcommand{\bo}{\mcm{O}}
+\newcommand{\sDelta}{{\scriptstyle \Delta}}
+\newcommand{\gs}{\hspace{0.5cm}}
+\newcommand{\mvec}[1]{\accentset{\rightharpoonup}{#1}}
+
+%%%%%%%%%%%
+\begin{document}
+\tableofcontents
+\newpage
+\section{Introduction}
+\input{content/theory}
+
+\section{Methodology}
+\section{Analysis of Numerical Results}
+\section{Appendix}
+    \subsection{Non-Dimensionalization}
+    \subsection{Programs}
+    \subsection{Contributions}
+
+
+\end{document}

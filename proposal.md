@@ -27,3 +27,7 @@ EXPLICIT METHODS
 2.  SOR
 
 ### ERROR ANALYSIS 
+
+
+Truncation Error in O
+

@@ -6,21 +6,21 @@ import time as t
 
 class Mesh:
     def __init__(self,x=(0,1),y=(0,1),h=0.1,gtype="2D"):
-        self.x_dim,self.y_dim=int((x[1]-x[0])//h +1),int((y[1]-y[0])//h +1) 
+        self.x_dim,self.y_dim=int((x[1]-x[0])/h +1),int((y[1]-y[0])/h +1) 
         self.y_dom=np.linspace(y[0],y[1],self.y_dim)
         self.x_dom=np.linspace(x[0],x[1],self.x_dim)
         self.gtype= gtype 
         if self.gtype == "1D":
             self.grid=np.ones((self.x_dim,),dtype="single")
         elif self.gtype == "2D":
-            self.grid=np.ones((self.y_dim,self.x_dim),dtype="single")
+            self.grid=np.ones((self.y_dim,self.x_dim),dtype="double")
 
     def dirichlet(self,x,excluded = "y"):
         if self.gtype=="2D" and len(x)==4:
-            if excluded != "x":
-                self.grid[0,:],self.grid[-1,:] = x[0] , x[1]
-            if excluded !="y":
-                self.grid[:,0],self.grid[:,-1] =  x[2] ,x[3]
+            if excluded != "y":
+                self.grid[0,:],self.grid[-1,:] = x[2] , x[3]
+            if excluded !="x":
+                self.grid[:,0],self.grid[:,-1] =  x[0] , x[1]
         elif self.gtype == "1D" and len(x)==2:
             self.grid[0],self.grid[-1] = x[0] , x[1]
         else:
@@ -55,13 +55,10 @@ def ne1d(x,g):
     return(y[-1])
 
 #@jit("f8[:,:](f8[:,:],f4,f8[:,:])",nopython=True,nogil=True)
-def sor2dpoisson(x,overcf=1.9,charge=np.array([[25,20,-4],[25,24,4]])):
+def sor2dpoisson(x,h,overcf=1.9,p=None):
     k,m = x.shape[0],x.shape[1]
-    h = np.zeros(x.shape)
-    if charge is not None :
-        for jk in charge:
-            h[jk[0]][jk[1]] = jk[2]
-
+    if p is None :
+        p = np.zeros(x.shape)
     for f in range(500):
         new_x= np.array(x)
         for i in range(0,k):
@@ -77,9 +74,10 @@ def sor2dpoisson(x,overcf=1.9,charge=np.array([[25,20,-4],[25,24,4]])):
                     down = new_x[i+1][j]
                 else:
                     down = new_x[i-1][j]
-                new_x[i][j] += ((up+down+right+left + h[i][j])/4 - new_x[i][j]) * overcf
-    
-        if np.allclose(x,new_x,atol=1e-5):
+                new_x[i][j] = new_x[i][j] + ((up+down+right+left + h**2*p[i][j])/4 - new_x[i][j]) * overcf
+        er = (abs(new_x - x) / new_x).max()
+        print(er)
+        if er<=0.5e-4: #Why relative error instead of abs ?# significant digits and Decimal places
             print(f)
             break
         else:
@@ -89,7 +87,7 @@ def sor2dpoisson(x,overcf=1.9,charge=np.array([[25,20,-4],[25,24,4]])):
 if __name__ == "__main__":
 
     t0 = t.time()
-    
+    '''    
     m = Mesh((0,1),h=0.1,gtype="1D")
     mesh = m.get()
     mesh[0],mesh[-1] = 0,-1
@@ -103,16 +101,16 @@ if __name__ == "__main__":
     print(t1-t0)
     plt.show()
     '''
-    mm = Mesh((0,3),(0,6),h=0.1)
-    bound_x = np.ones((mm.x_dim,))
-    bound_y = np.ones((mm.y_dim,))
-    mm.dirichlet([None,None,bound_y*2,bound_y*-2],excluded="x")
+    mm = Mesh((0,2),(0,2),h=0.1)
+    bound_x = np.ones((mm.y_dim,))
+    bound_y = np.ones((mm.x_dim,))
+    mm.dirichlet([bound_x*2,bound_x*2.1,None,None])
     INPUT2D = mm.get()
     #print(INPUT2D)
     X, Y = np.meshgrid(mm.x_dom,mm.y_dom)
     #print(mm.x_dom)
     
-    pfield = sor2dpoisson(INPUT2D,charge= None)
+    pfield = sor2dpoisson(INPUT2D,0.1)
     vect= np.gradient(-1*pfield)
     plt.contourf(X,Y,pfield,38,cmap="coolwarm")
 
@@ -124,5 +122,7 @@ if __name__ == "__main__":
     plt.show()
     #x=np.linspace(5,100,100)
     #plt.plot(x,gauss1d(INPUT))
-    '''
+    t1= t.time()
+    print(t1-t0)
+    
 

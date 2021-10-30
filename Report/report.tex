@@ -1,5 +1,4 @@
-\documentclass[11pt]{report}
-
+\documentclass[a4paper,12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
@@ -11,11 +10,11 @@
  total={170mm,257mm},
  left=15mm,
  right = 15mm,
- bottom=20mm ,
- top=20mm,}
+ bottom=15mm ,
+ top=15mm,}
  
 %%% Font
-\usepackage{amsmath}
+\usepackage{amsmath,accents}
 
 
 \numberwithin{equation}{section}
@@ -23,10 +22,16 @@
 \newcommand{\pa}{\partial}
 \newcommand{\mcm}[1]{\mathcal{#1}}
 \newcommand{\bo}{\mcm{O}}
+\newcommand{\sDelta}{{\scriptstyle \Delta}}
+\newcommand{\gs}{\hspace{0.5cm}}
+\newcommand{\mvec}[1]{\accentset{\rightharpoonup}{#1}}
 
 %%%%%%%%%%%
 \begin{document}
-\section{\sffamily Finite Difference Methods}
+\tableofcontents
+\newpage
+\section{Introduction}
+\section{ Finite Difference Method}
 Finite Difference Methods(FDM) are used for approximating the solution of partial differential equations over a set of finite points, arranged in a geometrical structure called a \textbf{mesh}%
 \footnote[1]{An object which consists of points which are spaced in a specific geometrical pattern is referred to as a \textbf{mesh} and each point in this mesh is called a \textbf{node}. The distance between any two adjacent nodes in a mesh with uniform spacing is called its \textbf{meshsize}}%
 , in the continous domain of solution. The methods involve the idea of reducing the given PDE, by means of truncated taylor series approximation of the derivatives, to a difference equation which is much easier to digest numerically. 
@@ -58,7 +63,7 @@ Finite difference approximations are obtained by dropping the limit and can be w
     &\text{Backward Difference} \hspace{1cm} U_x|_i \approx \frac{U_{i} - U_{i-1}}{h} \equiv \delta^-_{x} U_i \\
     &\text{Central Difference} \hspace{1cm} U_x|_i \approx \frac{U_{i+1} - U_{i-1}}{2h} \equiv \delta_{2x} U_i 
 \end{flalign*}
-Where $\delta^+_{x} , \delta^-_{x} , \delta_{2x}$ are called the \textbf{first-order finite diference operators} and the expansion is called the \textbf{finite difference quotient}, each representing forward,backward and centered respectively.
+Where $\delta^+_{x} , \delta^-_{x} , \delta_{2x}$ are called the \textbf{finite diference operators} for approximating \textbf{first-order derivatives} and their expansion is called the \textbf{finite difference quotient}, each representing forward,backward and centered respectively.
 Second and Higher order finite difference Quotients can also be obtained,
 \begin{align*}
     U_{xx}|_i &= \lim_{h \to 0} \frac{U_x(x_i+\frac{h}{2}) - U_x(x_i-\frac{h}{2})}{h} \\
@@ -71,35 +76,72 @@ Second and Higher order finite difference Quotients can also be obtained,
 The \textit{'error'} that accompanies \textit{'approximations'} in the method must be acccounted for. In this section, the truncation error in the derivative approximations is ascertained which will later help us deduce the error in PDE's solved using these approximations.
 \\[2mm]
 \textbf{The local truncation error for derivative approximations} is defined here as the difference between the exact value of the derivate and the approximated value at node $i$, it can be calculated using Taylor series expansions about $i$,\\[2mm]
-For First-order Forward difference operator, 
+For Forward difference operator, 
 \begin{align*}
     \tau &\equiv \delta _ x^{+} U_ i - {U_ x}|_ i \\
-    &= \frac{1}{{\scriptstyle \Delta } x}\left( U_ {i+1} - U_{i}\right) - {U_ x}|_i \\
-    &= \frac{1}{{\scriptstyle \Delta } x}\left[ \left( U_ i + {\scriptstyle \Delta } x{U_ x}|_ i + \frac{1}{2}{\scriptstyle \Delta } x^2{U_{xx}}|_ i + \mcm{O}({\scriptstyle \Delta } x^3)\right) - U_i \right] - {U_ x}|_ i \\
-    &= \frac{1}{2}{\scriptstyle \Delta } x{U_{xx}}|_ i + \mcm{O}({\scriptstyle \Delta } x^2) = \mcm{O}(\Delta x)
+    &= \frac{1}{\sDelta x}\left( U_ {i+1} - U_{i}\right) - {U_ x}|_i \\
+    &= \frac{1}{\sDelta x}\left[ \left( U_ i + \sDelta x{U_ x}|_ i + \frac{1}{2}\sDelta x^2{U_{xx}}|_ i + \mcm{O}(\sDelta x^3)\right) - U_i \right] - {U_ x}|_ i \\
+    &= \frac{1}{2}\sDelta x{U_{xx}}|_ i + \mcm{O}(\sDelta x^2) = \mcm{O}(\Delta x)
 \end{align*}
-For First-order Backward difference operator, 
+For Backward difference operator, 
 \begin{align*}s
     \tau &\equiv \delta _ x^{-} U_ i - {U_ x}|_ i \\
-    &= \frac{1}{{\scriptstyle \Delta } x}\left( U_ i - U_{i-1}\right) - {U_ x}|_i \\
-    &= \frac{1}{{\scriptstyle \Delta } x}\left[ U_ i - \left( U_ i - {\scriptstyle \Delta } x{U_ x}|_ i + \frac{1}{2}{\scriptstyle \Delta } x^2{U_{xx}}|_ i + \mcm{O}({\scriptstyle \Delta } x^3)\right)\right] - {U_ x}|_ i \\
-    &= -\frac{1}{2}{\scriptstyle \Delta } x{U_{xx}}|_ i + \mcm{O}({\scriptstyle \Delta } x^2) = \mcm{O}(\Delta x)  
+    &= \frac{1}{\sDelta x}\left( U_ i - U_{i-1}\right) - {U_ x}|_i \\
+    &= \frac{1}{\sDelta x}\left[ U_ i - \left( U_ i - \sDelta x{U_ x}|_ i + \frac{1}{2}\sDelta x^2{U_{xx}}|_ i + \mcm{O}(\sDelta x^3)\right)\right] - {U_ x}|_ i \\
+    &= -\frac{1}{2}\sDelta x{U_{xx}}|_ i + \mcm{O}(\sDelta x^2) = \mcm{O}(\Delta x)  
 \end{align*}
-For First-order Central difference operator,
+For Central difference operator,
 \begin{align*}
     \tau &\equiv \delta _ {2x} U_ i - {U_ x}|_ i \\
-    &= \frac{1}{{2 \scriptstyle \Delta } x}\left( U_ {i+1} - U_{i-1}\right) - {U_ x}|_i \\
-    &= \frac{1}{{2 \scriptstyle \Delta } x}[ \left( U_ i + {\scriptstyle \Delta } x{U_ x}|_ i + \frac{1}{2}{\scriptstyle \Delta } x^2{U_{xx}}|_ i + \frac{1}{6}{\scriptstyle \Delta } x^3{U_{xxx}}|_ i + \frac{1}{12}{\scriptstyle \Delta } x^4{U_{xxxx}}|_ i + \mcm{O}({\scriptstyle \Delta } x^5)\right) \\
-    &\qquad - \left( U_ i - {\scriptstyle \Delta } x{U_ x}|_ i + \frac{1}{2}{\scriptstyle \Delta } x^2{U_{xx}}|_ i - \frac{1}{6}{\scriptstyle \Delta } x^3{U_{xxx}}|_ i + \frac{1}{12}{\scriptstyle \Delta } x^4{U_{xxxx}}|_ i +\mcm{O}({\scriptstyle \Delta } x^5)\right)] - {U_ x}|_ i \\
+    &= \frac{1}{{2 \sDelta } x}\left( U_ {i+1} - U_{i-1}\right) - {U_ x}|_i \\
+    &= \frac{1}{2 \sDelta  x}\Bigg[ \left( U_ i + \sDelta x{U_ x}|_ i + \frac{1}{2}\sDelta x^2{U_{xx}}|_ i + \frac{1}{6}\sDelta x^3{U_{xxx}}|_ i + \frac{1}{12}\sDelta x^4{U_{xxxx}}|_ i + \mcm{O}(\sDelta x^5)\right) \\
+    &\qquad - \left( U_ i - \sDelta x{U_ x}|_ i + \frac{1}{2}\sDelta x^2{U_{xx}}|_ i - \frac{1}{6}\sDelta x^3{U_{xxx}}|_ i + \frac{1}{12}\sDelta x^4{U_{xxxx}}|_ i +\mcm{O}(\sDelta x^5)\right)\Bigg] - {U_ x}|_ i \\
     &= -\frac{1}{6}\Delta x^2 U_{xxx_ i} + \mcm{O}(\Delta x^4) = \mcm{O}(\Delta x^2)
 \end{align*}
-where in the above expressions we assume that the Higher order derivatives of $U$ at $i$ are well defined. For a fairly small $\Delta x$ (less than 1) we can confidently say that $\bo(\Delta x^2)$ is samller than $\bo(\Delta x)$\footnote{The definition of the "big $\bo$" notation says that if for given functions $f(x)$ and $g(x)$ for $x \in S$ where S is some subset of $\mathbf{R}$, there exists a positive constant A such that $|f(x)| \leq A|g(x)|$ $\forall$ $x \in S$, we say that $f(x)$ is the "big $\bo$" of $g(x)$ or that $f(x)$ is of order of $g(x)$, mathematically given by $f(x) = \bo(g(x))$} .Thus we note that the centered difference approximation (second-order approximation) approximates the derivative more accurately than either of the \textit{one-sided diferences}\footnote{Forward and Backward differences are also called one-sided differences}
+where in the above expressions we assume that the Higher order derivatives of $U$ at $i$ are well defined. For a fairly small $\Delta x$ (less than 1) we can confidently say that $\bo(\Delta x^2)$ is samller than $\bo(\Delta x)$%
+\footnote{The definition of the "big $\bo$" notation says that if for given functions $f(x)$ and $g(x)$ for $x \in S$ where S is some subset of $\mathbf{R}$, there exists a positive constant A such that $|f(x)| \leq A|g(x)|$ $\forall$ $x \in S$, we say that $f(x)$ is the "big $\bo$" of $g(x)$ or that $f(x)$ is of order of $g(x)$, mathematically given by $f(x) = \bo(g(x))$}%
+. Thus we note that the centered difference approximation (second-order accurate) approximates the derivative more accurately than either of the \textit{one-sided diferences} which are first-order accurate.\footnote{Forward and Backward differences are also called one-sided differences}
 
-\section{Iterative Methods}
+%%Second derivate 
+%% 
+\subsection{Reducing PDE to a discretised Difference equation}
+\subsubsection{Truncation error analysis of discretised PDE}
 
+
+\section{Iterative methods to solve linear algebraic equations}
+
+In the last section we have discussed alternative methods for approximating
+the solution of linear elliptic equations, the ﬁnite diﬀerence method, using
+either the diﬀerential equation or an integral form, Each of these methods gives rise to a system of linear algebraic equations, which may be very large. A two-dimensional problem may lead to a system of several thousand unknowns, and three-dimensional problems involving several hundred thousand unknowns are common in real engineering situations. The solution of such a system is a major problem in itself as traditional methods like Gaussian-elimination result in large computation times we are forced to employ faster methods. As we have seen above, the system of equations produced by a discretisation has many special features and an eﬃcient solution procedure must exploit these. The most obvious property of the system is that it is extremely sparse. Even when there are many thousand unknowns, each equation will involve one unknown and the unknowns at its immediate neighbourhood. In particular, if we write the equations in the conventional notation,
+\begin{equation*}
+    A \mvec{x} = \mvec{b} 
+\end{equation*}
+where A is an N × N matrix, b the given data vector and x the vector
+of N unknown interior mesh values, there is an implied one-dimensional
+ordering of these values which is somewhat unnatural and obscures the
+important property that only immediate neighbours are involved. Each
+row of the matrix A involves only a very small number of non-zero
+elements, commonly ﬁve or seven; moreover in many problems a suitable
+ordering of the unknowns will lead to a matrix in which these non-zero
+elements occur in a regular pattern. In devising eﬃcient methods for
+the solution of the system these structural properties will be important,
+
+\subsection{Jacobi Method}
+\subsection{Gauss-Seidel Method}
+\subsection{Relaxation methods and Successive Over-Relaxation(SOR)}
+\section{Model Problem}
+Consider the simplest one-dimensional model problem,
+\begin{align}
+    \frac{d^2U }{dx^2} = 0 \gs \forall \gs x \in (a,b) \\
+    U(a) = 1 \text{\gs and \gs } U(b) = -1 \nonumber
+\end{align}
+Nondimensionalising 
+\begin{align}
+    U = \frac{u}{5V} \\
+\end{align}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%5
-\section{Problems}
+\section{Main Problem}
 Analysis  
 
 
