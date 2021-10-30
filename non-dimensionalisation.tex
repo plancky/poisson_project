@@ -1,0 +1,110 @@
+\documentclass[letterpaper,11pt]{article}
+\usepackage[a4paper, total={6.5in, 11in}]{geometry}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage[p,osf]{cochineal}
+\usepackage[scale=.95,type1]{cabin}
+\usepackage[cochineal,bigdelims,cmintegrals,vvarbb]{newtxmath}
+%\usepackage{newpxmath}
+\usepackage[zerostyle=c,scaled=.94]{newtxtt}
+\usepackage{amsmath,accents}
+\usepackage{relsize}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{outlines}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\definecolor{greyish}{HTML}{798799}
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	urlcolor=darkblue,
+}
+%\usepackage[backend=biblatex,style=science]{biblatex} %Imports biblatex package
+%\addbibresource{spect.bib} %Import the bibliography file
+
+\usepackage[section]{placeins}
+\pagestyle{empty}
+%\titleformat{\section}{\vspace{-4pt}\scshape\raggedright\large}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+\newcommand{\newsection}[1]{\section{\sffamily{\bfseries{#1}}}}
+\newcommand{\myvec}[1]{\accentset{\rightharpoonup}{#1}}
+\newcommand{\bd}[1]{\textbf{\textit{#1}}}
+
+\begin{document}
+	\newsection {Non -Dimensionalisation}
+		\subsection{Laplace Equation}
+		\noindent
+		In this section we would like to non-dimensionalise Laplace equation. The general form of Laplace equation is:
+		\begin{center}
+			$$\myvec{\nabla}^2 \varphi(\myvec{r}) = 0$$
+		\end{center}
+		\noindent
+		or 
+		\begin{center}
+			\[  
+			\frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} = 0
+			\]
+		\end{center}
+		or 
+		\begin{center}
+			\[u_{xx} + u_{yy} = 0 \]
+		\end{center}
+	\noindent
+	where \textbf{$ u_{xx} $} represents the second order partial derivative of u with respect to x.
+	and $ u_{yy} $ represents second order partial derivative of u with respect to y.
+	In our case $ u = V $ so we need to non -dimensionalise the following equation:
+	\begin{center}
+			\[V_{xx} + V_{yy} = 0 \]
+	\end{center}
+	\noindent 
+	Now we will replace the dimensional variable with non-dimensional variables. Let \[\hat{V} = \frac{V}{V_s},  \hat{x} = \frac{x}{x_s},  \hat{y} = \frac{y}{y_s}\]
+	\noindent
+	here the $ \hat{V}, \hat{x}, \hat{y} $ are dimensionless variables and $ V_s, x_s, y_s$ are the scaling variables having the same unit as their counterparts.
+	\[  
+	\frac{\partial^2 V}{\partial x^2} = \frac{\partial}{\partial x} \Bigg({ \frac{\partial V}{\partial x}}\Bigg) \]
+	\[ = \frac{\partial}{\partial x} \bigg(\frac{\partial (\hat{V}V_s)}{\partial (\hat{x}x_s)}\bigg) \]
+	\[ = \frac{V_s}{x_s} \Big[{\frac{\partial}{\partial (x_s \hat{x})}} \Big({\frac{\partial \hat{V}}{\partial \hat{x}}}\Big)\Big]\]
+	\[ = \frac{V_s}{x_s^2} \Big[{\frac{\partial^2 \hat{V}}{\partial \hat{x^2}}}\Big]\]
+	\noindent
+	similarly, we can write for y as : 
+	\[\frac{V_s}{y_s^2} \Big[{\frac{\partial^2 \hat{V}}{\partial \hat{y^2}}}\Big]\]
+	\noindent
+	Now we can write our equation as:
+	\[ = \frac{V_s}{y_s^2} \Big[{\frac{\partial^2 \hat{V}}{\partial \hat{y^2}}}\Big] + \frac{V_s}{x_s^2} \Big[{\frac{\partial^2 \hat{V}}{\partial \hat{x^2}}}\Big] = 0 \]
+	So now if choose same magnitude for our scaling factor then we write our equation as:
+	\[ = \frac{V_s}{x_s^2} \Big[{\frac{\partial^2 \hat{V}}{\partial \hat{y^2}}} +  {\frac{\partial^2 \hat{V}}{\partial \hat{x^2}}}\Big] = 0 \]
+	\[ = {\frac{\partial^2 \hat{V}}{\partial \hat{y^2}}} +  {\frac{\partial^2 \hat{V}}{\partial \hat{x^2}}} = 0 \]
+	Hence so if we just use the same sacling factors for both x and y variable then we don't need to non-dimensionalise the Laplace equation.
+	\subsection{Poisson Equation}
+	\noindent
+	Now since the general form of Poisson Equation is as follows:
+	\begin{center}
+		$$\myvec{\nabla}^2 \varphi(\myvec{r}) =  f(\myvec{r})$$
+	\end{center}
+	\noindent
+	or 
+	\begin{center}
+		\[  
+		\frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} =  f({r})
+		\]
+	\end{center}
+	
+	So for our case we can write it as:
+	\[  
+	\frac{\partial^2 V}{\partial x^2} + \frac{\partial^2 V}{\partial y^2} =  \frac{\rho}{\epsilon_0}
+	\]
+	Now following the same procedure  for LHS as done in case of Laplace equation we get:
+		\[  \frac{V_s}{x_s^2} \Big[{\frac{\partial^2 \hat{V}}{\partial \hat{y^2}}} +  {\frac{\partial^2 \hat{V}}{\partial \hat{x^2}}}\Big] =   \frac{\rho}{\epsilon_0} \]
+	or
+		\[  {\frac{\partial^2 \hat{V}}{\partial \hat{y^2}}} +  {\frac{\partial^2 \hat{V}}{\partial \hat{x^2}}} =   \frac{\rho}{\epsilon_0} \frac{x_s^2}{V_s} \]
+		Now we will choose the scaling factors such that the value of RHS becomes unity to ease our computation part and it will depend upon the question.
+		
+		\newpage
+		\newsection {Error Analysis }
+		\subsection{Model Problem}
+		In this we will analyse a model problem and perform analysis on it so that we can get a genaral idea about the  error induced in our methods.
+\end{document}		
