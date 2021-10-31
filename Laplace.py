@@ -59,7 +59,7 @@ def sor2dpoisson(x,h,overcf=1.9,p=None):
     k,m = x.shape[0],x.shape[1]
     if p is None :
         p = np.zeros(x.shape)
-    for f in range(500):
+    for f in range(1000):
         new_x= np.array(x)
         for i in range(0,k):
             for j in range(1,m-1):
