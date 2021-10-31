@@ -2,13 +2,12 @@ from Laplace import *
 import numpy as np
 from mpl_toolkits import mplot3d
 
-
-h =0.05
-xs=1
-ep = 8.854e+12
+ep = 8.854e-3
 #us,xs=(8.85*40**2)*10**-12,1/40
-us = xs**2/ep
-mm = Mesh((0,4/xs),(0,4.4/xs),h)
+us = 1e+40
+xs=np.sqrt(us*ep)
+mm = Mesh((0,4),(0,4.4),0.1)
+h= np.diff(mm.x_dom)[0]/xs
 #lower_bound_y = np.ones((mm.x_dim,))
 #upper_bound_y = np.ones((mm.x_dim,))
 lower_bound_x = np.ones((mm.y_dim,))*5/us
@@ -18,10 +17,10 @@ ini= mm.get()
 X,Y = np.meshgrid(mm.x_dom,mm.y_dom)
 distri = np.zeros(ini.shape)
 print(X)
-bool_B = np.any([X==0.5/xs,X==1.5/xs,X==2.5/xs,X==3.5/xs],axis=0) & (Y >= 0.3)
-bool_A = (X==2/xs) & (Y <=4)
-distri[bool_B] = -5/4.1
-distri[bool_A] = 5/4
+bool_B = np.any([X==0.5,X==1.5,X==2.5,X==3.5],axis=0) & (Y >= 0.3)
+bool_A = (X==2) & (Y <=4)
+#distri[bool_B] = -5/4.1
+#distri[bool_A] = 5/4
 #print(distri[bool_B])
 #print(bool_B[:,25])
 #print(INPUT2D)
@@ -36,7 +35,7 @@ np.savetxt("potential.dat",pfield)
 #plt.quiver(X,Y,vect[1],vect[0])
 fig = plt.figure()
 ax = plt.axes(projection="3d")
-ax.plot_surface(X*xs,Y*xs,pfield,cmap = "coolwarm", edgecolor='none')
+ax.plot_surface(X,Y,pfield,cmap = "coolwarm", edgecolor='none')
 plt.savefig("plot.png")
 plt.show()
 #x=np.linspace(5,100,100)
