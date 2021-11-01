@@ -28,7 +28,6 @@ class Mesh:
     def get(self):
         return(self.grid)
 
-
 def gauss1d(x,an):
     y=np.array((x,),dtype=float)
     for j in range(20000):
@@ -76,6 +75,36 @@ def sor2dpoisson(x,h,overcf=1.9,p=None):
                     down = new_x[i-1][j]
                 new_x[i][j] = new_x[i][j] + ((up+down+right+left + h**2*p[i][j])/4 - new_x[i][j]) * overcf
         er = (abs(new_x - x) / new_x).max()
+        if er<=0.5e-4: #Why relative error instead of abs ?# significant digits and Decimal places
+            print(f)
+            break
+        else:
+            x = new_x
+    return(new_x)
+
+
+#@jit("f8[:,:](f8[:,:],f4,f8[:,:])",nopython=True,nogil=True)
+def jacobi2d(x,h,overcf=1.9,p=None):
+    k,m = x.shape[0],x.shape[1]
+    if p is None :
+        p = np.zeros(x.shape)
+    for f in range(1000):
+        new_x= np.array(x)
+        for i in range(0,k):
+            for j in range(1,m-1):
+                left = x[i][j-1]
+                right = x[i][j+1]
+                ##Neumann 0 wrt y-axis at y_upper and y_lower bounds 
+                if i == k-1 :
+                    up = x[i-1][j]
+                else :
+                    up = x[i+1][j]
+                if i == 0 :
+                    down = x[i+1][j]
+                else:
+                    down = x[i-1][j]
+                new_x[i][j] = x[i][j] + ((up+down+right+left + h**2*p[i][j])/4 - x[i][j]) * overcf
+        er = (abs(new_x - x) / new_x).max()
         print(er)
         if er<=0.5e-4: #Why relative error instead of abs ?# significant digits and Decimal places
             print(f)
@@ -85,7 +114,6 @@ def sor2dpoisson(x,h,overcf=1.9,p=None):
     return(new_x)
 
 if __name__ == "__main__":
-
     t0 = t.time()
     '''    
     m = Mesh((0,1),h=0.1,gtype="1D")
