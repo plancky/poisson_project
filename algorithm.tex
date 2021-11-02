@@ -1,0 +1,164 @@
+\documentclass[letterpaper,11pt]{article}
+\usepackage[a4paper, total={6.5in, 11in}]{geometry}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[linesnumbered,lined,boxed,commentsnumbered]{algorithm2e}
+\usepackage{algpseudocode}
+
+\usepackage[p,osf]{cochineal}
+\usepackage[scale=.95,type1]{cabin}
+\usepackage[cochineal,bigdelims,cmintegrals,vvarbb]{newtxmath}
+%\usepackage{newpxmath}
+\usepackage[zerostyle=c,scaled=.94]{newtxtt}
+\usepackage{amsmath,accents}
+\usepackage{relsize}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{outlines}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\definecolor{greyish}{HTML}{798799}
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	urlcolor=darkblue,
+}
+%\usepackage[backend=biblatex,style=science]{biblatex} %Imports biblatex package
+%\addbibresource{spect.bib} %Import the bibliography file
+
+\usepackage[section]{placeins}
+\pagestyle{empty}
+%\titleformat{\section}{\vspace{-4pt}\scshape\raggedright\large}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+\newcommand{\newsection}[1]{\section{\sffamily{\bfseries{#1}}}}
+\newcommand{\myvec}[1]{\accentset{\rightharpoonup}{#1}}
+\newcommand{\bd}[1]{\textbf{\textit{#1}}}
+
+\begin{document}
+	\newsection {Introduction}
+		\subsection{Motvation}
+		\noindent 
+		We first encountered Laplace Equation during our course in electricity and magnetism in second semester and we were fascinated with how one can calculatge the potential in a region just by knowing the boundary condition, ofcourse the region has to be charge free for applying Laplace Equation. After Laplace Equation , we were introduced to Poisson Equation which was able solve in region having charges( or sources ). When we were given the oppurtunity to choose a project in our computational physics charge this semester, it did not take us long to decide the topic for project.
+		\subsection{General Idea}
+		\noindent
+		In our project we will try to tackle the Laplace and Poisson equaton which is an ellipitic linear partial differential equation having application in various fields of physics ranging from thermodynamics, electrostatics etc. We will solve the equation computationally using the method of finite differences in one and two dimensions for rectangular membrane
+	
+	\newpage
+	\newsection{Algprithm}
+\begin{algorithm}
+	\caption{Jacobi Method}
+	%{This iterative method takes an initial matrix of guess values and solves the the equation $$ Ax = b $$})
+	\KwData{INPUT -: An $ k \times m $ matrix of initial values, value of step size $h$ and  also a matrix containing the initial charge configuration} 
+	\KwResult{OUTPUT -: An $ k \times m $ matrix containing the values of potential on all $x$ and $y$ values} 
+	\For{f = 0, 1, 2, 3, 4....N}{ 
+		make new array of size $ k \times m $ \tcc*{initialising a new array for solution}
+		\For(\tcc*{taking a x value}){i =0, 1, 2, 3 ... k}{
+			\For(\tcc*{taking all y value for a x value}){ j =1, 2, 3 ... (m-1)}{
+				\tcc{now defining the required quantites for stencil}
+				$left = {a}_{i,j-1}$ \; 
+				$right = {a}_{i,j+1}$ \;
+				\If{$ i = k-1 $ }{
+					$up = {a}_{i-1,j}$\;
+					\Else{
+						up = ${a}_{i+1,j}$\;
+						
+					}							
+				}
+				\If{ $ i = 0 $}{
+					down = ${a}_{i+1,j}$\;
+					\Else{
+						down = ${a}_{i-1,j}$ \;
+					}
+				}
+				{new ${a}_{i,j}$ = (up + down + left + right + $h^2 * {p}_{i,j} $ )/4 + new ${a}_{i,j}$} \tcc*{new value the grid point}
+			}
+			{max relative error = max(new  x - x)/ $x$}\;
+			\If(\tcc*{checking for tolerance}){max relative error < tolerance}{
+				{break}\;
+				\Else(\tcc*{if tolerance not reached then the iteration continues}){
+					new x =  x	
+				}
+			}
+		}
+	}	
+\end{algorithm}
+
+\begin{algorithm}
+	\caption{Successive Over Relaxation}
+	%{This iterative method takes an initial matrix of guess values and solves the the equation $$ Ax = b $$})
+	\KwData{INPUT -: An $ k \times m $ matrix of initial values, value of step size $h$, value of $\omega$ or relaxation factor and  also a matrix containing the initial charge configuration} 
+	\KwResult{OUTPUT -: An $ k \times m $ matrix containing the values of potential on all $x$ and $y$ values} 
+	\For{f = 0, 1, 2, 3, 4....N}{ 
+		make new array of size $ k \times m $ \tcc*{initialising a new array for solution}
+		\For(\tcc*{taking a x value}){i =0, 1, 2, 3 ... k}{
+			\For(\tcc*{taking all y value for a x value}){ j =1, 2, 3 ... (m-1)}{
+				\tcc{now defining the required quantites for stencil}
+				$left = {a}_{i,j-1}$ \; 
+				$right = {a}_{i,j+1}$ \;
+				\If{$ i = k-1 $ }{
+					$up = {a}_{i-1,j}$\;
+					\Else{
+						up = ${a}_{i+1,j}$\;
+						
+					}							
+				}
+				\If{ $ i = 0 $}{
+					down = ${a}_{i+1,j}$\;
+					\Else{
+						down = ${a}_{i-1,j}$ \;
+					}
+				}
+				{new ${a}_{i,j}$ = ((up + down + left + right + $h^2 * {p}_{i,j} $ )/4 -new ${a}_{i,j}$)*omega + new ${a}_{i,j}$} \tcc*{new value the grid point}
+			}
+			{max relative error = max((new  x - x)/ $x$)}\;
+			\If(\tcc*{checking for tolerance}){max relative error $<$ tolerance}{
+				{break}\;
+				\Else(\tcc*{if tolerance not reached then the iteration continues}){
+					new x =  x	
+				}
+			}
+		}
+	}	
+\end{algorithm}
+
+\begin{algorithm}
+	\caption{Gauss Seidel Method}
+	%{This iterative method takes an initial matrix of guess values and solves the the equation $$ Ax = b $$})
+	\KwData{INPUT -: An $ k \times m $ matrix of initial values, value of step size $h$ and  also a matrix containing the initial charge configuration} 
+	\KwResult{OUTPUT -: An $ k \times m $ matrix containing the values of potential on all $x$ and $y$ values} 
+	\For{f = 0, 1, 2, 3, 4....N}{ 
+		make new array of size $ k \times m $ \tcc*{initialising a new array for solution}
+		\For(\tcc*{taking a x value}){i =0, 1, 2, 3 ... k}{
+			\For(\tcc*{taking all y value for a x value}){ j =1, 2, 3 ... (m-1)}{
+				\tcc{now defining the required quantites for stencil}
+				$left = {a}_{i,j-1}$ \; 
+				$right = {a}_{i,j+1}$ \;
+				\If{$ i = k-1 $ }{
+					$up = {a}_{i-1,j}$\;
+					\Else{
+						up = ${a}_{i+1,j}$\;
+						
+					}							
+				}
+				\If{ $ i = 0 $}{
+					down = ${a}_{i+1,j}$\;
+					\Else{
+						down = ${a}_{i-1,j}$ \;
+					}
+				}
+				{new ${a}_{i,j}$ = ((up + down + left + right + $h^2 * {p}_{i,j} $ )/4 -new ${a}_{i,j}$) + new ${a}_{i,j}$} \tcc*{new value the grid point}
+			}
+			{max relative error = max((new  x - x)/ $x$)}\;
+			\If(\tcc*{checking for tolerance}){max relative error $<$ tolerance}{
+				{break}\;
+				\Else(\tcc*{if tolerance not reached then the iteration continues}){
+					new x =  x	
+				}
+			}
+		}
+	}	
+\end{algorithm}
+
+\end{document}
