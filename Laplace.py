@@ -84,7 +84,7 @@ def sor2dpoisson(x,h,overcf=1.9,p=None):
 
 
 #@jit("f8[:,:](f8[:,:],f4,f8[:,:])",nopython=True,nogil=True)
-def jacobi2d(x,h,overcf=1.9,p=None):
+def jacobi2d(x,h,p=None):
     k,m = x.shape[0],x.shape[1]
     if p is None :
         p = np.zeros(x.shape)
@@ -103,7 +103,7 @@ def jacobi2d(x,h,overcf=1.9,p=None):
                     down = x[i+1][j]
                 else:
                     down = x[i-1][j]
-                new_x[i][j] = x[i][j] + ((up+down+right+left + h**2*p[i][j])/4 - x[i][j]) * overcf
+                new_x[i][j] += ((up+down+right+left + h**2*p[i][j])/4) 
         er = (abs(new_x - x) / new_x).max()
         print(er)
         if er<=0.5e-4: #Why relative error instead of abs ?# significant digits and Decimal places
