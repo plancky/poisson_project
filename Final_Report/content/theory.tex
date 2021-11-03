@@ -1,9 +1,5 @@
 \section{Theory}
 Identical infinitely-long thin metal plates $A_1,A_2,A_3,A_4,A_5,B_1,B_2,B_3 $ and $B_4$ are placed in an \textit{interleaved} arrangement as dipicted in fig1.(a) Group of plates $A_i$ and $B_i$ are connected to the terminal $A$ and $B$ , respectively, by means of gold wires. The terminals are connected to different potential sources $U_A$ and $U_B$ respectively. \\
-This arrangement can be seen as a number of parallel plate capacitors connected in parallel to each other as seen in fig1(b),
-
-
-
 This is called an interleaved capacitor, Our goal will be to approximate the potential distribution (in two dimensions considering symmetry along the the third axis which will be dropped) inside the capacitor after we disconnect the capacitor from sources, treating the interior plates as line charge distributions.
 \begin{align*}
     &U_A = 5V \\
@@ -12,13 +8,31 @@ This is called an interleaved capacitor, Our goal will be to approximate the pot
     &\text{Distance between plates ($d$)} = 0.5\mu m \\
     &\textit{Dimensions: } 4 \times 4.4 \mu m  
 \end{align*}
-
+This arrangement can be seen as a number of parallel plate capacitors connected in parallel to each other as seen in fig1(b),
+if $C_0$ is the capacitance of each capacitor in parallel and $C$ is the capacitance of the entire arrangement then,
+\begin{align*}
+    C_0 = 8 C
+\end{align*}
+Also we know that for parallel plate capacitors with cross-section area $A$ and distance $d$ between the plates,
+\begin{align}
+    C_0 = \epsilon_0 \frac{A}{d} \implies A = \frac{C_0d}{\epsilon_0}
+\end{align}
+Therefore charge distribution on any plate $A_i$ is given by,
+\begin{align*}
+    \rho_A = \frac{(C \times V )}{5A} \implies \rho_A = \epsilon_0\frac{10^6}{4}C m^{-2} 
+\end{align*}
+Similarly,
+\begin{align}
+    \rho_B = -\epsilon_0\frac{10^6}{3.2}C m^{-2} 
+\end{align}
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=5cm, height=4cm]{content/interleaved_cap_2D.png}
+    \begin{subfigure}[b]{\linewidth}
+    \includegraphics[width=5cm, height=4cm]{content/capacitor.png}
     \caption{\small Diagram dipciting the arrangement of plates in a interleaved fashion.}
     \label{fig 1: the capacitor}
+    \end{subfigure}
 \end{figure}
 Mathematical Formulation:\\
 Let $U(x,y)$ and $\vec{E}(x,y)$ be the potential and Electric field distribution defined in the region of our arrangement $(x,y) = [0,4\mu m]\times[0,4.4\mu m]$ .\\
@@ -46,7 +60,9 @@ Now according to our given arrangement,
     B_2 &= \{ (x^*,y^*) \gs : \gs x^*= 1.5\mu m \gs;\gs 0.3\mu m \leq y^* \leq 4.3\mu m \} \\
     B_3 &= \{ (x^*,y^*) \gs : \gs x^*= 2.5\mu m \gs;\gs 0.3\mu m \leq y^* \leq 4.3\mu m \} \\
     B_4 &= \{ (x^*,y^*) \gs : \gs x^*= 3.5\mu m \gs;\gs 0.3\mu m \leq y^* \leq 4.3\mu m \} \\
-    A_2 &= \{ (x^*,y^*) \gs : \gs x^*= 2\mu m \gs;\gs 0\mu m \leq y^* \leq 4\mu m \} 
+    A_2 &= \{ (x^*,y^*) \gs : \gs x^*= 1\mu m \gs;\gs 0\mu m \leq y^* \leq 4\mu m \} \\
+    A_3 &= \{ (x^*,y^*) \gs : \gs x^*= 2\mu m \gs;\gs 0\mu m \leq y^* \leq 4\mu m \} \\
+    A_4 &= \{ (x^*,y^*) \gs : \gs x^*= 3\mu m \gs;\gs 0\mu m \leq y^* \leq 4\mu m \} 
 \end{align}
 We get the following boundary conditions for the above boundary value problem,
 \begin{align}
@@ -80,7 +96,9 @@ Now according to our given arrangement,
     B_2 &= \{ (x^*,y^*) \gs : \gs x^*= 1.5/s \gs;\gs 0.3/s \leq y^* \leq 4.3/s \} \\
     B_3 &= \{ (x^*,y^*) \gs : \gs x^*= 2.5/s \gs;\gs 0.3/s \leq y^* \leq 4.3/s \} \\
     B_4 &= \{ (x^*,y^*) \gs : \gs x^*= 3.5/s \gs;\gs 0.3/s \leq y^* \leq 4.3/s \} \\
-    A_2 &= \{ (x^*,y^*) \gs : \gs x^*= 2/s \gs;\gs 0/s \leq y^* \leq 4/s \} 
+    A_2 &= \{ (x^*,y^*) \gs : \gs x^*= 1/s \gs;\gs 0/s \leq y^* \leq 4/s \} \\
+    A_3 &= \{ (x^*,y^*) \gs : \gs x^*= 2/s \gs;\gs 0/s \leq y^* \leq 4/s \} \\
+    A_4 &= \{ (x^*,y^*) \gs : \gs x^*= 3/s \gs;\gs 0/s \leq y^* \leq 4/s \} 
 \end{align}
 We get the following boundary conditions for the above boundary value problem,
 \begin{align}
