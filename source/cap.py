@@ -1,12 +1,13 @@
-from Laplace import *
+from lib.poisson import *
 import numpy as np
 from mpl_toolkits import mplot3d
 
 ep = 8.854e-12
-us = 1e+40
-xs=np.sqrt(us*ep)
-mm = Mesh((0,4),(0,4.4),0.1)
-h= np.diff(mm.x_dom)[0]/xs
+us = 1
+xs = 1
+## Set Domain
+mm = mesh((0,4),(0,4.4),0.1)
+h = np.diff(mm.x_dom)[0]
 
 ## Set Dirichlet 
 '''
@@ -31,19 +32,20 @@ X,Y = np.meshgrid(mm.x_dom,mm.y_dom)
 distri = np.zeros(ini.shape)
 xr,yr = np.round_(X,2),np.round_(Y,2)
 bool_A = ((xr==2) | (xr==1) | (xr==3)) & (yr <=4) 
-bool_B = np.any([xr==0.5,xr==1.5,xr==2.5,xr==3.5],axis=0) & (yr >= 0.3)
-distri[bool_A] = 80/5*1e-6*8.854/us
-distri[bool_B] = -20*1e-6*8.854/us
+bool_B = np.any([xr==0.5,xr==1.5,xr==2.5,xr==3.5],axis=0) & (yr >= 0.4)
+distri[bool_A] = 1/(3.2)*1e+6*xs**2/us
+distri[bool_B] = -1/(3.2)*1e+6*xs**2/us
 
-pfield = sor2dpoisson(ini,h,p=distri)*us
+mm.set_loc("dataset1_h2")
+wlst= np.arange(1,2,0.01)
+for w in wlst:
+    mm.sor_poisson2d(distri,w,nu=us)
+#mm.jacobi_poisson2d(distri,us)
+mm.save_omega()
 
-dat = np.array([X.flatten(),Y.flatten(),pfield.flatten()],dtype =float)
-np.savetxt("potential_laplace.dat",dat.T)
-
+'''
 #dat = np.loadtxt("potential_laplace.dat").T
 #dat[2]*=1e+40
-
-
 #plt.contourf(X,Y,pfield,50,cmap="coolwarm")
 #print(pfield)
 #plt.quiver(X,Y,vect[1],vect[0])
@@ -56,3 +58,4 @@ np.savetxt("potential_laplace.dat",dat.T)
 #plt.plot(x,gauss1d(INPUT))
 #t1= t.time()
 #print(t1-t0)
+'''

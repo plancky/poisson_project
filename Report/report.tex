@@ -11,11 +11,14 @@
  left=15mm,
  right = 15mm,
  bottom=15mm ,
- top=15mm,}
+ top=15mm,
+ }
  
 %%% Font
 \usepackage{amsmath,accents}
 
+%%% Tikz
+\usepackage{tikz}
 
 \numberwithin{equation}{section}
 \usepackage{tabularx}
@@ -38,8 +41,36 @@ Finite Difference Methods(FDM) are used for approximating the solution of partia
 \subsection{Finite Difference Approximations}
 The quality of the solution depends on the quality of approximations made to the derivatives.
 %%%
-Consider this one-dimensional structured mesh of nodes $(x_0,x_1,x_2,..,x_i,..,x_n)$ at which the solution $U(x_i)$  is to be found, such that the difference $h = x_{i+1} - x_i $ is constant throughout the mesh and $x_i = x_0 + ih$\\
-Let $U_i$ represent the solution at the $i$-th node and 
+Consider this one-dimensional structured mesh of nodes $(x_0,x_1,x_2,..,x_i,..,x_n)$ at which the solution $U(x_i)$  is to be found, such that the difference $h = x_{i+1} - x_i $ is constant throughout the mesh and $x_i \equiv x_0 + ih$.\\
+\begin{figure}[h]
+\centering
+
+\begin{tikzpicture}
+    \coordinate (H) at (4.5,4pt);
+    \draw[thick,color=gray,<->] (-1,0) -- (11,0);
+    \foreach \x  in {0,1,2,3,4,5,6,7,8,9,10}
+        \draw[fill=black] (\x cm,0) circle (1.2pt) (\x cm,-2pt) node[anchor=north] {$x_{\x}$};
+    \draw[thin,<->] (4,4pt) -- (5,4pt);%
+    \node[anchor=south] at (H) {$h$};
+\end{tikzpicture}
+
+\caption{\small 1D mesh with 11 nodes and a meshsize h}
+\end{figure}
+\\
+Let $U_i$ represent the solution at the $i$-th node and \hfill
+\begin{tikzpicture}[scale =2]
+    \draw[thick,color=gray,<->] (3,-2cm) -- (6,-2cm);
+    \foreach \x  in {3.5,4.5,5.5}
+        \draw[fill=black] (\x cm,-2cm) circle (1.2pt) ;
+    \draw (3.5 cm,-2.01cm) node[color=gray,anchor=north] {$i-1$};
+    \draw (4.5 cm,-2.01cm) node[color=gray,anchor=north] {$i$};
+    \draw (5.5 cm,-2.01cm) node[color=gray,anchor=north] {$i+1$};
+    \draw (3.5 cm,-1.99cm) node[color=gray,anchor=south] {$U_{i-1}$};
+    \draw (4.5 cm,-1.99cm) node[color=gray,anchor=south] {$U_{i}$};
+    \draw (5.5 cm,-1.99cm) node[color=gray,anchor=south] {$U_{i+1}$};
+\end{tikzpicture}
+
+
 \begin{equation*}
     \left. \frac{\partial U}{\partial x} \right|_{x_ i} = U_{x}(x_0 + ih) \equiv U_{x}|_i
 \end{equation*} 
@@ -71,6 +102,26 @@ Second and Higher order finite difference Quotients can also be obtained,
     &= \lim_{h \to 0}\frac{U_{i+1}-2 U_i + U_{i-1}}{h^2} \\
     &\approx \boxed{\delta^2_x U_i \equiv \frac{1}{h^2}(U_{i+1}-2 U_i + U_{i-1})} \hspace{1cm} \text{[Central second-order Difference]}
 \end{align*}
+
+\begin{figure}[h]
+    \centering
+\begin{tikzpicture}[scale=2]
+    \coordinate (A) at (3.5 cm,0cm);
+    \coordinate (B) at (4.5 cm,0cm);
+    \coordinate (C) at (5.5 cm,0cm);
+    \draw[thick,color=gray,<->] (3cm,0) -- (6cm,0);
+    \draw[fill=black] (A) circle (1.2pt) (A) node[anchor=north] {$1$};
+    \draw[fill=red] (B) circle (1.2pt) (B) node[anchor=north] {$-2$};
+    \draw[fill=black] (C) circle (1.2pt) (C) node[anchor=north] {$1$};
+    \draw (A) node[color=gray,anchor=south] {$U_{i-1}$};
+    \draw (B) node[color=gray,anchor=south] {$U_{i}$};
+    \draw (C) node[color=gray,anchor=south] {$U_{i+1}$};
+    
+\end{tikzpicture}
+
+\end{figure}
+
+
 \vfill
 \subsection{Local Truncation Error of Finite Difference Approximations}
 The \textit{'error'} that accompanies \textit{'approximations'} in the method must be acccounted for. In this section, the truncation error in the derivative approximations is ascertained which will later help us deduce the error in PDE's solved using these approximations.
@@ -84,7 +135,7 @@ For Forward difference operator,
     &= \frac{1}{2}\sDelta x{U_{xx}}|_ i + \mcm{O}(\sDelta x^2) = \mcm{O}(\Delta x)
 \end{align*}
 For Backward difference operator, 
-\begin{align*}s
+\begin{align*}
     \tau &\equiv \delta _ x^{-} U_ i - {U_ x}|_ i \\
     &= \frac{1}{\sDelta x}\left( U_ i - U_{i-1}\right) - {U_ x}|_i \\
     &= \frac{1}{\sDelta x}\left[ U_ i - \left( U_ i - \sDelta x{U_ x}|_ i + \frac{1}{2}\sDelta x^2{U_{xx}}|_ i + \mcm{O}(\sDelta x^3)\right)\right] - {U_ x}|_ i \\

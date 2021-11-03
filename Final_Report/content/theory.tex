@@ -11,19 +11,19 @@ This is called an interleaved capacitor, Our goal will be to approximate the pot
 This arrangement can be seen as a number of parallel plate capacitors connected in parallel to each other as seen in fig1(b),
 if $C_0$ is the capacitance of each capacitor in parallel and $C$ is the capacitance of the entire arrangement then,
 \begin{align*}
-    C_0 = 8 C
+    C_0 = C/8
 \end{align*}
 Also we know that for parallel plate capacitors with cross-section area $A$ and distance $d$ between the plates,
 \begin{align}
     C_0 = \epsilon_0 \frac{A}{d} \implies A = \frac{C_0d}{\epsilon_0}
 \end{align}
-Therefore charge distribution on any plate $A_i$ is given by,
-\begin{align*}
-    \rho_A = \frac{(C \times V )}{5A} \implies \rho_A = \epsilon_0\frac{10^6}{4}C m^{-2} 
-\end{align*}
-Similarly,
+Therefore the charge distribution on any plate $A_i$ is given by,
 \begin{align}
-    \rho_B = -\epsilon_0\frac{10^6}{3.2}C m^{-2} 
+    \rho_A = \frac{(C \times V )}{5A} \implies \rho_A = 2\epsilon_0 \times 10^5C m^{-2} 
+\end{align}
+Similarly on $B_i$,
+\begin{align}
+    \rho_B = -2\epsilon_0 \times 10^5C m^{-2} 
 \end{align}
 
 \begin{figure}[h]
@@ -49,17 +49,17 @@ In two dimensions with euclidean coordinate system the equation reduces to,
 where,
 \begin{equation}
 \rho(x,y) =  \begin{cases}
-    -0.55 \mu C/m & :\text{if} \gs (x,y) \in B_i \gs \text{where} \gs i = 1,2,3,4 \\
-    +0.74 \mu C/m & :\text{if} \gs (x,y) \in A_2  \\
-    0 \mu C/m & : \gs \text{elsewhere} \\
+    -2\epsilon_0 \times 10^5 C m^{-2} & :\text{if} \gs (x,y) \in B_i \gs \text{where} \gs i = 1,2,3,4 \\
+    2\epsilon_0 \times 10^5 C m^{-2} & :\text{if} \gs (x,y) \in A_i \gs \text{where} \gs i = 2,3,4  \\
+    0 C m^{-2} & : \gs \text{elsewhere} \\
 \end{cases}  
 \end{equation}
 Now according to our given arrangement,
 \begin{align}
-    B_1 &= \{ (x^*,y^*) \gs : \gs x^*= 0.5\mu m \gs;\gs 0.3\mu m \leq y^* \leq 4.3\mu m \} \\
-    B_2 &= \{ (x^*,y^*) \gs : \gs x^*= 1.5\mu m \gs;\gs 0.3\mu m \leq y^* \leq 4.3\mu m \} \\
-    B_3 &= \{ (x^*,y^*) \gs : \gs x^*= 2.5\mu m \gs;\gs 0.3\mu m \leq y^* \leq 4.3\mu m \} \\
-    B_4 &= \{ (x^*,y^*) \gs : \gs x^*= 3.5\mu m \gs;\gs 0.3\mu m \leq y^* \leq 4.3\mu m \} \\
+    B_1 &= \{ (x^*,y^*) \gs : \gs x^*= 0.5\mu m \gs;\gs 0.4\mu m \leq y^* \leq 4.4\mu m \} \\
+    B_2 &= \{ (x^*,y^*) \gs : \gs x^*= 1.5\mu m \gs;\gs 0.4\mu m \leq y^* \leq 4.4\mu m \} \\
+    B_3 &= \{ (x^*,y^*) \gs : \gs x^*= 2.5\mu m \gs;\gs 0.4\mu m \leq y^* \leq 4.4\mu m \} \\
+    B_4 &= \{ (x^*,y^*) \gs : \gs x^*= 3.5\mu m \gs;\gs 0.4\mu m \leq y^* \leq 4.4\mu m \} \\
     A_2 &= \{ (x^*,y^*) \gs : \gs x^*= 1\mu m \gs;\gs 0\mu m \leq y^* \leq 4\mu m \} \\
     A_3 &= \{ (x^*,y^*) \gs : \gs x^*= 2\mu m \gs;\gs 0\mu m \leq y^* \leq 4\mu m \} \\
     A_4 &= \{ (x^*,y^*) \gs : \gs x^*= 3\mu m \gs;\gs 0\mu m \leq y^* \leq 4\mu m \} 
@@ -85,17 +85,17 @@ The B.V.P reduces to,
 where,
 \begin{equation}
 \rho'(x',y') =  \begin{cases}
-    -0.55\frac{s}{\nu}  & :\text{if} \gs (x',y') \in B_i \gs \text{where} \gs i = 1,2,3,4 \\
-    +0.74\frac{s}{\nu} & :\text{if} \gs (x',y') \in A_2  \\
+    -2\epsilon_0 \times 10^5  & :\text{if} \gs (x',y') \in B_i \gs \text{where} \gs i = 1,2,3,4 \\
+    2\epsilon_0 \times 10^5 & :\text{if} \gs (x',y') \in A_i \gs \text{where} \gs i = 2,3,4 \\
     0  & : \gs \text{elsewhere} \\
 \end{cases}
 \end{equation}
 Now according to our given arrangement,
 \begin{align}
-    B_1 &= \{ (x^*,y^*) \gs : \gs x^*= 0.5/s \gs;\gs 0.3/s \leq y^* \leq 4.3/s \} \\
-    B_2 &= \{ (x^*,y^*) \gs : \gs x^*= 1.5/s \gs;\gs 0.3/s \leq y^* \leq 4.3/s \} \\
-    B_3 &= \{ (x^*,y^*) \gs : \gs x^*= 2.5/s \gs;\gs 0.3/s \leq y^* \leq 4.3/s \} \\
-    B_4 &= \{ (x^*,y^*) \gs : \gs x^*= 3.5/s \gs;\gs 0.3/s \leq y^* \leq 4.3/s \} \\
+    B_1 &= \{ (x^*,y^*) \gs : \gs x^*= 0.5/s \gs;\gs 0.4/s \leq y^* \leq 4.4/s \} \\
+    B_2 &= \{ (x^*,y^*) \gs : \gs x^*= 1.5/s \gs;\gs 0.4/s \leq y^* \leq 4.4/s \} \\
+    B_3 &= \{ (x^*,y^*) \gs : \gs x^*= 2.5/s \gs;\gs 0.4/s \leq y^* \leq 4.4/s \} \\
+    B_4 &= \{ (x^*,y^*) \gs : \gs x^*= 3.5/s \gs;\gs 0.4/s \leq y^* \leq 4.4/s \} \\
     A_2 &= \{ (x^*,y^*) \gs : \gs x^*= 1/s \gs;\gs 0/s \leq y^* \leq 4/s \} \\
     A_3 &= \{ (x^*,y^*) \gs : \gs x^*= 2/s \gs;\gs 0/s \leq y^* \leq 4/s \} \\
     A_4 &= \{ (x^*,y^*) \gs : \gs x^*= 3/s \gs;\gs 0/s \leq y^* \leq 4/s \} 
@@ -105,3 +105,5 @@ We get the following boundary conditions for the above boundary value problem,
     & U(0,y) = +5/\nu \gs; \gs U(4,y) = +5/\nu \\ 
     & U_y(x,0) = 0 \gs; \gs U_y(x,4.4) = 0 
 \end{align}
+
+%%%%%%%%%%%%%%%END%%%%%%%%%%%%%%%%%%%%%%

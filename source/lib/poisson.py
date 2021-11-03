@@ -1,15 +1,18 @@
 #from mpl_toolkits import mplot3d
-#from numba import jit
+from numba import jit
 import numpy as np
 import matplotlib.pyplot as plt
 import time as t
 
-class Mesh:
+class mesh:
     def __init__(self,x=(0,1),y=(0,1),h=0.1,gtype="2D"):
         self.x_dim,self.y_dim=int((x[1]-x[0])/h +1),int((y[1]-y[0])/h +1) 
         self.y_dom=np.linspace(y[0],y[1],self.y_dim)
         self.x_dom=np.linspace(x[0],x[1],self.x_dim)
+        self.h = h
+        self.omega = dict()
         self.gtype= gtype 
+        self.X,self.Y = np.meshgrid(self.x_dom,self.y_dom)
         if self.gtype == "1D":
             self.grid=np.ones((self.x_dim,),dtype="single")
         elif self.gtype == "2D":
@@ -27,6 +30,24 @@ class Mesh:
             raise ValueError("Expected {0} but recieved {1} Boundary conditions.".format(self.gtype[0],len(x)))
     def get(self):
         return(self.grid)
+    def set_loc(self,loc):
+        self.loc = loc
+
+    def jacobi_poisson2d(self,p,nu=1):
+        self.u = jacobi2d(self.grid,self.h,p)[0]*nu
+        self.dat = np.array([self.X.flatten(),self.Y.flatten(),self.u.flatten()],dtype =float)
+        np.savetxt(f"/home/planck/Desktop/secc_project_proposal/dats/{self.loc}/jacobi_poisson2d_{self.h}.dat",self.dat.T)
+
+    def sor_poisson2d(self,p,w,nu=1):
+        solve = sor2dpoisson(self.grid,self.h,w,p)
+        self.u = solve[0]*nu
+        self.omega[w] = solve[1]
+        self.dat = np.array([self.X.flatten(),self.Y.flatten(),self.u.flatten()],dtype =float)
+        np.savetxt(f"/home/planck/Desktop/secc_project_proposal/dats/{self.loc}/sor_poisson2d_{self.h}_{w}_{nu}.dat",self.dat.T)
+    
+    def save_omega(self):
+        np.savetxt(f"/home/planck/Desktop/secc_project_proposal/dats/{self.loc}/omega_variation.dat",
+        np.array([list(self.omega.keys()),list(self.omega.values())]).T)
 
 def gauss1d(x,an):
     y=np.array((x,),dtype=float)
@@ -52,16 +73,16 @@ def ne1d(x,g):
             print(j)
             break
     return(y[-1])
-
-#@jit("f8[:,:](f8[:,:],f4,f8[:,:])",nopython=True,nogil=True)
+#"Tuple(f8[:,:],f8)(f8[:,:],f8,f8,f8[:,:])"
+@jit(nopython=False,nogil=True)
 def sor2dpoisson(x,h,overcf=1.9,p=None):
     k,m = x.shape[0],x.shape[1]
     if p is None :
         p = np.zeros(x.shape)
-    for f in range(10000):
-        new_x= np.array(x)
-        for i in range(0,k):
-            for j in range(1,m-1):
+    for f in np.arange(1,15000,1):
+        new_x= x.copy()
+        for i in np.arange(0,k,1):
+            for j in np.arange(1,m-1,1):
                 left = new_x[i][j-1]
                 right = new_x[i][j+1]
                 ##Neumann 0 wrt y-axis at y_upper and y_lower bounds 
@@ -74,22 +95,21 @@ def sor2dpoisson(x,h,overcf=1.9,p=None):
                 else:
                     down = new_x[i-1][j]
                 new_x[i][j] = new_x[i][j] + ((up+down+right+left + h**2*p[i][j])/4 - new_x[i][j]) * overcf
-        er = (abs(new_x - x) / new_x).max()
-        if er<=0.5e-30: #Why relative error instead of abs ?# significant digits and Decimal places
+        er = np.abs((new_x - x )/ new_x).max()
+        if er<=h**2: #Why relative error instead of abs ?# significant digits and Decimal places
             print(f)
             break
         else:
-            x = new_x
-    return(new_x)
-
+            x = new_x.copy()
+    return(new_x,f)
 
 #@jit("f8[:,:](f8[:,:],f4,f8[:,:])",nopython=True,nogil=True)
 def jacobi2d(x,h,p=None):
     k,m = x.shape[0],x.shape[1]
     if p is None :
         p = np.zeros(x.shape)
-    for f in range(1000):
-        new_x= np.array(x)
+    for f in range(2000):
+        new_x= x.copy()
         for i in range(0,k):
             for j in range(1,m-1):
                 left = x[i][j-1]
@@ -103,15 +123,32 @@ def jacobi2d(x,h,p=None):
                     down = x[i+1][j]
                 else:
                     down = x[i-1][j]
-                new_x[i][j] += ((up+down+right+left + h**2*p[i][j])/4) 
-        er = (abs(new_x - x) / new_x).max()
-        print(er)
-        if er<=0.5e-12: #Why relative error instead of abs ?# significant digits and Decimal places
-            print(f)
+                new_x[i][j] = ((up+down+right+left + h**2*p[i][j])/4) 
+        er = abs((new_x - x) / new_x).max()
+        if er<=h**2: #Why relative error instead of abs ?# significant digits and Decimal places
             break
         else:
-            x = new_x
-    return(new_x)
+            x = new_x.copy()
+    return(new_x,[f,er])
+
+
+def poisson(b,nptx,npty,dx,dy,nboundaryx,nboundaryy):
+    p  = np.zeros((nptx,npty))
+    ppad  = np.zeros((nptx+nboundaryx,npty+nboundaryy))
+    phatpad  = np.zeros((nptx+nboundaryx,npty+nboundaryy))
+    bpad    = np.zeros((nptx+nboundaryx,npty+nboundaryy))
+    bpad[:nptx,:npty] = b
+    kxpad = 2*np.pi*np.fft.fftfreq(nptx+nboundaryx,d=dx)
+    kypad = 2*np.pi*np.fft.fftfreq(npty+nboundaryy,d=dy)
+    epsilon = 1.e-9
+    ppad = np.real(np.fft.ifft2(-np.fft.fft2(bpad)/np.maximum(kxpad[None, :]**2 + kypad[:, None]**2,epsilon)))
+    p = ppad[:nptx,:npty]
+    p[0,:]      = 0
+    p[nptx-1,:] = 0
+    p[:,0]      = 0
+    p[:,npty-1] = 0
+    return p
+
 
 if __name__ == "__main__":
     t0 = t.time()
