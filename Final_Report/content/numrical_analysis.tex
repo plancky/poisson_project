@@ -1,11 +1,24 @@
 In this section we will try to analyse  results thoroughly. In this section we will analyse the Jacobi Method, SOR  and Gauss Seidel Method  
 \subsection{Main Problem}
 our problem consists of 4 capacitor which were charged at the beginning and then disconnnected after they were charged  to a potential of $ \pm5 volts$. So in our problem the first plate of capacitor at the begining {(i.e. $A_{1}$ in figure 1) }of system and last plate {(i.e. $A_5$)} of the last capacitor  would act as the boundary condition. We are solving our problem by considering it only in two direction and not taking the third direction due to the symmetry of problem.
-\subsubsection*{Expectation}
-Now since in our problem there are 4 capacitor and all of them have identical condition in the begining so we expect to get symmetrical result with high potential near the positive plates (i.e. the plates denoted by A  in the figure1) of capacitor and low potential near the 
-\subsection{Successive Over Relaxation Method}
-\subsubsection*{Optimum value of Relaxation Factor}
+\subsubsection{Expectation}
+Now since in our problem there are 4 capacitor and all of them have identical condition in the begining so we expect to get symmetrical result with high potential near the positively chacged plates (i.e. the plates denoted by A  in the figure1) of capacitor and low potential near the negatively charged plates but we are considerig them in two dimension so they will behave as the "line charges " rather than the capacitors.Since we are ensuring the value at the boundary reamins constant at $ +5 volts $ so the distribution should contain the positive spike in value of potential at the location of " line charges " having positive potential at the begining and negative spike at places of negative potential. \\
+Now if we anlayse the our set up from ones side then, at the top of arrangement we have boundary in form of line charge whose potential is 5 volts and then we line charge $ B_1$ which was charged to a potential of $ -5 volts $ so we should expect a decrease in potential as we move from $ A_1 $ to $ B_1 $ in x direction with spike at $ B_1 $ and since the potential is not maintained in Y direction so we should expect a decrease in potential from one side of Y to other, now after $ B_1 $ we move to $ A_2 $ so we should expect increase in potential with positive spike at $ A_2 $ in x direction and since the $ A_2 $ line charge extend till only $ 4 \mu m $ and its predecessor and successor which are both negatively charged exist for $ 4.4 \mu m $ so we should expect to see aggragation of negative charge for higher values of Y so low potential for higher values of Y and low value potential for values of Y closer to zero. Now if we move $ A_2 $ to $ B_2 $ the potential should decrease from $ A_2 $ to $ B_3 $ in x direction and the variation in potential should be similar to previous case.\\
+Nwo due to symmetry, we can just divide the region as going from positve to negative or negative to positive line charge and then it's variation of potential can be explained as $ A_2 $ to $ B_2 $ or $ B_1 $ to $ A_2 $ respectively.\\
+So our expected solution should be similar to figure below -:\\
+
+\subsubsection{Results}
+In this section we will analyse the computational results obatined using three different iterative methods after converting the problem into system of linear equation by using the method of finite differences. 
+\paragraph{Jacobi Method}
+The results obtaied from this method agree with the expectation of form of solution. The solution obtained from this method is shown below in form of heat map and surfaceplot. \\
+
+As we can see from the gaph that there is gradual decrease in value of potential in x direction till we reach in middle of x and then it again increases till the end of x direction which is as expcted.
+This runtime for this method is  \Bigg()  for a mesh size of with a step size of afer running for    number of iterations which is not bad for iterative method running in python.\\
+
+
+\paragraph{Successive Over Relaxation (SOR)}
+
+\subparagraph{Optimum value of Relaxation Factor}
 In Successive Over Relaxation we have to choose the value of a relaxation factor which is responsible. It's value can be chosen anywhere between 1 to 2 i.e. relaxation factor or $ \omega  \in [1,2] $. So we used different values of $ \omega $ to see which one is best for computation in our case by varying the value of $\omega$ between 1 and 2 with a step size of 0.01 and stored the value of number of iterations  required to reach the tolerance. The following graph represents the graph between number of itereation and value of $ \omega $. \\
 From the graph we can see that the most optimum value of $ \omega $ is $1.89$ according to number of iterations.
-\subsection{Jacobi Method}
-\subsection{Gauss Seidel Mehtod} 
+\paragraph{Gauss Seidel Mehtod} 
