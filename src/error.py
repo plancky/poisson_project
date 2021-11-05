@@ -1,8 +1,7 @@
 import numpy as np
-from Laplace import *
-
-
-n = [10,20,30,50,80,100,150,200]
+from lib.poisson import *
+import matplotlib.pyplot as plt
+n = np.arange(1,10000,1000)
 lst=[]
 rms=[]
 '''f = lambda x : -1*x 
@@ -22,14 +21,12 @@ for i in n :
 f = lambda x : np.sin(np.pi*x) 
 for i in n :
     h = 1/(i)
-    m = Mesh((0,1),h=h,gtype="1D")
-    mesh = m.get()
-    mesh[0],mesh[-1] = 0,0
-    B = ne1d(mesh,m.x_dom)
+    m = mesh((0,1),h=h,gtype="1D")
+    m.grid[0],m.grid[-1] = 0,0
+    B = model1d(m.grid,m.x_dom,rtol=1e-4)
     er =abs(f(m.x_dom)-B)
-    #print(er)
     lst.append(max(er))
-    rms.append(np.linalg.norm((f(m.x_dom)-B))/len(mesh))
+    rms.append(np.linalg.norm((f(m.x_dom)-B))/len(m.grid))
     #plt.plot(m.x_dom,er)
     #for j in B[1]:
     #    plt.plot(m.x_dom,j)

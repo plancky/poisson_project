@@ -1,0 +1,202 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{metropolis}
+\metroset{numbering=fraction}
+\usecolortheme{owl}
+\usepackage{amsmath,fontenc,amsfonts,mathtools}%
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamertemplate{subsection in toc}[subsections numbered]
+
+\makeatletter
+\setbeamertemplate{section page}{
+	\centering
+	\begin{minipage}{22em}
+		\raggedright
+		\usebeamercolor[fg]{section title}
+		\usebeamerfont{section title}
+		\thesection.~\insertsectionhead\\[-1ex]
+		\usebeamertemplate*{progress bar in section page}
+		\par
+		\ifx\insertsubsectionhead\@empty\else%
+		\usebeamercolor[fg]{subsection title}%
+		\usebeamerfont{subsection title}%
+		\thesection.\thesubsection.~\insertsubsectionhead
+		\fi
+	\end{minipage}
+	\par
+	\vspace{\baselineskip}
+}
+
+\makeatother
+
+
+\usepackage{graphicx}
+\usepackage{svg}
+\usepackage[backend=bibtex,style=chem-acs]{biblatex}
+\addbibresource{careyfoster.bib}
+\usepackage{csvsimple,longtable,booktabs}
+
+
+\title{CAREY FOSTER's BRIDGE}
+\subtitle{A Brief Review}
+\author{Shashvat Jain}
+\date{\today}
+\begin{document}
+	\maketitle
+	\begin{frame}{OUTLINE}
+		\tableofcontents
+	\end{frame}
+	\section{INTRODUCTION}
+	\begin{frame}{What is Carey Foster's bridge? Why do we need another bridge?}
+		The Carey Foster's bridge is another modification of Wheatstone bridge arrangement used to measure relatively medium or equal resistances compared to other resistances in the arrangement. As a result it becomes a necessity to ask why do we need Carey Foster's bridge?
+		The answer to this question must lie within the subtleties of it's modification. \\
+		So let's take a closer look with an experiment using the bridge.
+	\end{frame}
+
+	\section{THE EXPERIMENT}
+
+	\subsection{AIM AND APPARATUS USED}
+
+	\begin{frame}{AIM AND APPARATUS USED}
+		\begin{itemize}
+			\item \textbf{AIM : } To determine an unknown low resistance using the Carey Foster's bridge.
+			\item \textbf{APPARATUS USED : } Carey foster's bridge, unknown low resistance,Resistance box, Battery, jockey, one way key, Galvanometer,small shunt resistance, connecting wires of almost zero resistance.
+		\end{itemize}
+	\end{frame}
+
+	\subsection{CIRCUIT DIAGRAM}
+
+	\begin{frame}{CIRCUIT DIAGRAM}
+		\begin{figure}
+			\centering
+			\includegraphics[width=0.7\columnwidth]{Carey_Foster_bridge.png}
+			\caption{The Carey Foster bridge. The thick-edged areas are busbars of almost zero resistance.\cite{dia1}}
+			\label{fig:1}
+		\end{figure}
+	\end{frame}
+	
+
+	\subsection{THEORY}
+	\begin{frame}{THEORY}
+		X is the unknown resistance. P,Q and Y are known resistances of magnitude comparable to that of X, forming the other half of the bridge. The bridge wire EF has a jockey contact D placed along it and is slid until the galvanometer G measures zero. The thick-bordered areas are thick copper busbars of almost zero resistance.\\ 
+		The bridge is said to be balanced when no current passes through the galvanometer.\\ 
+		\begin{itemize}
+			\item
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}{FORMULA USED}
+		Let $\ell_{1}$ be the length ED when X is placed on the right and
+		 $\alpha$ is the unknown left-side extra resistance EX and $\beta$ is the unknown right-side extra resistance FY, and $\sigma$is the resistance per percent length of the bridge wire: 
+		\begin{equation*}
+			{\displaystyle {P \over Q}={{X+\sigma (\ell _{1}+\alpha )} \over {Y+\sigma (100-\ell _{1}+\beta )}}}
+		\end{equation*}
+		and add 1 to each side:
+		\begin{equation}
+			{\displaystyle {P \over Q}+1={{X+Y+\sigma (100+\alpha +\beta )} \over {Y+\sigma (100-\ell _{1}+\beta )}}}
+		\end{equation}
+		Now swap X and Y. $\ell_{2}$ is the new null point reading: 
+		\begin{equation*}
+			{\displaystyle {P \over Q}={{Y+\sigma (\ell _{2}+\alpha )} \over {X+\sigma (100-\ell _{2}+\beta )}}}
+		\end{equation*}
+	\end{frame}
+
+	\begin{frame}{FORMULA USED}
+		and add 1 to each side:
+		\begin{equation}
+			{\displaystyle {P \over Q}+1={{X+Y+\sigma (100+\alpha +\beta )} \over {X+\sigma (100-\ell _{2}+\beta )}}}
+		\end{equation}
+		From (1) and (2) we get:
+		\begin{equation*}
+			{Y+\sigma (100-\ell _{1}+\beta )=X+\sigma (100-\ell _{2}+\beta )}
+		\end{equation*}
+		\begin{equation}
+			{\implies X= Y+ \sigma (\ell _{2}-\ell _{1})}
+		\end{equation}
+	\end{frame}
+	\begin{frame}{Subtleties of Modification}
+		\begin{itemize}
+			\item Note that the unknown unwanted resistances $\alpha$ and $\beta$ have no affect on the finally obtained resistance $X$. This reduces the error in the result to a great extent.
+			This boosts the sensitivity of the instrument 
+			\item Comparing this to a metre bridge, This setup ensures that the components of the circuit are not majorly harmed incase the unknown resistance is very small.
+			\item This enables more accurate measurements of smaller resistances.
+		\end{itemize}
+	\end{frame}
+	\subsection{PROCEDURE}
+	\begin{frame}{PROCEDURE}
+		\textbf{To find the unknown resistance(X)}
+		\begin{enumerate}
+			\item Setup the circuit as shown in figure \ref{fig:1}
+			\item Start by switching on the circuit and sliding the galvanometer jockey ubtil the deflections become very small.
+			\item Now remove the shunt resistance and search for null point in the region of minimal deflection.
+			\item Once the null point is found, measure EF.
+			\item Swap X and Y and repeat the above steps to get $\ell_2$.
+			\item Repeat 1,2,3 qnd 4 with different values of Y.
+		\end{enumerate}
+		\textbf{To find the resistance per unit length ($\sigma$)}
+		\begin{enumerate}
+			\item Setup the circuit as shown in circuit diagram but now replace X with a wire of zero resistance. 
+		\end{enumerate}
+	\end{frame}
+	\subsection{OBSERVATIONS}
+	\begin{frame}{DATA}
+		Data was obtained from the following lab report \cite{read}
+		\begin{enumerate}
+			\item LC of the instrument used to measure Y = 0.01 $\Omega$
+			\item LC of metre scale = 0.1cm
+		\end{enumerate}
+		\begin{table}[h]
+			\caption{Observations for Resistance per unit length($\sigma$)}
+			\csvreader[longtable=cccccc,
+			table head=\toprule\bfseries S.No. &\bfseries Y($\Omega$) &\bfseries $\ell_{1}(cm) $ &\bfseries $\ell_{2}(cm) $ &\bfseries $\ell_{1} - \ell_{2}$ (cm) &\bfseries $\sigma$($\Omega / cm$) \\ \midrule\endhead\bottomrule\endfoot,
+			late after line=\\,
+			before reading={\catcode`\#=12},after reading={\catcode`\#=6}
+			]{careyfoster_01.csv}{1=\Sno,Y=\Y,l2=\li,l1=\lii,l2-l1=\di,rho=\X}{\thecsvrow & \Y & \li & \lii & \di & \X}
+		\end{table}
+	
+	\end{frame}
+	\begin{frame}{DATA}
+		\begin{table}[h]
+			\caption{Observations for value of X}
+			\csvreader[longtable=cccccc,
+			table head=\toprule\bfseries S.No. &\bfseries Y($\Omega$) &\bfseries $\ell_{1}(cm) $ &\bfseries $\ell_{2}(cm) $ &\bfseries $\ell_{2} - \ell_{1}$ (cm) &\bfseries $X$($\Omega$) \\ \midrule\endhead\bottomrule\endfoot,
+			late after line=\\,
+			before reading={\catcode`\#=12},after reading={\catcode`\#=6}
+			]{careyfoster_02.csv}{1=\Sno,2=\Y,3=\li,4=\lii,5=\di,6=\X}{\thecsvrow & \Y & \li & \lii & \di & \X}
+		\end{table}
+	\end{frame}
+	\begin{frame}{DATA ANALYSIS}
+		\begin{itemize}
+			\item Mean value of $\sigma$ = 0.032 $\Omega/cm$
+			\item Error in $\sigma$ due to LC $\approx 0.005$ 
+			\item Standard error in $\sigma$ = 0.002
+			\item Mean value of X = 0.7 $\Omega$
+			\item Error in X due to LC $\approx 0.1$ 
+			\item Standard error in X = 0.01
+		\end{itemize}
+	\end{frame}
+	\subsection{RESULTS}
+	\begin{frame}{RESULTS}
+		\begin{itemize}
+			\item Value of unknown resistance X = $0.7 \pm 0.1$
+		\end{itemize}
+	\end{frame}
+	\begin{frame}{PRECAUTIONS}
+		\begin{itemize}
+			\item Make sure that all resistances are of low and comparable magnitude. High unknown resistances can render the galvanometer and resistance wire useless.
+			\item Do not forget to to remove shunt resistance when close to the null point.
+			\item Do not rub the jockey against the resistance wire wire, slide it gently. 
+			\item Make a note of the error in the measurements of the known resistances.
+		\end{itemize}
+	\end{frame}
+	\begin{frame}{Light Dependent Resistances LDRs}
+		\begin{itemize}
+			\item During the early 20th century the bridge was popularly used for measuring unknown resistances.
+			\item Carey Foster's bridge arrangement is used in light detectors where the unknown resistance is a Light dependent resistance(LDR) whose resistance decreases with increase in the intensity of light falling on it.
+		\end{itemize}
+	\end{frame}
+\section{REFERENCES}
+	\begin{frame}[t]
+	\frametitle{REFERENCES}
+		\printbibliography[heading=none]
+	\end{frame}
+\end{document}

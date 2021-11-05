@@ -5,5 +5,8 @@ set auto
 set isosamples 60
 #splot '/home/planck/Desktop/secc_project_proposal/dats/dataset1_h2/sor_poisson2d_0.1_1_1.dat' 
 #splot '/home/planck/Desktop/secc_project_proposal/dats/dataset2_e-8/sor_poisson2d_0.01_1.8979_1.dat' 
-plot '/home/planck/Desktop/secc_project_proposal/dats/dataset2_e-8/sor_poisson2d_0.01_1.8979_1.dat' with image
+#plot '/home/planck/Desktop/secc_project_proposal/dats/dataset2_e-8/sor_poisson2d_0.01_1.8979_1.dat' with image
+set yrange [0:2000]
+set xrange [1:2]
+plot '/home/planck/Desktop/secc_project_proposal/dats/dataset1_h2/omega_variation.dat' 
 pause -1 "Hit any key to continue"

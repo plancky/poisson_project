@@ -1,4 +1,4 @@
-#from numba import jit
+from numba import jit
 import numpy as np
 import time as t
 import os
@@ -14,7 +14,7 @@ class mesh:
         self.gtype= gtype 
         self.X,self.Y = np.meshgrid(self.x_dom,self.y_dom)
         if self.gtype == "1D":
-            self.grid=np.ones((self.x_dim,),dtype="single")
+            self.grid=np.ones((self.x_dim,),dtype="double")
         elif self.gtype == "2D":
             self.grid=np.ones((self.y_dim,self.x_dim),dtype="double")
 
@@ -32,8 +32,10 @@ class mesh:
         return(self.grid)
     def set_loc(self,loc):
         self.loc = os.getcwd()+f"/dats/{loc}"
-        os.mkdir(self.loc)
-
+        try:
+            os.mkdir(self.loc)
+        except:
+            pass
     def jacobi_poisson2d(self,p,nu=1,rtol=None):
         self.u = pm.jacobi2d(self.grid,self.h,p,rtol)[0]*nu
         self.dat = np.array([self.X.flatten(),self.Y.flatten(),self.u.flatten()],dtype =float)
@@ -50,32 +52,38 @@ class mesh:
         np.savetxt(f"/home/planck/Desktop/secc_project_proposal/dats/{self.loc}/omega_variation.dat",
         np.array([list(self.omega.keys()),list(self.omega.values())]).T)
 
-def gauss1d(x,an):
-    y=np.array((x,),dtype=float)
-    for j in range(20000):
-        y=np.vstack((y,y[-1]))
-        for i in range(1,len(y[-1])-1):
-            y[-1][i]=(y[-1][i-1]+y[-1][i+1])/2
-        er = max(abs((y[-1]-y[-2])/y[-1])[1:-1])
-        if er<=0.5e-14 and y.shape[0]>=2:
+@jit("(f8[:],f8[:],f8,f8)",nopython=True)
+def sor1dpoisson(x,an,overcf=1,rtol=1e-8):
+    old_x = x.copy()
+    for j in np.arange(1,1e+4):
+        y= old_x.copy()
+        for i in np.arange(1,len(y)-1):
+            y[i]=y[i] + ((y[i-1]+y[i+1])/2 - y[i])*overcf
+        er = np.abs((y-old_x)/y).max()
+        if er<=rtol :
             print(j)
             break
-    return(y[-1])
+        else:
+            old_x= y.copy()
+    return(y,j)
 
-def ne1d(x,g):
+@jit("f8[:](f8[:],f8[:],f8)",nopython=True)
+def model1d(x,g,rtol=1e-8):
     h= g[1] - g[0]
-    y=np.array((x,),dtype=float)
-    for j in range(int(5e+4)):
-        y=np.vstack((y,y[-1]))
-        for i in range(1,len(y[-1])-1):
-            y[-1][i]=(y[-1][i-1]+y[-1][i+1]+2*(h**2)*(np.pi**2)*np.sin(np.pi*g[i]))/(2 + (np.pi*h)**2)
-        er = max(abs((y[-1]-y[-2])/y[-1])[1:-1])
-        if er<=0.5e-8 and y.shape[0]>=2:
+    old_x= x.copy()
+    for j in np.arange(1,5e+4,1):
+        y = old_x.copy()
+        for i in np.arange(1,len(y)-1):
+            y[i]=(y[i-1]+y[i+1]+2*(h**2)*(np.pi**2)*np.sin(np.pi*g[i]))/(2 + (np.pi*h)**2)
+        er = np.abs((y-old_x)/y).max()
+        if er<=rtol :
             print(j)
             break
-    return(y[-1])
-'''
-@jit("Tuple((f8[:,:],f8))(f8[:,:],f8,f8,f8[:,:],f8)",nopython=True)
+        else:
+            x_old = y.copy()
+    return(y)
+
+@jit("Tuple((f8[:,:],f8))(f8[:,:],f8,f8,f8[:,:],f8)",nopython=True,cache=True)
 def sor2dpoisson(x,h,overcf=1.9,p=None,rtol=None):
     k,m = x.shape[0],x.shape[1]
     if p is None :
@@ -106,7 +114,7 @@ def sor2dpoisson(x,h,overcf=1.9,p=None,rtol=None):
             x = new_x.copy()
     return(new_x,f)
 
-@jit("Tuple((f8[:,:],f8))(f8[:,:],f8,f8[:,:],f8)",nopython=True)
+@jit("Tuple((f8[:,:],f8))(f8[:,:],f8,f8[:,:],f8)",nopython=True,cache=True)
 def jacobi2d(x,h,p=None,rtol=None):
     k,m = x.shape[0],x.shape[1]
     if p is None :
@@ -129,12 +137,12 @@ def jacobi2d(x,h,p=None,rtol=None):
                 else:
                     down = x[i-1][j]
                 new_x[i][j] = ((up+down+right+left + h**2*p[i][j])/4) 
-        er = abs((new_x - x) / new_x).max()
+        er = np.abs((new_x - x) / new_x).max()
         if er<=rtol: #Why relative error instead of abs ?# significant digits and Decimal places
             break
         else:
             x = new_x.copy()
-    return(new_x,[f,er])
-'''
+    return(new_x,f)
+
 if __name__ == "__main__":
     pass

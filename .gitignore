@@ -4,3 +4,6 @@
 */*.synctex.gz
 */*.fls
 */*.fdb_latexmk
+/src/lib/__pycache__/*.pyc
+/src/lib/__pycache__/*.nbc
+/src/lib/__pycache__/*.nbi
