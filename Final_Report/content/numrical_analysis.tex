@@ -1,0 +1,11 @@
+In this section we will try to analyse  results thoroughly. In this section we will analyse the Jacobi Method, SOR  and Gauss Seidel Method  
+\subsection{Main Problem}
+our problem consists of 4 capacitor which were charged at the beginning and then disconnnected after they were charged  to a potential of $ \pm5 volts$. So in our problem the first plate of capacitor at the begining {(i.e. $A_{1}$ in figure 1) }of system and last plate {(i.e. $A_5$)} of the last capacitor  would act as the boundary condition. We are solving our problem by considering it only in two direction and not taking the third direction due to the symmetry of problem.
+\subsubsection*{Expectation}
+Now since in our problem there are 4 capacitor and all of them have identical condition in the begining so we expect to get symmetrical result with high potential near the positive plates (i.e. the plates denoted by A  in the figure1) of capacitor and low potential near the 
+\subsection{Successive Over Relaxation Method}
+\subsubsection*{Optimum value of Relaxation Factor}
+In Successive Over Relaxation we have to choose the value of a relaxation factor which is responsible. It's value can be chosen anywhere between 1 to 2 i.e. relaxation factor or $ \omega  \in [1,2] $. So we used different values of $ \omega $ to see which one is best for computation in our case by varying the value of $\omega$ between 1 and 2 with a step size of 0.01 and stored the value of number of iterations  required to reach the tolerance. The following graph represents the graph between number of itereation and value of $ \omega $. \\
+From the graph we can see that the most optimum value of $ \omega $ is $1.89$ according to number of iterations.
+\subsection{Jacobi Method}
+\subsection{Gauss Seidel Mehtod} 
