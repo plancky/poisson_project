@@ -1,3 +1,4 @@
+\section{Numerical Analysis}
 In this section we will try to analyse  results thoroughly. In this section we will analyse the Jacobi Method, SOR  and Gauss Seidel Method  
 \subsection{Main Problem}
 our problem consists of 4 capacitor which were charged at the beginning and then disconnnected after they were charged  to a potential of $ \pm5 volts$. So in our problem the first plate of capacitor at the begining {(i.e. $A_{1}$ in figure 1) }of system and last plate {(i.e. $A_5$)} of the last capacitor  would act as the boundary condition. We are solving our problem by considering it only in two direction and not taking the third direction due to the symmetry of problem.
@@ -13,12 +14,33 @@ In this section we will analyse the computational results obatined using three d
 The results obtaied from this method agree with the expectation of form of solution. The solution obtained from this method is shown below in form of heat map and surfaceplot. \\
 
 As we can see from the gaph that there is gradual decrease in value of potential in x direction till we reach in middle of x and then it again increases till the end of x direction which is as expcted.
-This runtime for this method is  \Bigg()  for a mesh size of with a step size of afer running for    number of iterations which is not bad for iterative method running in python.\\
+This runtime for this method is  $\Bigg() $ for a mesh size of with a step size of afer running for    number of iterations which is not bad for iterative method running in python.\\
+
+\paragraph{Gauss Seidel Mehtod} The result obtained from this method are shown in below figure \\
+\\
+After looking at the heat map can say that the results are in agreement with our expectation i.e. there is more negative potential for higher values of Y and decrease in potential in X direction til middle and then increase til boundary. The number of iterations for acheiving the tolearnce of $ dash dash $ is $  $ 
 
 
 \paragraph{Successive Over Relaxation (SOR)}
-
+In this section we will first analyse the results obtained for different values of relaxation factor. Then we will analyse the results obtained for the chosen relaxation factor.
 \subparagraph{Optimum value of Relaxation Factor}
-In Successive Over Relaxation we have to choose the value of a relaxation factor which is responsible. It's value can be chosen anywhere between 1 to 2 i.e. relaxation factor or $ \omega  \in [1,2] $. So we used different values of $ \omega $ to see which one is best for computation in our case by varying the value of $\omega$ between 1 and 2 with a step size of 0.01 and stored the value of number of iterations  required to reach the tolerance. The following graph represents the graph between number of itereation and value of $ \omega $. \\
-From the graph we can see that the most optimum value of $ \omega $ is $1.89$ according to number of iterations.
-\paragraph{Gauss Seidel Mehtod} 
+In Successive Over Relaxation we have to choose the value of a relaxation factor which is responsible for the rate of convergence of solution. It's value can be chosen anywhere between 1 to 2 i.e. relaxation factor or $ \omega  \in [1,2] $. So we used different values of $ \omega $ to see which one is best for computation in our case by varying the value of $\omega$ between 1 and 2 with a step size of 0.01 and stored the value of number of iterations  required to reach the tolerance. The following graph represents the graph between number of itereation and value of $ \omega $. \\
+\subparagraph{Result}From the graph we can see that the most optimum value of $ \omega $ is $1.89$ according to number of iterations required to reach the solution.Now we will analyse the plot, heat map and  compare it with the expectation. The below figure shows the heat map and the 3d plot of solution. \\
+Now first analysing the y direction of graph, in genral we expected to see  negative potential for higher values of Y and positive potential for lower values of Y which is exactly what is happening in the heat map. For X direction we expected to see increase or decrease in potential as depending upon going from a postively charged plate to negatively charged plate or vice-versa and overall change to be first decreasing till middle and then again increasing due to the fixed values of potential at boundary which is also agreeing with the heat map of solution.\\
+\paragraph{Comparison of Method}
+Since all the iterative methods we used have given us almost identical results so we will only compare them on the basis of number of iteration required so as to determine which method is more compuationally cheap and viable
+\subparagraph{Jacobi and Gauss Seidel Method}Jacobi Method required $dash dash $ number of iteration for giving us a result with a tolearnce of $ dash dash $ while Gauss Seidel Method required $ dash dash $ number of iteration for acheiving the same tolerance. Hence we can say that Gauss Method is better choice than Jacobi Method compuatationally.  
+\subparagraph{SOR and Jacobi}When we compared different values of relaxation factor for finding the optimum value of relaxation factor we found that for $ \omega = $ , the number of iteration it required was only dash dash in comparison of Jacobi Method so clearly the SOR method is more computationally cheap and hence naturally better option as compared to Jacobi Method.
+\subparagraph{SOR and Gauss Seidel Method} Both of these iterative schemes are dependent on $\omega$ while for Gauss Seidel $ \omega$ is always $1$ , the value of $\omega$ can vary from $(1,2)$ after performing the computation for a mesh of same size and same step size, the number of iteration for SOR were $  $ and for Gauss Seidel were $  $ . So here also SOR is more computationally cheap and better option as compared to its counterpart.\\
+\\
+So comparing all the method for computation under identical condition on the basis of number of iteration required for acheiving the required tolerance we can say $ \boldsymbol{SOR Method} $ is best method among all three iterative schemes used.
+
+\paragraph{Numba Library} The function for all the iterative method were run under a $ jit cover $ of $ numba library$ which when used in python converts the function of python into machine code which is more faster for performing computation in python.
+
+\newpage
+\section{Conclusion}
+\subsection{Result}
+We tried to solve the problem of interleaved capacitor using the finite difference method for solving poisson equation. We have solved the problem using three different iterative schemes. After completing this project we can say that the method of SOR is best for solving the system of linear equation after using the finite differences method. Using SOR method we were able to solve mesh of size $ (480 times 480) $ in just $ xxxxxx $ number of iteration in just $  yyyy $ seconds. Also we gained good insight and intuition after solving the problem of interleaved capacitor.
+\subsection{Experience}
+We learnt a lot of new things during this project. We have gained the knowledge on how to solve a physical problem computationally and the various process involved in it such as non-dimensionalisation, the concept of convergence etc. Our python, latex and gnu skills have also increase significantly and our fascination with power of poisson equation and computation method have only gone uphill as compared to start of project of how one can solve such complex physical problem just by using some standard method and understand the "physical aspect " of such problems easily. We also spend a good portion of time studying about theoretical aspects of different computational methods and trying to understand the concepts about which we didn't pay a lot of attention to earlier such as the truncation error , round off error etc. This project has been an incredible journey for us as it has not only increased our theoretical , physical and compuational knowledge but it has also taught us about the importance of perseverance and patience as there were many topic or subtopics that we didn't understand easily just by studying about it from one or two place or things that were not easily available in comprehendable nature for us due to advance nature of partial differential equation and sometimes we have to spend a lot of time just searching about it. But in the end we are very grateful that we had chosen such a topic that has taught us so much. 
+\end{document}
