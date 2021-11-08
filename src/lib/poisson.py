@@ -4,6 +4,22 @@ import time as t
 import os
 from .methods import poisson_module as pm
 
+def convert_gnuplotgrid3d(FILE):
+    f = open(FILE,'r')
+    prev_x = f.readline().split()[0]
+    lst1= ""
+    for line in f :
+        new_x = line.split(' ')[0]
+        if new_x!=prev_x:
+            lst1+="\n"+line
+            prev_x = new_x
+        else:
+            lst1+=line
+    f.close()
+    f2 =open(FILE,"w")
+    f2.write(lst1)
+    f2.close()
+
 class mesh:
     def __init__(self,x=(0,1),y=(0,1),h=0.1,gtype="2D"):
         self.x_dim,self.y_dim=int((x[1]-x[0])/h +1),int((y[1]-y[0])/h +1) 
@@ -37,20 +53,25 @@ class mesh:
         except:
             pass
     def jacobi_poisson2d(self,p,nu=1,rtol=None):
-        self.u = pm.jacobi2d(self.grid,self.h,p,rtol)[0]*nu
-        self.dat = np.array([self.X.flatten(),self.Y.flatten(),self.u.flatten()],dtype =float)
+        solve = jacobi2d(self.grid,self.h,p,rtol)
+        self.u = solve[0]*nu
+        self.dat = np.array([self.X.flatten('F'),self.Y.flatten('F'),self.u.flatten('F')],dtype =float)
         np.savetxt(f"{self.loc}/jacobi_poisson2d_{self.h}.dat",self.dat.T,fmt="%.20g")
-
+        convert_gnuplotgrid3d(f"{self.loc}/jacobi_poisson2d_{self.h}.dat")
+        return(solve)
     def sor_poisson2d(self,p,w,nu=1,rtol=None):
-        solve = pm.sor2dpoisson(self.grid,self.h,w,p,rtol)
+        solve = sor2dpoisson(self.grid,self.h,w,p,rtol)
         self.u = solve[0]*nu
         self.omega[w] = solve[1]
-        self.dat = np.array([self.X.flatten(),self.Y.flatten(),self.u.flatten()],dtype =float)
+        self.dat = np.array([self.X.flatten('F'),self.Y.flatten('F'),self.u.flatten('F')],dtype =float)
         np.savetxt(f"{self.loc}/sor_poisson2d_{self.h}_{w}_{nu}.dat",self.dat.T,fmt="%.20g")
+        convert_gnuplotgrid3d(f"{self.loc}/sor_poisson2d_{self.h}_{w}_{nu}.dat")
+        return(solve)
     
     def save_omega(self):
         np.savetxt(f"/home/planck/Desktop/secc_project_proposal/dats/{self.loc}/omega_variation.dat",
         np.array([list(self.omega.keys()),list(self.omega.values())]).T)
+
 
 @jit("(f8[:],f8[:],f8,f8)",nopython=True)
 def sor1dpoisson(x,an,overcf=1,rtol=1e-8):
@@ -90,7 +111,7 @@ def sor2dpoisson(x,h,overcf=1.9,p=None,rtol=None):
         p = np.zeros(x.shape)
     if rtol is None :
         rtol = h**2
-    for f in np.arange(1,15000,1):
+    for f in np.arange(1,30000,1):
         new_x= x.copy()
         for i in np.arange(0,k,1):
             for j in np.arange(1,m-1,1):
@@ -108,7 +129,6 @@ def sor2dpoisson(x,h,overcf=1.9,p=None,rtol=None):
                 new_x[i][j] = new_x[i][j] + ((up+down+right+left + h**2*p[i][j])/4 - new_x[i][j]) * overcf
         er = np.abs((new_x - x )/ new_x).max()
         if er<=rtol: #Why relative error instead of abs ?# significant digits and Decimal places
-            print(f)
             break
         else:
             x = new_x.copy()
@@ -121,7 +141,7 @@ def jacobi2d(x,h,p=None,rtol=None):
         p = np.zeros(x.shape)
     if rtol is None :
         rtol = h**2
-    for f in np.arange(1,15000,1):
+    for f in np.arange(1,1e+5,1):
         new_x= x.copy()
         for i in np.arange(0,k,1):
             for j in np.arange(1,m-1,1):
