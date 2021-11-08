@@ -193,55 +193,51 @@ In the last section we have discussed how to reduce a PDE to a linear combinatio
 \begin{equation*}
     A \mvec{x} = \mvec{b} 
 \end{equation*}
-where A is an N × N matrix, b the given data vector and x the vector
-of N unknown interior mesh values, there is an implied one-dimensional
-ordering of these values which is somewhat unnatural and obscures the
-important property that only immediate neighbours are involved. Each
-row of the matrix A involves only a very small number of non-zero
-elements, commonly ﬁve or seven; moreover in many problems a suitable
-ordering of the unknowns will lead to a matrix in which these non-zero
-elements occur in a regular pattern. In devising eﬃcient methods for
-the solution of the system these structural properties will be important,
+where A is an N × N matrix, b the given data vector and x the vector of N unknown interior mesh values, there is an implied one-dimensional ordering of these values which is somewhat unnatural and obscures the important property that only immediate neighbours are involved. Each row of the matrix A involves only a very small number of non-zero elements, commonly ﬁve or seven; moreover in many problems a suitable ordering of the unknowns will lead to a matrix in which these non-zero elements occur in a regular pattern. In devising eﬃcient methods for the solution of the system these structural properties will be important,
 
 \subsubsection{Jacobi Method}
 \begin{algorithm}
-	\caption{Jacobi Method}
-	%{This iterative method takes an initial matrix of guess values and solves the the equation $$ Ax = b $$})
-	\KwData{INPUT -: An $ k \times m $ matrix of initial values, value of step size $h$ and  also a matrix containing the initial charge configuration} 
-	\KwResult{OUTPUT -: An $ k \times m $ matrix containing the values of potential on all $x$ and $y$ values} 
-	\For{f = 0, 1, 2, 3, 4....N}{ 
+
+    \textbf{\large Jacobi Method(X,S,P,$\epsilon_r$)}\\[-1pt]
+    \par\noindent\rule{\textwidth}{0.4pt} \\
+	\KwIn{An $ k \times m $ matrix of initial values, value of step size $h$ and  also a matrix containing the initial charge configuration} 
+	\KwOut{An $ k \times m $ matrix containing the values of potential on all $x$ and $y$ values} 
+    \par\noindent\rule{\textwidth}{0.4pt} \\
+    \For{f = 0, 1, 2, 3, 4....N}{ 
 		make new array of size $ k \times m $ \tcc*{initialising a new array for solution}
 		\For(\tcc*{taking a x value}){i =0, 1, 2, 3 ... k}{
-			\For(\tcc*{taking all y value for a x value}){ j =1, 2, 3 ... (m-1)}{
-				\tcc{now defining the required quantites for stencil}
+            \For(\tcc*{taking all y value for a x value}){ j =1, 2, 3 ... (m-1)}{
+                \tcc{now defining the required quantites for stencil}
 				$left = {a}_{i,j-1}$ \; 
 				$right = {a}_{i,j+1}$ \;
 				\If{$ i = k-1 $ }{
-					$up = {a}_{i-1,j}$\;
+                    $up = {a}_{i-1,j}$\;
 					\Else{
-						up = ${a}_{i+1,j}$\;
+                        up = ${a}_{i+1,j}$\;
 						
-					}							
-				}
-				\If{ $ i = 0 $}{
-					down = ${a}_{i+1,j}$\;
-					\Else{
-						down = ${a}_{i-1,j}$ \;
-					}
-				}
-				{new ${a}_{i,j}$ = (up + down + left + right + $h^2 * {p}_{i,j} $ )/4 + new ${a}_{i,j}$} \tcc*{new value the grid point}
-			}
-			{max relative error = max(new  x - x)/ $x$}\;
-			\If(\tcc*{checking for tolerance}){max relative error < tolerance}{
-				{break}\;
-				\Else(\tcc*{if tolerance not reached then the iteration continues}){
-					new x =  x	
-				}
-			}
-		}
-	}	
-\end{algorithm}
-\subsubsection{Gauss-Seidel Method}
-\subsubsection{Relaxation methods and Successive Over-Relaxation(SOR)}
-
-
+                        }							
+                        }
+                        \If{ $ i = 0 $}{
+                            down = ${a}_{i+1,j}$\;
+                            \Else{
+                                down = ${a}_{i-1,j}$ \;
+                                }
+                                }
+                                {new ${a}_{i,j}$ = (up + down + left + right + $h^2 * {p}_{i,j} $ )/4 + new ${a}_{i,j}$} \tcc*{new value the grid point}
+                                }
+                                {max relative error = max(new  x - x)/ $x$}\;
+                                \If(\tcc*{checking for tolerance}){max relative error < tolerance}{
+                                    {break}\;
+                                    \Else(\tcc*{if tolerance not reached then the iteration continues}){
+                                        new x =  x	
+                                        }
+                                        }
+                                        }
+                                        }	
+                                        \caption{Jacobi Method}
+                                    \end{algorithm}
+                                    \subsubsection{Gauss-Seidel Method}
+                                    \subsubsection{Relaxation methods and Successive Over-Relaxation(SOR)}
+                                    
+                                    
+                                    
