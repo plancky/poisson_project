@@ -1,3 +1,4 @@
+%
 \section{Methodology}
 \subsection{Finite Difference Method}
 Finite Difference Methods(FDM) are used for approximating the solution of partial differential equations over a set of finite points, arranged in a geometrical structure called a \textbf{mesh}%
@@ -196,48 +197,61 @@ In the last section we have discussed how to reduce a PDE to a linear combinatio
 where A is an N × N matrix, b the given data vector and x the vector of N unknown interior mesh values, there is an implied one-dimensional ordering of these values which is somewhat unnatural and obscures the important property that only immediate neighbours are involved. Each row of the matrix A involves only a very small number of non-zero elements, commonly ﬁve or seven; moreover in many problems a suitable ordering of the unknowns will lead to a matrix in which these non-zero elements occur in a regular pattern. In devising eﬃcient methods for the solution of the system these structural properties will be important,
 
 \subsubsection{Jacobi Method}
-\begin{algorithm}
+Jacobi method starts with a set of intial guess values for the unknowns and then gets new value for the unkowns by substituting the quess values in the equations one at a time,the process is repeated with the newly produced value of the unkowns.\\[2mm]
+\begin{algorithm}[H]
+    \textbf{\large Jacobi Method (X,$\mathbf{S:(X^{(n)},P,h,i,j)} \mapsto x$,P,h,$\mathbf{\epsilon_r}$)}\\[-1pt]  
+    This verison of jacobi method is optimised for poisson on a uniformly structured rectangular mesh, It takes the initial guess values at all nodes, the stencil and iteratively solves the stencil over all interior nodes unitl the relative tolerance is reached.  \\[2mm]
+	\KwIn{ $\mathbf{X} :\gs k \times m $ matrix of initial guess values, value of step size $h$, a matrix containing the initial charge configuration $\mathbf{P}$, a mappping here described by the relation \ref{eq:difference equation}, N an upper bound on the number of iterations} 
+	\KwOut{An $ k \times m $ matrix containing the values of potential on all satisfying the relation \ref{eq:difference equation}} 
+    \For{n in $1,\dots N$}{ 
+		\For{all the interior nodes and also the boundary nodes parallel to x}{
+            $x^{(n+1)}_{i,j} = S(X^{(n)},P,h,i,j)$
+            }
+    
+        if $\max_{i,j}{\{\frac{X^{(n+1)} -X^{(n)}}{X^{(n+1)}}\}}\leq \epsilon_r$ ;\\
+        break
+    }
+    \caption{Jacobi Method}
+\end{algorithm}
 
-    \textbf{\large Jacobi Method(X,S,P,$\epsilon_r$)}\\[-1pt]
+
+\subsubsection{Gauss-Seidel Method}
+The Gauss-Seidel method applies the stencil on the new unkowns as it iterates over the system of equations unlike Jacobi method which only works on the unknown values of the previous iteration.\\[2mm]
+\begin{algorithm}[H]
+    \textbf{\large Gauss-Seidel Method (X,$\mathbf{S:(X^{(n)},P,h,i,j)} \mapsto x$,P,h,$\mathbf{\epsilon_r}$)}\\[-1pt]
     \par\noindent\rule{\textwidth}{0.4pt} \\
-	\KwIn{An $ k \times m $ matrix of initial values, value of step size $h$ and  also a matrix containing the initial charge configuration} 
-	\KwOut{An $ k \times m $ matrix containing the values of potential on all $x$ and $y$ values} 
+    This verison of jacobi method is optimised for poisson on a uniformly structured rectangular mesh, It takes the initial guess values at all nodes, the stencil and iteratively solves the stencil over all interior nodes unitl the relative tolerance is reached.  \\[2mm]
+	\KwIn{ $\mathbf{X} :\gs k \times m $ matrix of initial guess values, value of step size $h$, a matrix containing the initial charge configuration $\mathbf{P}$, a mappping S described here by the relation \ref{eq:difference equation}, N an upper bound on the number of iterations} 
+	\KwOut{An $ k \times m $ matrix containing the values of potential on all satisfying the relation \ref{eq:difference equation}} 
     \par\noindent\rule{\textwidth}{0.4pt} \\
-    \For{f = 0, 1, 2, 3, 4....N}{ 
-		make new array of size $ k \times m $ \tcc*{initialising a new array for solution}
-		\For(\tcc*{taking a x value}){i =0, 1, 2, 3 ... k}{
-            \For(\tcc*{taking all y value for a x value}){ j =1, 2, 3 ... (m-1)}{
-                \tcc{now defining the required quantites for stencil}
-				$left = {a}_{i,j-1}$ \; 
-				$right = {a}_{i,j+1}$ \;
-				\If{$ i = k-1 $ }{
-                    $up = {a}_{i-1,j}$\;
-					\Else{
-                        up = ${a}_{i+1,j}$\;
-						
-                        }							
-                        }
-                        \If{ $ i = 0 $}{
-                            down = ${a}_{i+1,j}$\;
-                            \Else{
-                                down = ${a}_{i-1,j}$ \;
-                                }
-                                }
-                                {new ${a}_{i,j}$ = (up + down + left + right + $h^2 * {p}_{i,j} $ )/4 + new ${a}_{i,j}$} \tcc*{new value the grid point}
-                                }
-                                {max relative error = max(new  x - x)/ $x$}\;
-                                \If(\tcc*{checking for tolerance}){max relative error < tolerance}{
-                                    {break}\;
-                                    \Else(\tcc*{if tolerance not reached then the iteration continues}){
-                                        new x =  x	
-                                        }
-                                        }
-                                        }
-                                        }	
-                                        \caption{Jacobi Method}
-                                    \end{algorithm}
-                                    \subsubsection{Gauss-Seidel Method}
-                                    \subsubsection{Relaxation methods and Successive Over-Relaxation(SOR)}
-                                    
-                                    
-                                    
+    \For{n in $1,\dots N$}{
+        set $X^{(n+1)} = X^{(n)}$ \\ 
+		\For{all the interior nodes and also the boundary nodes parallel to x-axis}{
+            $x^{(n+1)}_{i,j} = S(X^{(n+1)},P,h,i,j)$
+        }
+        if $\max_{i,j}{\{\frac{X^{(n+1)} -X^{(n)}}{X^{(n+1)}}\}}\leq \epsilon_r$ ;\\
+        break
+    } 
+    \par\noindent\rule{\textwidth}{0.4pt} \\[2mm]
+    \caption{Jacobi Method}
+\end{algorithm}
+\subsubsection{Successive Over-Relaxation(SOR)}
+Succesive over-relaxation or SOR is a method that belongs to a class of methods called Relaxation methods. Such so-called relaxation methods reached a high state of development in the l940s  One result was a modiﬁcation of the Gauss–Seidel procedure which is now called successive over-relaxation or the SOR method. Taking the recent values of the unknowns. We proceed by calculating the correction which would be given by the Gauss–Seidel iteration (iterating on new unknowns), and then multiply this correction by $\omega$ before adding to the previous value. The term over-relaxation then implies that $\omega>1$. \\[2mm]
+\begin{algorithm}[H]
+    \textbf{\large S.O.R Method (X,$\mathbf{S:(X^{(n)},P,h,i,j)} \mapsto x$,P,h,$\mathbf{\epsilon_r}$)}\\[-1pt]
+    \par\noindent\rule{\textwidth}{0.4pt} \\
+    This verison of jacobi method is optimised for poisson on a uniformly structured rectangular mesh, It takes the initial guess values at all nodes, the stencil and iteratively solves the stencil over all interior nodes unitl the relative tolerance is reached.  \\[2mm]
+	\KwIn{ $\mathbf{X} :\gs k \times m $ matrix of initial guess values, value of step size $h$, a matrix containing the initial charge configuration $\mathbf{P}$, a mappping S described here by the relation \ref{eq:difference equation}, N an upper bound on the number of iterations} 
+	\KwOut{An $ k \times m $ matrix containing the values of potential on all satisfying the relation \ref{eq:difference equation}} 
+    \par\noindent\rule{\textwidth}{0.4pt} \\
+    \For{n in $1,\dots N$}{
+        set $X^{(n+1)} = X^{(n)}$ \\ 
+		\For{all the interior nodes and also the boundary nodes parallel to x-axis}{
+            $x^{(n+1)}_{i,j} = x^{(n)}_{i,j}+ \omega(S(X^{(n+1)},P,h,i,j)- x^{(n+1)}_{i,j})$
+        }
+        if $\max_{i,j}{\{\frac{X^{(n+1)} -X^{(n)}}{X^{(n+1)}}\}}\leq \epsilon_r$ ;\\
+        break
+    } 
+    \par\noindent\rule{\textwidth}{0.4pt} \\[2mm]
+    \caption{SOR Method}
+\end{algorithm}                                    
