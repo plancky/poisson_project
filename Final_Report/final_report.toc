@@ -18,8 +18,6 @@
 \contentsline {subsection}{\numberline {4.2}Results}{12}{}%
 \contentsline {paragraph}{Comparison of Method}{12}{}%
 \contentsline {subsubsection}{\numberline {4.2.1}Successive Over Relaxation (SOR)}{13}{}%
-\contentsline {subparagraph}{Result}{13}{}%
-\contentsline {paragraph}{Numba Library}{14}{}%
-\contentsline {section}{\numberline {5}Conclusion}{15}{}%
-\contentsline {subsection}{\numberline {5.1}Result}{15}{}%
-\contentsline {subsection}{\numberline {5.2}Experience}{15}{}%
+\contentsline {section}{\numberline {5}Conclusion}{14}{}%
+\contentsline {subsection}{\numberline {5.1}Result}{14}{}%
+\contentsline {subsection}{\numberline {5.2}Experience}{14}{}%

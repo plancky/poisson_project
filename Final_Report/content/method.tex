@@ -95,23 +95,23 @@ For Forward difference operator,
 \begin{align*}
     \tau &\equiv \delta _ x^{+} U'_ i - {U'_ x}|_ i \\
     &= \frac{1}{\sDelta x}\left( U'_ {i+1} - U'_{i}\right) - {U'_ x}|_i \\
-    &= \frac{1}{\sDelta x}\left[ \left( U'_ i + \sDelta x{U'_ x}|_ i + \frac{1}{2}\sDelta x^2{U'_{xx}}|_ i + \mcm{O}(\sDelta x^3)\right) - U'_i \right] - {U'_ x}|_ i \\
-    &= \frac{1}{2}\sDelta x{U'_{xx}}|_ i + \mcm{O}(\sDelta x^2) = \mcm{O}(\Delta x)
+    &= \frac{1}{\sDelta x}\left[ \left( U'_ i + \sDelta x{U'_ x}|_ i + \frac{1}{2}(\sDelta x)^2{U'_{xx}}|_ i + \mcm{O}((\sDelta x)^3)\right) - U'_i \right] - {U'_ x}|_ i \\
+    &= \frac{1}{2}\sDelta x{U'_{xx}}|_ i + \mcm{O}((\sDelta x)^2) = \mcm{O}(\Delta x)
 \end{align*}
 For Backward difference operator, 
 \begin{align*}
     \tau &\equiv \delta _ x^{-} U'_ i - {U'_ x}|_ i \\
     &= \frac{1}{\sDelta x}\left( U'_ i - U'_{i-1}\right) - {U'_ x}|_i \\
-    &= \frac{1}{\sDelta x}\left[ U'_ i - \left( U'_ i - \sDelta x{U'_ x}|_ i + \frac{1}{2}\sDelta x^2{U'_{xx}}|_ i + \mcm{O}(\sDelta x^3)\right)\right] - {U'_ x}|_ i \\
-    &= -\frac{1}{2}\sDelta x{U'_{xx}}|_ i + \mcm{O}(\sDelta x^2) = \mcm{O}(\Delta x)  
+    &= \frac{1}{\sDelta x}\left[ U'_ i - \left( U'_ i - \sDelta x{U'_ x}|_ i + \frac{1}{2}(\sDelta x)^2{U'_{xx}}|_ i + \mcm{O}((\sDelta x)^3)\right)\right] - {U'_ x}|_ i \\
+    &= -\frac{1}{2}\sDelta x{U'_{xx}}|_ i + \mcm{O}((\sDelta x)^2) = \mcm{O}(\Delta x)  
 \end{align*}
 For Central difference operator,
 \begin{align*}
     \tau &\equiv \delta _ {2x} U'_ i - {U'_ x}|_ i \\
     &= \frac{1}{{2 \sDelta } x}\left( U'_ {i+1} - U'_{i-1}\right) - {U'_ x}|_i \\
-    &= \frac{1}{2 \sDelta  x}\Bigg[ \left( U'_ i + \sDelta x{U'_ x}|_ i + \frac{1}{2}\sDelta x^2{U'_{xx}}|_ i + \frac{1}{6}\sDelta x^3{U'_{xxx}}|_ i + \frac{1}{12}\sDelta x^4{U'_{xxxx}}|_ i + \mcm{O}(\sDelta x^5)\right) \\
-    &\qquad - \left( U'_ i - \sDelta x{U'_ x}|_ i + \frac{1}{2}\sDelta x^2{U'_{xx}}|_ i - \frac{1}{6}\sDelta x^3{U'_{xxx}}|_ i + \frac{1}{12}\sDelta x^4{U'_{xxxx}}|_ i +\mcm{O}(\sDelta x^5)\right)\Bigg] - {U'_ x}|_ i \\
-    &= -\frac{1}{6}\Delta x^2 U'_{xxx_ i} + \mcm{O}(\Delta x^4) = \mcm{O}((\Delta x)^2)
+    &= \frac{1}{2 \sDelta  x}\Bigg[ \left( U'_ i + \sDelta x{U'_ x}|_ i + \frac{1}{2}(\sDelta x)^2{U'_{xx}}|_ i + \frac{1}{6}(\sDelta x)^3{U'_{xxx}}|_ i + \frac{1}{12}(\sDelta x)^4{U'_{xxxx}}|_ i + \mcm{O}((\sDelta x)^5)\right) \\
+    &\qquad - \left( U'_ i - \sDelta x{U'_ x}|_ i + \frac{1}{2}(\sDelta x)^2{U'_{xx}}|_ i - \frac{1}{6}(\sDelta x)^3{U'_{xxx}}|_ i + \frac{1}{12}(\sDelta x)^4{U'_{xxxx}}|_ i +\mcm{O}((\sDelta x)^5)\right)\Bigg] - {U'_ x}|_ i \\
+    &= -\frac{1}{6}\Delta x^2 U'_{xxx_ i} + \mcm{O}((\sDelta x)^4) = \mcm{O}((\Delta x)^2)
 \end{align*}
 where in the above expressions we assume that the Higher order derivatives of $U$ at $i$ are well defined. For a fairly small $\Delta x$ (less than 1) we can confidently say that $\bo(\Delta x^2)$ is samller than $\bo(\Delta x)$%
 \footnote{The definition of the "big $\bo$" notation says that if for given functions $f(x)$ and $g(x)$ for $x \in S$ where S is some subset of $\mathbf{R}$, there exists a positive constant A such that $|f(x)| \leq A|g(x)|$ $\forall$ $x \in S$, we say that $f(x)$ is the "big $\bo$" of $g(x)$ or that $f(x)$ is of order of $g(x)$, mathematically given by $f(x) = \bo(g(x))$}%
@@ -121,8 +121,8 @@ Similarly, Approximation of second-order derivative,
 \begin{align*}
     \tau &\equiv \delta^2_x U'_i - U'_{xx}|_i \\
      &= \frac{1}{(\sDelta x)^2}(U'_{i+1}-2 U'_i + U'_{i-1})  - U'_{xx}|_i \\
-     &= \frac{1}{(\sDelta x)^2}\Bigg[ \left( U'_ i + \sDelta x{U'_ x}|_ i + \frac{1}{2}\sDelta x^2{U'_{xx}}|_ i + \frac{1}{6}\sDelta x^3{U'_{xxx}}|_ i + \frac{1}{12}\sDelta x^4{U'_{xxxx}}|_ i + \mcm{O}((\sDelta x)^5)\right) - 2 U'_i\\
-    & + \left( U'_ i - \sDelta x{U'_ x}|_ i + \frac{1}{2}\sDelta x^2{U'_{xx}}|_ i - \frac{1}{6}\sDelta x^3{U'_{xxx}}|_ i + \frac{1}{12}\sDelta x^4{U'_{xxxx}}|_ i +\mcm{O}((\sDelta x)^5)\right)\Bigg] - {U'_ {xx}}|_ i \\
+     &= \frac{1}{(\sDelta x)^2}\Bigg[ \left( U'_ i + \sDelta x{U'_ x}|_ i + \frac{1}{2}(\sDelta x)^2{U'_{xx}}|_ i + \frac{1}{6}(\sDelta x)^3{U'_{xxx}}|_ i + \frac{1}{12}(\sDelta x)^4{U'_{xxxx}}|_ i + \mcm{O}((\sDelta x)^5)\right) - 2 U'_i\\
+    & + \left( U'_ i - \sDelta x{U'_ x}|_ i + \frac{1}{2}(\sDelta x)^2{U'_{xx}}|_ i - \frac{1}{6}(\sDelta x)^3{U'_{xxx}}|_ i + \frac{1}{12}(\sDelta x)^4{U'_{xxxx}}|_ i +\mcm{O}((\sDelta x)^5)\right)\Bigg] - {U'_ {xx}}|_ i \\
     &= \mcm{O}((\sDelta x)^2)
 \end{align*}
 Thus, the second-order derivative approximator is also second order accurate.
