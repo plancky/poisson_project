@@ -29,13 +29,22 @@ Similarly on $B_i$,
 \begin{figure}[h]
     \centering
     \begin{subfigure}[b]{\linewidth}
-    \includegraphics[width=5cm, height=4cm]{content/capacitor.png}
+    \includegraphics[width=0.5\textwidth, height=4cm]{content/capacitor.png}
     \caption{\small Diagram dipciting the arrangement of plates in a interleaved fashion.}
     \label{fig 1: the capacitor}
     \end{subfigure}
 \end{figure}
+
+\begin{figure}[h]
+    \centering
+    \def\svgwidth{0.6\textwidth}
+    \import{./diagrams}{daigram.pdf_tex}
+    \caption{Riemmans theorem}
+    \label{fig:riemmans-theorem}
+\end{figure}
+
 Mathematical Formulation:\\
-Let $U(x,y)$ and $\vec{E}(x,y)$ be the potential and Electric field distribution defined in the region of our arrangement $(x,y) = [0,4\mu m]\times[0,4.4\mu m]$ .\\
+Let $U(x,y)$ and $\vec{E}(x,y)$ be the potential and Electric field distribution defined in the region of our arrangement $(x,y) \in \Omega := [0,4\mu m]\times[0,4.4\mu m]$ .\\
 We know from maxwell's laws that for static electric fields $\vec{\nabla} \cdot \vec{E} = \rho / \epsilon_0 $, $\vec{\nabla} \times \vec{E} = 0$
 \\
 From the later we get $E=-\vec{\nabla}U$, substituting this back into the former we get,

@@ -42,6 +42,17 @@
    \draw[->] (midlabel) -- (#2);
 }
 
+%%inkscape import
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    
+    \import{./diagrams/}{#1.pdf_tex}
+}
+
 %%%%%%%%%%%
 \begin{document}
 
