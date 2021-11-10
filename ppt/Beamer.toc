@@ -1,6 +1,0 @@
-\beamer@sectionintoc {1}{Content}{2}{0}{1}
-\beamer@sectionintoc {2}{Introduction}{3}{0}{2}
-\beamer@sectionintoc {3}{Theory}{4}{0}{3}
-\beamer@sectionintoc {4}{Problem}{4}{0}{4}
-\beamer@sectionintoc {5}{Methodology}{6}{0}{5}
-\beamer@subsectionintoc {5}{1}{Finite Differences}{6}{0}{5}
