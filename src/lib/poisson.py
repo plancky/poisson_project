@@ -111,7 +111,7 @@ def sor2dpoisson(x,h,overcf=1.9,p=None,rtol=None):
         p = np.zeros(x.shape)
     if rtol is None :
         rtol = h**2
-    for f in np.arange(1,30000,1):
+    for f in np.arange(1,1e+6,1):
         new_x= x.copy()
         for i in np.arange(0,k,1):
             for j in np.arange(1,m-1,1):
@@ -134,14 +134,14 @@ def sor2dpoisson(x,h,overcf=1.9,p=None,rtol=None):
             x = new_x.copy()
     return(new_x,f)
 
-@jit("Tuple((f8[:,:],f8))(f8[:,:],f8,f8[:,:],f8)",nopython=True,cache=True)
+@jit("Tuple((f8[:,:],f8))(f8[:,:],f8,f8[:,:],f8)",nopython=True)
 def jacobi2d(x,h,p=None,rtol=None):
     k,m = x.shape[0],x.shape[1]
     if p is None :
         p = np.zeros(x.shape)
     if rtol is None :
         rtol = h**2
-    for f in np.arange(1,1e+5,1):
+    for f in np.arange(1,1e+6,1):
         new_x= x.copy()
         for i in np.arange(0,k,1):
             for j in np.arange(1,m-1,1):

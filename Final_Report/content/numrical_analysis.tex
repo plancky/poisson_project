@@ -22,29 +22,50 @@ To remind ourselves, our problem consists of an interleaved capacitor which is c
 \subsection{Results}
 Now that we have converted the problem into a system of linear equations by applying the relation \ref{eq:difference equation} to each node on the mesh and analysed the conversion, we move on to analyse the computational results obtained using three different iterative methods namely Jacobi, Gauss-Seidel and S.O.R to solve the system of linear equations.
 
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[height= 70mm]{content/graphs/Jacobi_0125_map.png}
+    \caption{Jacobi}
+    \label{fig1}
+\end{figure}%
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[height= 70mm]{content/graphs/Jacobi_0125_map.png}
+    \caption{Jacobi}
+    \label{fig2:}
+\end{figure}%
 \begin{figure}[h]
     \centering
-    \begin{subfigure}{.5\textwidth}
-      \centering
-      \includegraphics[width=.9\linewidth]{content/graphs/Jacobi_0125_map.png}
-      \caption{Jacobi}
-      \label{fig:sub1}
-    \end{subfigure}%
-    \begin{subfigure}{.5\textwidth}
-      \centering
-      \includegraphics[width=.9\linewidth]{content/graphs/Gauss_0125_map.png}
-      \caption{Gauss-Seidel}
-      \label{fig:sub2}
-    \end{subfigure}
-    \begin{subfigure}{.5\textwidth}
-        \centering
-        \includegraphics[width=.9\linewidth]{content/graphs/SOR_0125_map.png}
-        \caption{S.O.R with relaxation factor = 1.9}
-        \label{fig:sub3}
-    \end{subfigure}
-    \caption{ \centering Colour map for potential distribution, taking meshsize h = 0.0125 and relative tolerance $\epsilon_r = 10^{-8}$}
-    \label{fig:}
-\end{figure}
+    \includegraphics[height= 70mm]{content/graphs/Jacobi_0125_map.png}
+    \caption{Jacobi}
+    \label{fig3:}
+\end{figure}%
+
+%\begin{figure}[h]
+%    \centering
+%    \begin{subfigure}{.7\textwidth}
+%      \centering
+%      \includegraphics[width=\textwidth]{content/graphs/Jacobi_0125_map.png}
+%      \caption{Jacobi}
+%      \label{fig:sub1}
+%    \end{subfigure}%
+%    \begin{subfigure}{.7\textwidth}
+%      \centering
+%      \includegraphics[width=\linewidth]{content/graphs/Gauss_0125_map.png}
+%      \caption{Gauss-Seidel}
+%      \label{fig:sub2}
+%    \end{subfigure}
+%    \begin{subfigure}{.7\textwidth}
+%        \centering
+%        \includegraphics[width=\linewidth]{content/graphs/SOR_0125_map.png}
+%        \caption{S.O.R with relaxation factor = 1.9}
+%        \label{fig:sub3}
+%    \end{subfigure}
+%    \caption{ \centering Colour map for potential distribution, taking meshsize h = 0.0125 and relative tolerance $\epsilon_r = 10^{-8}$}
+%    \label{fig:}
+%\end{figure}
 
 \paragraph{Comparison of Method}{%
 Since all the iterative methods we used have given us almost identical results so we will only compare them on the basis of number of iteration required so as to determine which method is more compuationally cheap and viable}
@@ -87,7 +108,7 @@ In this section we analyse the results obtained for different values of relaxati
 In Successive Over Relaxation we have to choose the value of a relaxation factor which is responsible for the rate of convergence of solution. It's value can be chosen anywhere between 1 to 2 i.e. relaxation factor or $\omega  \in [1,2]$. We observed the variation of No. of iterations required to reach a given tolerance with change in $ \omega $. The following graph represents the graph between number of itereations and value of $\omega$. \\
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.7\textwidth]{content/graphs/omega.png}
+    \includegraphics[width=\textwidth]{content/graphs/omega.png}
     \caption{variation of number of iterations for convergence with relative tolerance=$10^{-8}$ and meshsize $h = 0.1$  }
     \label{omega variation}
 \end{figure}
