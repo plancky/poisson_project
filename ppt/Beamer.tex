@@ -1,6 +1,7 @@
 \documentclass[9 pt]{beamer}
 \usepackage{graphics}
 \usepackage{xcolor}
+\usepackage{array}
 \usepackage[utf8]{inputenc}
 \renewcommand\fbox{\fcolorbox{purple}{white}}
 \usepackage{amsmath,accents}
@@ -12,6 +13,13 @@
 	\draw[<-] (#1) --  (midlabel);
 	\draw[->] (midlabel) -- (#2);
 }
+\newcommand{\pa}{\partial}
+\newcommand{\mcm}[1]{\mathcal{#1}}
+\newcommand{\bo}{\mcm{O}}
+\newcommand{\sDelta}{{\scriptstyle \Delta}}
+\newcommand{\gs}{\hspace{0.35cm}}
+\newcommand{\mvec}[1]{\accentset{\rightharpoonup}{#1}}
+
 \usepackage{import}
 \usetheme{Frankfurt}
 \title{Finite Difference Method For Poisson Equation}
@@ -141,6 +149,35 @@
 			\end{tikzpicture}]}
 		\end{figure}
 		\end{frame}	
+		\subsection{Truncation Error}
+		\begin{frame}{Truncation Error}
+			\begin{itemize}
+				\item Truncation Error arises due to truncation of Taylor series used for approximating the value of derivative to form a difference equation.
+				\item First order derivative can be approximated in three ways-:
+					\begin{itemize}
+						\item Forward Difference Method
+						\item Backward Difference Method
+						\item Central Difference Method \\
+						\medskip
+					\end{itemize}
+				
+						\begin{center}
+							
+							\begin{tabular}{ || c| c || } 
+								\hline 
+								Forward Difference Method &  $ \mcm{O}(\Delta x)$ \\ 
+								\hline 
+								Backward Difference Method &$ \mcm{O}(\Delta x)$  \\ 
+								\hline 
+								Central Difference Method &  $ \mcm{O}((\Delta x)^2) $ \\ 
+								\hline \hline
+							\end{tabular}
+						\end{center}
+						\item Above table shows that central order approximation are more accurate than one sided differences.
+						\item Second Order derivative is also second order accurate.
+				
+			\end{itemize}
+		\end{frame}
 		\subsection{Iterative Method }
 		\begin{frame}{Iterative Method}
 			\begin{itemize}

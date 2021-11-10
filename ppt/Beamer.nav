@@ -30,29 +30,33 @@
 \headcommand {\slideentry {5}{1}{0}{6/6}{}{0}}
 \headcommand {\beamer@framepages {6}{6}}
 \headcommand {\beamer@subsectionpages {6}{6}}
-\headcommand {\beamer@subsectionentry {0}{5}{2}{7}{Iterative Method }}
-\headcommand {\slideentry {5}{2}{1}{7/7}{Iterative Method }{0}}
+\headcommand {\beamer@subsectionentry {0}{5}{2}{7}{Truncation Error}}
+\headcommand {\slideentry {5}{2}{1}{7/7}{Truncation Error}{0}}
 \headcommand {\beamer@framepages {7}{7}}
-\headcommand {\beamer@sectionpages {6}{7}}
 \headcommand {\beamer@subsectionpages {7}{7}}
-\headcommand {\sectionentry {6}{result}{8}{result}{0}}
-\headcommand {\beamer@subsectionpages {8}{7}}
-\headcommand {\beamer@subsectionentry {0}{6}{1}{8}{Expectation}}
-\headcommand {\slideentry {6}{1}{1}{8/8}{Expectation}{0}}
+\headcommand {\beamer@subsectionentry {0}{5}{3}{8}{Iterative Method }}
+\headcommand {\slideentry {5}{3}{1}{8/8}{Iterative Method }{0}}
 \headcommand {\beamer@framepages {8}{8}}
+\headcommand {\beamer@sectionpages {6}{8}}
 \headcommand {\beamer@subsectionpages {8}{8}}
-\headcommand {\beamer@subsectionentry {0}{6}{2}{9}{Numerical Result}}
-\headcommand {\slideentry {6}{2}{1}{9/9}{Numerical Result}{0}}
+\headcommand {\sectionentry {6}{result}{9}{result}{0}}
+\headcommand {\beamer@subsectionpages {9}{8}}
+\headcommand {\beamer@subsectionentry {0}{6}{1}{9}{Expectation}}
+\headcommand {\slideentry {6}{1}{1}{9/9}{Expectation}{0}}
 \headcommand {\beamer@framepages {9}{9}}
-\headcommand {\beamer@sectionpages {8}{9}}
 \headcommand {\beamer@subsectionpages {9}{9}}
-\headcommand {\sectionentry {7}{Conclusion}{10}{Conclusion}{0}}
-\headcommand {\slideentry {7}{0}{1}{10/10}{}{0}}
+\headcommand {\beamer@subsectionentry {0}{6}{2}{10}{Numerical Result}}
+\headcommand {\slideentry {6}{2}{1}{10/10}{Numerical Result}{0}}
 \headcommand {\beamer@framepages {10}{10}}
-\headcommand {\slideentry {7}{0}{2}{11/11}{}{0}}
+\headcommand {\beamer@sectionpages {9}{10}}
+\headcommand {\beamer@subsectionpages {10}{10}}
+\headcommand {\sectionentry {7}{Conclusion}{11}{Conclusion}{0}}
+\headcommand {\slideentry {7}{0}{1}{11/11}{}{0}}
 \headcommand {\beamer@framepages {11}{11}}
-\headcommand {\beamer@partpages {1}{11}}
-\headcommand {\beamer@subsectionpages {10}{11}}
-\headcommand {\beamer@sectionpages {10}{11}}
-\headcommand {\beamer@documentpages {11}}
-\headcommand {\gdef \inserttotalframenumber {11}}
+\headcommand {\slideentry {7}{0}{2}{12/12}{}{0}}
+\headcommand {\beamer@framepages {12}{12}}
+\headcommand {\beamer@partpages {1}{12}}
+\headcommand {\beamer@subsectionpages {11}{12}}
+\headcommand {\beamer@sectionpages {11}{12}}
+\headcommand {\beamer@documentpages {12}}
+\headcommand {\gdef \inserttotalframenumber {12}}
