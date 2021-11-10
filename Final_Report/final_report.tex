@@ -14,9 +14,13 @@
  bottom=15mm ,
  top=15mm,}
  
-%%% Font
+\usepackage{hyperref}
+
+ %%% Font
 \usepackage{amsmath,accents}
-%%%Tikz and images
+
+
+%%% images
 \usepackage{graphicx}
 \usepackage{caption,subcaption}
 
@@ -26,13 +30,7 @@
 
 \numberwithin{equation}{section}
 \usepackage{tabularx,multirow}
-\newcommand{\pa}{\partial}
-\newcommand{\mcm}[1]{\mathcal{#1}}
-\newcommand{\bo}{\mcm{O}}
-\newcommand{\sDelta}{{\scriptstyle \Delta}}
-\newcommand{\gs}{\hspace{0.35cm}}
-\newcommand{\mvec}[1]{\accentset{\rightharpoonup}{#1}}
- 
+
 %%Tikz 
 \usepackage{tikz}
 \usetikzlibrary{angles, quotes, calc, decorations.markings, intersections}
@@ -42,17 +40,20 @@
    \draw[->] (midlabel) -- (#2);
 }
 
-%%inkscape import
+%%import
 \usepackage{import}
 \usepackage{xifthen}
 \usepackage{pdfpages}
 \usepackage{transparent}
 
-\newcommand{\incfig}[1]{%
-    
-    \import{./diagrams/}{#1.pdf_tex}
-}
-
+%%%%defined commands
+\newcommand{\pa}{\partial}
+\newcommand{\mcm}[1]{\mathcal{#1}}
+\newcommand{\bo}{\mcm{O}}
+\newcommand{\sDelta}{{\scriptstyle \Delta}}
+\newcommand{\gs}{\hspace{0.35cm}}
+\newcommand{\mvec}[1]{\accentset{\rightharpoonup}{#1}}
+ 
 %%%%%%%%%%%
 \begin{document}
 

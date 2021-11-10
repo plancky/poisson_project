@@ -129,7 +129,7 @@ Thus, the second-order derivative approximator is also second order accurate.
 
 %%Second derivate %%
 \subsubsection{Reducing PDE to a discretised difference equation}
-First we decompose our continous domain $\Omega := [0,4] \times [0,4.4] $ of $U'(x,y)$ to a discretised one by overlaying it with a uniformly structured rectangular mesh of meshsize $\sDelta x=\sDelta y= h$ and working only on the nodes of the mesh. \\[2mm]
+First we decompose our continous domain $\Omega$ of $U(x,y)$ to a discretised one by overlaying it with a uniformly structured rectangular mesh of meshsize $\sDelta x=\sDelta y= h$ and working only on the nodes of the mesh. \\[2mm]
 
 \begin{figure}
     \centering
@@ -199,7 +199,7 @@ where A is an N × N matrix, b the given data vector and x the vector of N unkno
 \subsubsection{Jacobi Method}
 Jacobi method starts with a set of intial guess values for the unknowns and then gets new value for the unkowns by substituting the quess values in the equations one at a time,the process is repeated with the newly produced value of the unkowns.\\[2mm]
 \begin{algorithm}[H]
-    \textbf{\large Jacobi Method (X,$\mathbf{S:(X^{(n)},P,h,i,j)} \mapsto x$,P,h,$\mathbf{\epsilon_r}$)}\\[-1pt]  
+    \textbf{Jacobi Method (X,$\mathbf{S:(X^{(n)},P,h,i,j)} \mapsto x$,P,h,$\mathbf{\epsilon_r}$)}\\[-1pt]  
     This verison of jacobi method is optimised for poisson on a uniformly structured rectangular mesh, It takes the initial guess values at all nodes, the stencil and iteratively solves the stencil over all interior nodes unitl the relative tolerance is reached.  \\[2mm]
 	\KwIn{ $\mathbf{X} :\gs k \times m $ matrix of initial guess values, value of step size $h$, a matrix containing the initial charge configuration $\mathbf{P}$, a mappping here described by the relation \ref{eq:difference equation}, N an upper bound on the number of iterations} 
 	\KwOut{An $ k \times m $ matrix containing the values of potential on all satisfying the relation \ref{eq:difference equation}} 
@@ -218,7 +218,7 @@ Jacobi method starts with a set of intial guess values for the unknowns and then
 \subsubsection{Gauss-Seidel Method}
 The Gauss-Seidel method applies the stencil on the new unkowns as it iterates over the system of equations unlike Jacobi method which only works on the unknown values of the previous iteration.\\[2mm]
 \begin{algorithm}[H]
-    \textbf{\large Gauss-Seidel Method (X,$\mathbf{S:(X^{(n)},P,h,i,j)} \mapsto x$,P,h,$\mathbf{\epsilon_r}$)}\\[-1pt]
+    \textbf{Gauss-Seidel Method (X,$\mathbf{S:(X^{(n)},P,h,i,j)} \mapsto x$,P,h,$\mathbf{\epsilon_r}$)}\\[-1pt]
     \par\noindent\rule{\textwidth}{0.4pt} \\
     This verison of jacobi method is optimised for poisson on a uniformly structured rectangular mesh, It takes the initial guess values at all nodes, the stencil and iteratively solves the stencil over all interior nodes unitl the relative tolerance is reached.  \\[2mm]
 	\KwIn{ $\mathbf{X} :\gs k \times m $ matrix of initial guess values, value of step size $h$, a matrix containing the initial charge configuration $\mathbf{P}$, a mappping S described here by the relation \ref{eq:difference equation}, N an upper bound on the number of iterations} 
@@ -238,7 +238,7 @@ The Gauss-Seidel method applies the stencil on the new unkowns as it iterates ov
 \subsubsection{Successive Over-Relaxation(SOR)}
 Succesive over-relaxation or SOR is a method that belongs to a class of methods called Relaxation methods. Such so-called relaxation methods reached a high state of development in the l940s  One result was a modiﬁcation of the Gauss–Seidel procedure which is now called successive over-relaxation or the SOR method. Taking the recent values of the unknowns. We proceed by calculating the correction which would be given by the Gauss–Seidel iteration (iterating on new unknowns), and then multiply this correction by $\omega$ before adding to the previous value. The term over-relaxation then implies that $\omega>1$. \\[2mm]
 \begin{algorithm}[H]
-    \textbf{\large S.O.R Method (X,$\mathbf{S:(X^{(n)},P,h,i,j)} \mapsto x$,P,h,$\mathbf{\epsilon_r}$)}\\[-1pt]
+    \textbf{S.O.R Method (X,$\mathbf{S:(X^{(n)},P,h,i,j)} \mapsto x$,P,h,$\mathbf{\epsilon_r}$)}\\[-1pt]
     \par\noindent\rule{\textwidth}{0.4pt} \\
     This verison of jacobi method is optimised for poisson on a uniformly structured rectangular mesh, It takes the initial guess values at all nodes, the stencil and iteratively solves the stencil over all interior nodes unitl the relative tolerance is reached.  \\[2mm]
 	\KwIn{ $\mathbf{X} :\gs k \times m $ matrix of initial guess values, value of step size $h$, a matrix containing the initial charge configuration $\mathbf{P}$, a mappping S described here by the relation \ref{eq:difference equation}, N an upper bound on the number of iterations} 
