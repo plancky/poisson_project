@@ -1,5 +1,8 @@
-\documentclass[8pt]{beamer}
+\documentclass[9 pt]{beamer}
 \usepackage{graphics}
+\usepackage{xcolor}
+\usepackage[utf8]{inputenc}
+\renewcommand\fbox{\fcolorbox{purple}{white}}
 \usepackage{amsmath,accents}
 \usepackage{tikz}
 
@@ -19,33 +22,42 @@
 \maketitle
 
 \section{Content}
-\begin{frame}{Contents}
-
-\begin{itemize}
-\item Introduction 
-\item Theory
-\item Methodology
-\item Analysis of Numerical Results
-\item Summary 
-\end{itemize}
-
-\end{frame}
+	\begin{frame}{Talk}
+			\begin{block}{Plam}
+				\begin{itemize}
+					
+					\item We will start the talk by \alert{introducing} our topic.
+					\item After introdudcing the topic, we would like to exaplain our \alert{ question}. 
+					\item Then we will proceed to describe the various \alert{methods} we have used in the project.
+					\item After discussion on methods, we would like to discuss our \alert{results}.
+					\item We will conclude the talk with \alert{conclusion} of results and by sharing our \alert{experience} in completing this project.
+					
+				\end{itemize}
+			\end{block}
+		
+	\end{frame}
 
 \section{Introduction}
-\begin{frame}{Introduction}
-	\begin{itemize}
-		\item  Poisson Equation is an elliptic partial differential Equation.having general form as -: \\
-	 \[  
-		\frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} =  f({r})
-		\] \\
-		\item Differential Equation can be converted into a system of linear equation by approxiamting them as derivatives by method of finite differences.
-		\item There are many iterative schemes which can be employed to solve this system of linear equation such as Gauss Seidel, SOR and Jacobi Method.
+	\begin{frame}{Introduction}
+		\begin{itemize}
+			\item  Poisson Equation is an \alert{elliptic} partial differential Equation.having general form as -: 
+			\begin{center}
+				\setlength\fboxrule{2pt}\setlength\fboxsep{2mm}
+				\fbox{$ \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} =  f({r}) $}
+			\end{center}
+			\item Differetial Equation can be solved by variety of methods such as spectral methods, finite element methods, FDI. 
+			\item Method of finite differences converts differential Equation   into a system of linear equation by approxiamting the derivatives using taylor series. 
+			\item This system of linear equation obtained can be solved in two ways to obtain the solution of  differential equation-:
+				\begin{itemize}
+					\item Implicit Methods
+					\item Explicit Methods
+				\end{itemize}
+			
+			\item Implicit methods include many iterative schemes which can be employed to solve this system of linear equation such as \alert{Gauss Seidel, SOR} and \alert{Jacobi Method}.
 		
+		\end{itemize}
 		
-	\end{itemize}
-  
-   
-\end{frame}
+	\end{frame}
 
 \section{Theory}
 	\subsection{Problem}
@@ -168,8 +180,25 @@
 					
 				\end{frame}
 				\section{Conclusion}
-					\begin{frame}
-					
+					\begin{frame}{Conclusion}
+						\begin{block}{Result}
+							\begin{itemize}
+								\item After computing thte problem of interleaved capacitor from three different iterative schemes, we have arrived at the conclusion that SOR is the fastest among three.
+							\end{itemize}
+							\end{block}
+						\begin{block}{Experiences}
+							\begin{itemize}
+								\item We have gained more intuition and it has helped us to grasp the concept of electrostatic potential.
+								\item We have learnt a lot of new techniques and methods related to computational solution of differential equation.
+								\item There are some techniques and methods which we could not implemnet  but surely they have given us some things to ponder upon in future.
+								\item This project has also  introduced us to delight of finding out new things as most of things we did in this project were completely new to us.
+							\end{itemize}
+						\end{block}
+							
 					\end{frame}
+				\begin{frame}{References}
+					
+					content...
+				\end{frame}
 \end{document}
 
