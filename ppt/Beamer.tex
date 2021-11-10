@@ -1,4 +1,4 @@
-\documentclass[10pt]{beamer}
+\documentclass[8pt]{beamer}
 \usepackage{graphics}
 \usepackage{amsmath,accents}
 \usepackage{tikz}
@@ -9,7 +9,7 @@
 	\draw[<-] (#1) --  (midlabel);
 	\draw[->] (midlabel) -- (#2);
 }
-
+\usepackage{import}
 \usetheme{Frankfurt}
 \title{Finite Difference Method For Poisson Equation}
 \date{\today}
@@ -48,6 +48,7 @@
 \end{frame}
 
 \section{Theory}
+	\subsection{Problem}
 	\begin{frame}{Theory}
 		\section{Problem}
 		The below figure shows an interleaved capacitor -:
@@ -87,7 +88,7 @@
 			 \item After using Finite Difference operators we get the following stencil for poisson equation
 		\end{itemize}
 		\begin{align}
-			U_{i,j} = \frac{1}{4} \left[ U_{i+1,j}+ U_{i-1,j} + U_{i,j+1}+ U_{i,j+1} - h^2\frac{\rho'_{i,j} s^2}{\epsilon_0 \nu} \right]
+			U_{i,j} = \frac{1}{4} \left[ U_{i+1,j}+ U_{i-1,j} + U_{i,j+1}+ U_{i,j+1} + h^2\frac{\rho'_{i,j} s^2}{\epsilon_0 \nu} \right]
 		\end{align}
 		This stencil can be represented with the help of following diagram -: \\
 		\begin{figure}
@@ -128,6 +129,47 @@
 			\end{tikzpicture}]}
 		\end{figure}
 		\end{frame}	
-	
+		\subsection{Iterative Method }
+		\begin{frame}{Iterative Method}
+			\begin{itemize}
+				\item Iterative methods are techniques that exploit the properites of system to solve it implicitly to make computation faster.
+				\item We have used following iteratiion schemes-:\\
+			
+					 \begin{block}{Jacobi Method}
+						This method starts with a guess value and with each iteration, it replace guess values with new obtained values from iteration.$$ x^{(n+1)}_{i,j} = S(X^{(n)},P,h,i,j) $$
+						\end{block}
+					 \begin{block}{Gauss Seidel Method}
+						This method uses the obtained value in the same iteration for other unknowns.$$x^{(n+1)}_{i,j} = S(X^{(n+1)},P,h,i,j)$$
+						\end{block}
+					
+					\begin{block}{SOR}
+							This method involves a relaxation factor (greater than 1) which is multiplied to values obtained from Gauss Seidel before replacing old values.$$x^{(n+1)}_{i,j} = x^{(n)}_{i,j}+ \omega(S(X^{(n+1)},P,h,i,j)- x^{(n+1)}_{i,j})$$
+							
+						\end{block}
+				
+					
+					\end{itemize}
+				\end{frame}
+			\section{result}
+				\subsection{Expectation}
+				\begin{frame}{Expectation}
+					We expect the following graph-:\\
+					\begin{itemize}
+						\item $ \alpha_1 $ should decrease from positive to negative potential
+						\item $ \alpha_2 $ should have negatively charged potential
+						\item $ \alpha_3 $ should increase from negative to positive potential
+						\item $ \alpha_4 $ should have positively charged  potential
+					\end{itemize}
+					
+				\end{frame}
+				\subsection{Numerical Result}
+				\begin{frame}{Numerical Result}
+					We obtained following graphs as solution -: \\
+					
+				\end{frame}
+				\section{Conclusion}
+					\begin{frame}
+					
+					\end{frame}
 \end{document}
 
