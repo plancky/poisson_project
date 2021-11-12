@@ -5,12 +5,12 @@ Although one certainly would have some intuition about how the potential distrib
 
 To remind ourselves, our problem consists of an interleaved capacitor which is charged to a potential of $\pm5 V$ and then disconnnected. In our problem the first plate $A_{1}$ and the last plate $A_5$ of the capacitor were maintained at $+5V$. We are solving our problem assuming perfect symmetry along the third direction that is along the surface of the plates.(the z-direction).
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \def\svgwidth{0.6\textwidth}
     \import{./diagrams}{analysis.pdf_tex}
-    \caption{Riemmans theorem}
-    \label{fig:riemmans-theorem}
+    \caption{This diagram represents the region $\omega$ being studied, $\alpha_1,\alpha_2,\alpha_3,\alpha_4$ are the only unique regions in $\omega$ that were analysed.}
+    \label{}
 \end{figure}
 \begin{itemize}
     \item \textbf{Symmetry: } Now since in our arrangement is symmetrical, the resulting solution obtained should also be symmetrical about the line $x = 2$. 
@@ -40,41 +40,17 @@ Now that we have converted the problem into a system of linear equations by appl
     \caption{Jacobi}
     \label{fig2:}
 \end{figure}%
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[height= 70mm]{content/graphs/Jacobi_0125_map.png}
     \caption{Jacobi}
     \label{fig3:}
 \end{figure}%
 
-%\begin{figure}[h]
-%    \centering
-%    \begin{subfigure}{.7\textwidth}
-%      \centering
-%      \includegraphics[width=\textwidth]{content/graphs/Jacobi_0125_map.png}
-%      \caption{Jacobi}
-%      \label{fig:sub1}
-%    \end{subfigure}%
-%    \begin{subfigure}{.7\textwidth}
-%      \centering
-%      \includegraphics[width=\linewidth]{content/graphs/Gauss_0125_map.png}
-%      \caption{Gauss-Seidel}
-%      \label{fig:sub2}
-%    \end{subfigure}
-%    \begin{subfigure}{.7\textwidth}
-%        \centering
-%        \includegraphics[width=\linewidth]{content/graphs/SOR_0125_map.png}
-%        \caption{S.O.R with relaxation factor = 1.9}
-%        \label{fig:sub3}
-%    \end{subfigure}
-%    \caption{ \centering Colour map for potential distribution, taking meshsize h = 0.0125 and relative tolerance $\epsilon_r = 10^{-8}$}
-%    \label{fig:}
-%\end{figure}
-
 \paragraph{Comparison of Method}{%
 Since all the iterative methods we used have given us almost identical results so we will only compare them on the basis of number of iteration required so as to determine which method is more compuationally cheap and viable}
     
-\begin{table}[h]
+\begin{table}[ht]
     \centering
     \begin{tabular}{|c|c|c|c|}
     \hline
@@ -90,7 +66,7 @@ Since all the iterative methods we used have given us almost identical results s
 \end{table}
 
 
-\begin{table}[h]
+\begin{table}[ht]
     \centering
     \begin{tabular}{|c|c|c|c|}
     \hline
@@ -106,11 +82,11 @@ Since all the iterative methods we used have given us almost identical results s
 \end{table}
 
 \subsubsection{Successive Over Relaxation (SOR)}
-In this section we analyse the results obtained for different values of relaxation factor.\\[2mm]
+In this section we analyse the results obtained for different values of relaxation factor. \\[2mm]
 \noindent
 \textbf{ Optimum value of Relaxation Factor } \\
 In Successive Over Relaxation we have to choose the value of a relaxation factor which is responsible for the rate of convergence of solution. It's value can be chosen anywhere between 1 to 2 i.e. relaxation factor or $\omega  \in [1,2]$. We observed the variation of No. of iterations required to reach a given tolerance with change in $ \omega $. The following graph represents the graph between number of itereations and value of $\omega$. \\
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=\textwidth]{content/graphs/omega.png}
     \caption{variation of number of iterations for convergence with relative tolerance=$10^{-8}$ and meshsize $h = 0.1$  }

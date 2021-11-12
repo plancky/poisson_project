@@ -191,11 +191,10 @@ and Neumann to,
 \subsection{Iterative methods to solve linear algebraic equations}
 
 In the last section we have discussed how to reduce a PDE to a linear combination of function values at various nodes by means of the method of finite differences. If we let the function value at any node as an unknown variable then the stencil when applied to all interior nodes gives rise to a system of linear algebraic equations, which may be very large. A two-dimensional problem like ours may lead to a system of several thousand unknowns, and three-dimensional problems involving several hundred thousand unknowns are common in real engineering situations. The solution of such a system is a major problem in itself as traditional methods like Gaussian-elimination result in large computation times, we are therefore forced to employ faster methods. As we have seen above, the system of equations produced by a discretisation has many special features and an eﬃcient solution procedure must exploit these. The most obvious property of the system is that it is extremely sparse. Even when there are many thousand unknowns, each equation will involve one unknown and the unknowns at its immediate neighbourhood. In particular, if we write the equations in the conventional notation,
-\begin{equation*}
+\begin{equation} \label{linear system}
     A \mvec{x} = \mvec{b} 
-\end{equation*}
-where A is an N × N matrix, b the given data vector and x the vector of N unknown interior mesh values, there is an implied one-dimensional ordering of these values which is somewhat unnatural and obscures the important property that only immediate neighbours are involved. Each row of the matrix A involves only a very small number of non-zero elements, commonly ﬁve or seven; moreover in many problems a suitable ordering of the unknowns will lead to a matrix in which these non-zero elements occur in a regular pattern. In devising eﬃcient methods for the solution of the system these structural properties will be important,
-
+\end{equation}
+where A is an N × N matrix, b the given data vector and x the vector of N unknown interior mesh values, there is an implied one-dimensional ordering of these values which is somewhat unnatural and obscures the important property that only immediate neighbours are involved. Each row of the matrix A involves only a very small number of non-zero elements, commonly ﬁve or seven; moreover in many problems a suitable ordering of the unknowns will lead to a matrix in which these non-zero elements occur in a regular pattern. Instead of solving for this vector equation in matrix form we solve by applying the Finite difference equation to each node in the mesh which in practice is the same as solving the vector equation \ref{linear system} but without explicitly stating the matrices $A$ and $b$. Following sections describe the various methods we successfully employed for the same.\cite{mortonpde}
 \subsubsection{Jacobi Method}
 Jacobi method starts with a set of intial guess values for the unknowns and then gets new value for the unkowns by substituting the quess values in the equations one at a time,the process is repeated with the newly produced value of the unkowns.\\[2mm]
 \begin{algorithm}[H]
@@ -218,7 +217,7 @@ Jacobi method starts with a set of intial guess values for the unknowns and then
 
 \subsubsection{Gauss-Seidel Method}
 The Gauss-Seidel method applies the stencil on the new unkowns as it iterates over the system of equations unlike Jacobi method which only works on the unknown values of the previous iteration.\\[2mm]
-\begin{algorithm}[H]
+\begin{algorithm}
     \textbf{Gauss-Seidel Method (X,$\mathbf{S:(X^{(n)},P,h,i,j)} \mapsto x$,P,h,$\mathbf{\epsilon_r}$)}\\[-1pt]
     This verison of jacobi method is optimised for poisson on a uniformly structured rectangular mesh, It takes the initial guess values at all nodes, the stencil and iteratively solves the stencil over all interior nodes unitl the relative tolerance is reached.  \\[2mm]
 	\KwIn{ $\mathbf{X} :\gs k \times m $ matrix of initial guess values, value of step size $h$, a matrix containing the initial charge configuration $\mathbf{P}$, a mappping S described here by the relation \ref{eq:difference equation}, N an upper bound on the number of iterations} 
@@ -237,9 +236,12 @@ The Gauss-Seidel method applies the stencil on the new unkowns as it iterates ov
 \end{algorithm}
 \subsubsection{Successive Over-Relaxation(SOR)}
 
-Succesive over-relaxation or SOR is a method that belongs to a class of methods called Relaxation methods. Such so-called relaxation methods reached a high state of development in the l940s  One result was a modiﬁcation of the Gauss–Seidel procedure which is now called successive over-relaxation or the SOR method. Taking the recent values of the unknowns. We proceed by calculating the correction which would be given by the Gauss–Seidel iteration (iterating on new unknowns), and then multiply this correction by $\omega$ before adding to the previous value. The term over-relaxation then implies that $\omega>1$. \\[2mm]
 
-\begin{algorithm}[H]
+Successive over-relaxation or SOR is a method that belongs to a class of methods called Relaxation methods. 
+Such so-called relaxation methods reached a high state of development in the l940s One result was a modiﬁcation of the Gauss–Seidel procedure which is now called successive over-relaxation or the SOR method.
+Taking the recent values of the unknowns. We proceed by calculating the correction which would be given by the Gauss–Seidel iteration (iterating on new unknowns), and then multiply this correction by $\omega$ before adding to the previous value. The term over-relaxation then implies that $\omega>1$. \\[2mm]
+
+\begin{algorithm}
     \textbf{S.O.R Method (X,$\mathbf{S:(X^{(n)},P,h,i,j)} \mapsto x$,P,h,$\mathbf{\epsilon_r}$)}\\[-1pt]
     This verison of jacobi method is optimised for poisson on a uniformly structured rectangular mesh, It takes the initial guess values at all nodes, the stencil and iteratively solves the stencil over all interior nodes unitl the relative tolerance is reached.  \\[2mm]
 	\KwIn{ $\mathbf{X} :\gs k \times m $ matrix of initial guess values, value of step size $h$, a matrix containing the initial charge configuration $\mathbf{P}$, a mappping S described here by the relation \ref{eq:difference equation}, N an upper bound on the number of iterations} 

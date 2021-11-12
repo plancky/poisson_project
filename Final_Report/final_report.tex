@@ -1,5 +1,4 @@
-%
-\documentclass[12pt]{article}%
+\documentclass[12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
@@ -8,7 +7,7 @@
 \usepackage{geometry}
 \geometry{
  a4paper,
- total={170mm,257mm},
+ %total={160mm,250mm},
  left=15mm,
  right = 15mm,
  bottom=15mm ,
@@ -31,9 +30,12 @@
     urlcolor=codepurple,
 }%
 
- %%% Font
-\usepackage{amsmath,accents}
+%%BibTex
+\usepackage[backend=bibtex,style=ieee]{biblatex}
+\addbibresource{final_report.bib}%Import the bibliography file
 
+%%% Font
+\usepackage{amsmath,accents}
 
 %%% images
 \usepackage{graphicx}
@@ -77,24 +79,14 @@
     This report also includes the conversion of physical problem to a mathematical one by means of normalisation of variables. The iterative schemes have been analysed on the grounds of no. of iterations and  have Results and practices carried out in the making of this report certainly lead the reader to beneficial educational insights into computational physics and its application. \\
     This report is not meant to be a thorough investigation of the problem and should not be seen as a research project.
     }
+\newpage
 \tableofcontents
-\newpage
 \input{content/intro.tex}
-\newpage
 \input{content/theory}
-\newpage
 \input{content/method.tex}
-\newpage
 
 \input{content/numrical_analysis.tex}
-\newpage
 \input{content/conclusion.tex}
-\newpage
-\section{Appendix}
-\subsection{Non-Dimensionalization}
-    
-\subsection{Programs}
-\subsection{Contributions}
-
+\section{Hello}
 
 \end{document}
