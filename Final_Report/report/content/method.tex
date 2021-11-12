@@ -1,4 +1,3 @@
-%
 \section{Methodology}
 \subsection{Finite Difference Method}
 Finite Difference Methods(FDM) are used for approximating the solution of partial differential equations over a set of finite points, arranged in a geometrical structure called a \textbf{mesh}%
@@ -68,7 +67,7 @@ Second and Higher order finite difference Quotients can also be obtained,
     &\approx \boxed{\delta^2_x U'_i \equiv \frac{1}{h^2}(U'_{i+1}-2 U'_i + U'_{i-1})} \hspace{1cm} \text{[Central second-order Difference]}
 \end{align*}
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
 \begin{tikzpicture}[scale=2]
     \coordinate (A) at (3.5 cm,0cm);
@@ -194,7 +193,7 @@ In the last section we have discussed how to reduce a PDE to a linear combinatio
 \begin{equation} \label{linear system}
     A \mvec{x} = \mvec{b} 
 \end{equation}
-where A is an N × N matrix, b the given data vector and x the vector of N unknown interior mesh values, there is an implied one-dimensional ordering of these values which is somewhat unnatural and obscures the important property that only immediate neighbours are involved. Each row of the matrix A involves only a very small number of non-zero elements, commonly ﬁve or seven; moreover in many problems a suitable ordering of the unknowns will lead to a matrix in which these non-zero elements occur in a regular pattern. Instead of solving for this vector equation in matrix form we solve by applying the Finite difference equation to each node in the mesh which in practice is the same as solving the vector equation \ref{linear system} but without explicitly stating the matrices $A$ and $b$. Following sections describe the various methods we successfully employed for the same.\cite{mortonpde}
+where A is an N × N matrix, b the given data vector and x the vector of N unknown interior mesh values, there is an implied one-dimensional ordering of these values which is somewhat unnatural and obscures the important property that only immediate neighbours are involved. Each row of the matrix A involves only a very small number of non-zero elements, commonly ﬁve or seven; moreover in many problems a suitable ordering of the unknowns will lead to a matrix in which these non-zero elements occur in a regular pattern. Instead of solving for this vector equation in matrix form we solve by applying the Finite difference equation to each node in the mesh which in practice is the same as solving the vector equation \ref{linear system} but without explicitly stating the matrices $A$ and $b$. Following sections describe the various methods we successfully employed for the same.\autocite{mortonpde}
 \subsubsection{Jacobi Method}
 Jacobi method starts with a set of intial guess values for the unknowns and then gets new value for the unkowns by substituting the quess values in the equations one at a time,the process is repeated with the newly produced value of the unkowns.\\[2mm]
 \begin{algorithm}[H]
@@ -203,8 +202,8 @@ Jacobi method starts with a set of intial guess values for the unknowns and then
 	\KwIn{ $\mathbf{X} :\gs k \times m $ matrix of initial guess values, value of step size $h$, a matrix containing the initial charge configuration $\mathbf{P}$, a mappping here described by the relation \ref{eq:difference equation}, N an upper bound on the number of iterations} 
 	\KwOut{An $ k \times m $ matrix containing the values of potential on all satisfying the relation \ref{eq:difference equation}} 
     \For{n in $1,\dots N$}{ 
-		\For{all the interior nodes and also the boundary nodes parallel to x}{
-            $x^{(n+1)}_{i,j} = S(X^{(n)},P,h,i,j)$
+		\For{i = $1,2,3,\cdots,N_x$}{
+            $U'_{i,j} = \frac{1}{4} \left[ U'_{i+1,j}+ U'_{i-1,j} + U'_{i,j+1}+ U'_{i,j+1} + h^2\frac{\rho'_{i,j} s^2}{\epsilon_0 \nu} \right]$
             }
         \If{$\max_{i,j}{\{\frac{X^{(n+1)} -X^{(n)}}{X^{(n+1)}}\}}\leq \epsilon_r$}{
             return Output \\

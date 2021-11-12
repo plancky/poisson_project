@@ -1,6 +1,6 @@
 %% Creator: Inkscape 1.1.1 (3bf5ae0, 2021-09-20), www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'analysis.pdf' (pdf, eps, ps)
+%% Accompanies image file 'capacitor.pdf' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -38,7 +38,7 @@
   \newcommand*\fsize{\dimexpr\f@size pt\relax}%
   \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{450.52555847bp}%
+    \setlength{\unitlength}{7155bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -50,16 +50,18 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.99883345)%
+  \begin{picture}(1,0.46771488)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{analysis.pdf}}%
-    \put(0.02792697,0.49445932){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$4.4\mu m$\end{tabular}}}}%
-    \put(0.47575731,0.10814423){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$4\mu m$\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=2]{analysis.pdf}}%
-    \put(0.2790461,0.23002153){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\alpha_1$\end{tabular}}}}%
-    \put(0.24551585,0.54536653){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\alpha_2$\end{tabular}}}}%
-    \put(0.32694299,0.49767743){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\alpha_3$\end{tabular}}}}%
-    \put(0.36736301,0.79701097){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\alpha_4$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{capacitor.pdf}}%
+    \put(0.11781806,0.42832232){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$A_1$\end{tabular}}}}%
+    \put(0.76539396,0.37840133){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B_1$\end{tabular}}}}%
+    \put(0.76293418,0.28966514){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B_2$\end{tabular}}}}%
+    \put(0.76028671,0.19259223){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B_3$\end{tabular}}}}%
+    \put(0.7606086,0.1081827){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B_4$\end{tabular}}}}%
+    \put(0.11787846,0.33689319){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$A_2$\end{tabular}}}}%
+    \put(0.12922792,0.25934989){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$A_3$\end{tabular}}}}%
+    \put(0.12117287,0.15520644){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$A_4$\end{tabular}}}}%
+    \put(0.12129318,0.06404889){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$A_5$\end{tabular}}}}%
   \end{picture}%
 \endgroup%

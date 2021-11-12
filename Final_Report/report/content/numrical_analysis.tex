@@ -8,7 +8,7 @@ To remind ourselves, our problem consists of an interleaved capacitor which is c
 \begin{figure}[ht]
     \centering
     \def\svgwidth{0.6\textwidth}
-    \import{./diagrams}{analysis.pdf_tex}
+    \import{../diagrams}{analysis.pdf_tex}
     \caption{This diagram represents the region $\omega$ being studied, $\alpha_1,\alpha_2,\alpha_3,\alpha_4$ are the only unique regions in $\omega$ that were analysed.}
     \label{}
 \end{figure}
@@ -81,6 +81,8 @@ Since all the iterative methods we used have given us almost identical results s
 \label{computation_time}
 \end{table}
 
+So comparing all the method for computation under identical condition on the basis of number of iteration required for acheiving the required tolerance we can say $ \boldsymbol{SOR Method} $ is best method among all three iterative schemes used.
+
 \subsubsection{Successive Over Relaxation (SOR)}
 In this section we analyse the results obtained for different values of relaxation factor. \\[2mm]
 \noindent
@@ -92,13 +94,5 @@ In Successive Over Relaxation we have to choose the value of a relaxation factor
     \caption{variation of number of iterations for convergence with relative tolerance=$10^{-8}$ and meshsize $h = 0.1$  }
     \label{omega variation}
 \end{figure}
-From the graph we can see that the most optimum value of $ \omega $ is $1.89$ according to number of iterations required to reach the solution.Now we will analyse the plot, heat map and  compare it with the expectation. The below figure shows the heat map and the 3d plot of solution. \\
+From the graph we can see that the most optimum value of $ \omega $ is $1.89$ according to number of iterations required to reach the solution.
 
-So comparing all the method for computation under identical condition on the basis of number of iteration required for acheiving the required tolerance we can say $ \boldsymbol{SOR Method} $ is best method among all three iterative schemes used.
-\newpage
-\section{Conclusion}
-\subsection{Result}
-We tried to solve the problem of interleaved capacitor using the finite difference method for solving poisson equation. We have solved the problem using three different iterative schemes. After completing this project we can say that the method of SOR is best for solving the system of linear equation after using the finite differences method. Using SOR method we were able to solve mesh of size $ (480 times 480) $ in just $ xxxxxx $ number of iteration in just $  yyyy $ seconds. Also we gained good insight and intuition after solving the problem of interleaved capacitor.
-\subsection{Experience}
-We learnt a lot of new things during this project. We have gained the knowledge on how to solve a physical problem computationally and the various process involved in it such as non-dimensionalisation, the concept of convergence etc. Our python, latex and gnu skills have also increase significantly and our fascination with power of poisson equation and computation method have only gone uphill as compared to start of project of how one can solve such complex physical problem just by using some standard method and understand the "physical aspect " of such problems easily. We also spend a good portion of time studying about theoretical aspects of different computational methods and trying to understand the concepts about which we didn't pay a lot of attention to earlier such as the truncation error , round off error etc. This project has been an incredible journey for us as it has not only increased our theoretical , physical and compuational knowledge but it has also taught us about the importance of perseverance and patience as there were many topic or subtopics that we didn't understand easily just by studying about it from one or two place or things that were not easily available in comprehendable nature for us due to advance nature of partial differential equation and sometimes we have to spend a lot of time just searching about it. But in the end we are very grateful that we had chosen such a topic that has taught us so much. 
-\end{document}

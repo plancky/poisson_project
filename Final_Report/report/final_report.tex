@@ -1,6 +1,8 @@
 \documentclass[12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage[autostyle, english = american]{csquotes}
 
 %%%Margins and Indent 
 \setlength{\parindent}{-1pt}
@@ -24,18 +26,20 @@
 \usepackage{hyperref}
 \hypersetup{%
     colorlinks=true,
-    citecolor=black, 
+    citecolor=codegreen, 
     linkcolor=black,
     filecolor=codepurple,      
     urlcolor=codepurple,
 }%
 
 %%BibTex
-\usepackage[backend=bibtex,style=ieee]{biblatex}
+\usepackage[autocite=superscript,backend=biber,style=ieee]{biblatex}
 \addbibresource{final_report.bib}%Import the bibliography file
 
 %%% Font
+\usepackage{mathptmx}
 \usepackage{amsmath,accents}
+%\usepackage{newtxtext,newtxmath}
 
 %%% images
 \usepackage{graphicx}
@@ -73,6 +77,27 @@
  
 %%%%%%%%%%%
 \begin{document}
+\baselineskip 0.7cm
+\title{\bf \color{blue}Compuatational Techniques for solving the Poisson equation }
+\vskip 3cm
+\author{Akarsh Shukla  \\ (2020PHY1216) \and 
+Brahmanand Mishra \\ (2020PHY1184) \and 
+Shashvat Jain \\ (2020PHY1114) \\[4mm]
+{\color{blue}S.G.T.B. Khalsa College, University of
+Delhi, Delhi-110007, India.} }
+
+\maketitle
+\vskip 4cm
+\begin{center}
+{\it {\color{blue}Project Report Submitted to}}\\
+Dr. Mamta and Dr. H. C. Ramo \\
+\textit{\color{blue}as part of internal assessment for the course}\\
+ "32223902 - Computational Physics Skills"
+\end{center}
+
+\pagenumbering{gobble}
+
+\newpage
 
 \abstract{
     The project report brings light to the application of finite difference method to computationally solve a problem belonging to a class of poisson equation. It covers the extensive analysis of various iterative schemes, namely Jacobi,Gauss-Seidel and SOR, used for solving the system of of linear equations produced by finite difference method.
@@ -87,6 +112,7 @@
 
 \input{content/numrical_analysis.tex}
 \input{content/conclusion.tex}
-\section{Hello}
 
+\section{References}
+\printbibliography[heading = none]
 \end{document}

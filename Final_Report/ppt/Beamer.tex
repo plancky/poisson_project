@@ -7,6 +7,13 @@
 \usepackage{amsmath,accents}
 \usepackage{tikz}
 
+
+
+
+%%BibTex
+\usepackage[autocite=superscript,backend=biber,style=ieee]{biblatex}
+\addbibresource{../report/final_report.bib}%Import the bibliography file
+
 \usetikzlibrary{angles, quotes, calc, decorations.markings, intersections}
 \newcommand{\midlabelline}[3]{
 	\node (midlabel) at ($ (#1)!.5!(#2) $) {#3};
@@ -19,6 +26,10 @@
 \newcommand{\sDelta}{{\scriptstyle \Delta}}
 \newcommand{\gs}{\hspace{0.35cm}}
 \newcommand{\mvec}[1]{\accentset{\rightharpoonup}{#1}}
+
+
+
+
 
 \usepackage{import}
 \usetheme{Frankfurt}
@@ -234,8 +245,8 @@
 							
 					\end{frame}
 				\begin{frame}{References}
-					
-					content...
+					\nocite{*}
+					\printbibliography[heading=none]
 				\end{frame}
 \end{document}
 
