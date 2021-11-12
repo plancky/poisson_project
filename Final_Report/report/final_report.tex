@@ -34,15 +34,16 @@
 
 %%BibTex
 \usepackage[autocite=superscript,backend=biber,style=ieee]{biblatex}
-\addbibresource{final_report.bib}%Import the bibliography file
+\addbibresource{refs.bib}%Import the bibliography file
 
 %%% Font
-\usepackage{mathptmx}
+%\usepackage{mathptmx}
 \usepackage{amsmath,accents}
-%\usepackage{newtxtext,newtxmath}
+\usepackage{newtxtext,newtxmath}
 
 %%% images
 \usepackage{graphicx}
+\usepackage{float}
 \usepackage{caption,subcaption}
 
 %%Algorithm
@@ -75,10 +76,10 @@
 \newcommand{\gs}{\hspace{0.35cm}}
 \newcommand{\mvec}[1]{\accentset{\rightharpoonup}{#1}}
  
-%%%%%%%%%%%
+%%%%%%
 \begin{document}
 \baselineskip 0.7cm
-\title{\bf \color{blue}Compuatational Techniques for solving the Poisson equation }
+\title{\bf \color{black}Computational Techniques for solving the Poisson equation }
 \vskip 3cm
 \author{Akarsh Shukla  \\ (2020PHY1216) \and 
 Brahmanand Mishra \\ (2020PHY1184) \and 
@@ -106,6 +107,8 @@ Dr. Mamta and Dr. H. C. Ramo \\
     }
 \newpage
 \tableofcontents
+\newpage
+\pagenumbering{roman}
 \input{content/intro.tex}
 \input{content/theory}
 \input{content/method.tex}

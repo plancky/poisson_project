@@ -19,6 +19,93 @@
 
 \refsection{0}
   \datalist[entry]{none/global//global/global}
+    \entry{tudortmundkuzmin2}{online}{}
+      \name{author}{1}{}{%
+        {{hash=37d6683e412aaf6d135375f01acb682b}{%
+           family={Dmitri\bibnamedelima Kuzmin},
+           familyi={D\bibinitperiod\bibinitdelim K\bibinitperiod},
+           given={Institute\bibnamedelimb of\bibnamedelimb Applied\bibnamedelimb MathematicsUniversity\bibnamedelimb of\bibnamedelima Dortmund},
+           giveni={I\bibinitperiod\bibinitdelim o\bibinitperiod\bibinitdelim A\bibinitperiod\bibinitdelim M\bibinitperiod\bibinitdelim o\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Institute of Applied MathematicsUniversity of Dortmund}%
+      }
+      \strng{namehash}{37d6683e412aaf6d135375f01acb682b}
+      \strng{fullhash}{37d6683e412aaf6d135375f01acb682b}
+      \strng{bibnamehash}{37d6683e412aaf6d135375f01acb682b}
+      \strng{authorbibnamehash}{37d6683e412aaf6d135375f01acb682b}
+      \strng{authornamehash}{37d6683e412aaf6d135375f01acb682b}
+      \strng{authorfullhash}{37d6683e412aaf6d135375f01acb682b}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Non-Dimensionalisation and an overview of Discretization techniques}
+      \verb{urlraw}
+      \verb http://www.mathematik.tu-dortmund.de/~kuzmin/cfdintro/lecture3.pdf
+      \endverb
+      \verb{url}
+      \verb http://www.mathematik.tu-dortmund.de/~kuzmin/cfdintro/lecture3.pdf
+      \endverb
+    \endentry
+    \entry{mitocw}{online}{}
+      \name{author}{1}{}{%
+        {{hash=b2a61efe922e14502ce55341a766d091}{%
+           family={opencourseware},
+           familyi={o\bibinitperiod},
+           given={MIT},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{b2a61efe922e14502ce55341a766d091}
+      \strng{fullhash}{b2a61efe922e14502ce55341a766d091}
+      \strng{bibnamehash}{b2a61efe922e14502ce55341a766d091}
+      \strng{authorbibnamehash}{b2a61efe922e14502ce55341a766d091}
+      \strng{authornamehash}{b2a61efe922e14502ce55341a766d091}
+      \strng{authorfullhash}{b2a61efe922e14502ce55341a766d091}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Computational Methods in Aerospace Engineering}
+      \verb{urlraw}
+      \verb http://www.mathematik.tu-dortmund.de/~kuzmin/cfdintro/lecture3.pdf
+      \endverb
+      \verb{url}
+      \verb http://www.mathematik.tu-dortmund.de/~kuzmin/cfdintro/lecture3.pdf
+      \endverb
+    \endentry
+    \entry{thomas2013numerical}{book}{}
+      \name{author}{1}{}{%
+        {{hash=0b5c52b6706aa2c74b874d73d2b1a33b}{%
+           family={Thomas},
+           familyi={T\bibinitperiod},
+           given={J.W.},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer New York}%
+      }
+      \strng{namehash}{0b5c52b6706aa2c74b874d73d2b1a33b}
+      \strng{fullhash}{0b5c52b6706aa2c74b874d73d2b1a33b}
+      \strng{bibnamehash}{0b5c52b6706aa2c74b874d73d2b1a33b}
+      \strng{authorbibnamehash}{0b5c52b6706aa2c74b874d73d2b1a33b}
+      \strng{authornamehash}{0b5c52b6706aa2c74b874d73d2b1a33b}
+      \strng{authorfullhash}{0b5c52b6706aa2c74b874d73d2b1a33b}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9781489972781}
+      \field{series}{Texts in Applied Mathematics}
+      \field{title}{Numerical Partial Differential Equations: Finite Difference Methods}
+      \field{year}{2013}
+      \verb{urlraw}
+      \verb https://books.google.co.in/books?id=83v1BwAAQBAJ
+      \endverb
+      \verb{url}
+      \verb https://books.google.co.in/books?id=83v1BwAAQBAJ
+      \endverb
+    \endentry
     \entry{mortonpde}{book}{}
       \name{author}{2}{}{%
         {{hash=51c103d90e91424207eca639a6e942b8}{%
@@ -41,8 +128,8 @@
       \strng{authorbibnamehash}{b2b7d23289217eb3979409f1dffedc36}
       \strng{authornamehash}{b2b7d23289217eb3979409f1dffedc36}
       \strng{authorfullhash}{b2b7d23289217eb3979409f1dffedc36}
-      \field{sortinit}{1}
-      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{sortinit}{4}
+      \field{sortinithash}{e071e0bcb44634fab398d68ad04e69f4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{isbn}{9781139443203}
@@ -53,6 +140,35 @@
       \endverb
       \verb{url}
       \verb https://books.google.co.in/books?id=GW6%5C_AwAAQBAJ
+      \endverb
+    \endentry
+    \entry{tudortmundkuzmin}{online}{}
+      \name{author}{1}{}{%
+        {{hash=87b05f201e3bec951bf883a70c52d988}{%
+           family={Kuzmin},
+           familyi={K\bibinitperiod},
+           given={Dmitri},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Institute of Applied MathematicsUniversity of Dortmund}%
+      }
+      \strng{namehash}{87b05f201e3bec951bf883a70c52d988}
+      \strng{fullhash}{87b05f201e3bec951bf883a70c52d988}
+      \strng{bibnamehash}{87b05f201e3bec951bf883a70c52d988}
+      \strng{authorbibnamehash}{87b05f201e3bec951bf883a70c52d988}
+      \strng{authornamehash}{87b05f201e3bec951bf883a70c52d988}
+      \strng{authorfullhash}{87b05f201e3bec951bf883a70c52d988}
+      \field{sortinit}{5}
+      \field{sortinithash}{5dd416adbafacc8226114bc0202d5fdd}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Introduction to Computational Fluid Dynamics}
+      \verb{urlraw}
+      \verb http://www.mathematik.tu-dortmund.de/~kuzmin/cfdintro/lecture1.pdf
+      \endverb
+      \verb{url}
+      \verb http://www.mathematik.tu-dortmund.de/~kuzmin/cfdintro/lecture1.pdf
       \endverb
     \endentry
   \enddatalist

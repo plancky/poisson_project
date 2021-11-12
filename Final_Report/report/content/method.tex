@@ -22,7 +22,7 @@ Consider this one-dimensional structured mesh of nodes $(x_0,x_1,x_2,..,x_i,..,x
 \caption{\small 1D mesh with 11 nodes and a meshsize h}
 \end{figure}
 \\
-Let $U'_i$ represent the solution at the $i$-th node and \hfill
+Let $U_i$ represent the solution at the $i$-th node and \hfill
 \begin{tikzpicture}[scale =2]
     \draw[thick,color=gray,<->] (3,-2cm) -- (6,-2cm);
     \foreach \x  in {3.5,4.5,5.5}
@@ -30,41 +30,41 @@ Let $U'_i$ represent the solution at the $i$-th node and \hfill
     \draw (3.5 cm,-2.01cm) node[anchor=north,shift={(0,-5pt)}] {$i-1$};
     \draw (4.5 cm,-2.01cm) node[anchor=north,shift={(0,-5pt)}] {$i$};
     \draw (5.5 cm,-2.01cm) node[anchor=north,shift={(0,-5pt)}] {$i+1$};
-    \draw (3.5 cm,-1.99cm) node[anchor=south,shift={(0,5pt)}] {$U'_{i-1}$};
-    \draw (4.5 cm,-1.99cm) node[anchor=south,shift={(0,5pt)}] {$U'_{i}$};
-    \draw (5.5 cm,-1.99cm) node[anchor=south,shift={(0,5pt)}] {$U'_{i+1}$};
+    \draw (3.5 cm,-1.99cm) node[anchor=south,shift={(0,5pt)}] {$U_{i-1}$};
+    \draw (4.5 cm,-1.99cm) node[anchor=south,shift={(0,5pt)}] {$U_{i}$};
+    \draw (5.5 cm,-1.99cm) node[anchor=south,shift={(0,5pt)}] {$U_{i+1}$};
 \end{tikzpicture}
 \begin{equation*}
-    \left. \frac{\partial U}{\partial x} \right|_{x_ i} = U'_{x}(x_0 + ih) \equiv U'_{x}|_i
+    \left. \frac{\partial U}{\partial x} \right|_{x_ i} = U_{x}(x_0 + ih) \equiv U_{x}|_i
 \end{equation*} 
 \begin{equation*}
-    \left. \frac{\partial^2 U}{\partial x^2} \right|_{x_ i} = U'_{xx}(x_0 + ih) \equiv U'_{xx}|_i
+    \left. \frac{\partial^2 U}{\partial x^2} \right|_{x_ i} = U_{xx}(x_0 + ih) \equiv U_{xx}|_i
 \end{equation*}
 
 The first order derivative can be defined as,
 {\raggedright 
 \begin{align*}
-    &\text{} \hspace{1cm} U'_x|_i = \lim_{h \to 0} \frac{U'_{i+1} - U'_i}{h}  \\
-    &\text{or,} \hspace{1cm} U'_x|_i = \lim_{h \to 0} \frac{U'_{i} - U'_{i-1}}{h}  \\
-    &\text{or,} \hspace{1cm} U'_x|_i = \lim_{h \to 0} \frac{U'_{i+1} - U'_{i-1}}{2h}  
+    &\text{} \hspace{1cm} U_x|_i = \lim_{h \to 0} \frac{U_{i+1} - U_i}{h}  \\
+    &\text{or,} \hspace{1cm} U_x|_i = \lim_{h \to 0} \frac{U_{i} - U_{i-1}}{h}  \\
+    &\text{or,} \hspace{1cm} U_x|_i = \lim_{h \to 0} \frac{U_{i+1} - U_{i-1}}{2h}  
 \end{align*}
 }
 
 Finite difference approximations are obtained by dropping the limit and can be written as, 
  
 \begin{flalign*}
-    &\text{Forward Difference} \hspace{1cm} U'_x|_i \approx \frac{U'_{i+1} - U'_i}{h} \equiv \delta^+_{x} U'_i  \\
-    &\text{Backward Difference} \hspace{1cm} U'_x|_i \approx \frac{U'_{i} - U'_{i-1}}{h} \equiv \delta^-_{x} U'_i \\
-    &\text{Central Difference} \hspace{1cm} U'_x|_i \approx \frac{U'_{i+1} - U'_{i-1}}{2h} \equiv \delta_{2x} U'_i 
+    &\text{Forward Difference} \hspace{1cm} U_x|_i \approx \frac{U_{i+1} - U_i}{h} \equiv \delta^+_{x} U_i  \\
+    &\text{Backward Difference} \hspace{1cm} U_x|_i \approx \frac{U_{i} - U_{i-1}}{h} \equiv \delta^-_{x} U_i \\
+    &\text{Central Difference} \hspace{1cm} U_x|_i \approx \frac{U_{i+1} - U_{i-1}}{2h} \equiv \delta_{2x} U_i 
 \end{flalign*}
 
 Where $\delta^+_{x} , \delta^-_{x} , \delta_{2x}$ are called the \textbf{finite diference operators} for approximating \textbf{first-order derivatives} and their expansion is called the \textbf{finite difference quotient}, each representing forward,backward and centered respectively.
 Second and Higher order finite difference Quotients can also be obtained,
 \begin{align*}
-    U'_{xx}|_i &= \lim_{h \to 0} \frac{U'_x(x_i+\frac{h}{2}) - U'_x(x_i-\frac{h}{2})}{h} \\
+    U_{xx}|_i &= \lim_{h \to 0} \frac{U_x(x_i+\frac{h}{2}) - U_x(x_i-\frac{h}{2})}{h} \\
     &= \lim_{h \to 0} \frac{1}{h} \left[{\frac{U(x+h) - U(x)}{h} - \frac{(U(x)- U(x-h))}{h}}\right]\\
-    &= \lim_{h \to 0}\frac{U'_{i+1}-2 U'_i + U'_{i-1}}{h^2} \\
-    &\approx \boxed{\delta^2_x U'_i \equiv \frac{1}{h^2}(U'_{i+1}-2 U'_i + U'_{i-1})} \hspace{1cm} \text{[Central second-order Difference]}
+    &= \lim_{h \to 0}\frac{U_{i+1}-2 U_i + U_{i-1}}{h^2} \\
+    &\approx \boxed{\delta^2_x U_i \equiv \frac{1}{h^2}(U_{i+1}-2 U_i + U_{i-1})} \hspace{1cm} \text{[Central second-order Difference]}
 \end{align*}
 
 \begin{figure}[ht]
@@ -77,9 +77,9 @@ Second and Higher order finite difference Quotients can also be obtained,
     \draw[fill=black] (A) circle (1.2pt) (A) node[anchor=north,shift={(0,-5pt)}] {$1$};
     \draw[fill=red] (B) circle (1.2pt) (B) node[anchor=north,shift={(0,-5pt)}] {$-2$};
     \draw[fill=black] (C) circle (1.2pt) (C) node[anchor=north,shift={(0,-5pt)}] {$1$};
-    \draw (A) node[color=black,anchor=south,shift={(0,5pt)}] {$U'_{i-1}$};
-    \draw (B) node[color=black,anchor=south,shift={(0,5pt)}] {$U'_{i}$};
-    \draw (C) node[color=black,anchor=south,shift={(0,5pt)}] {$U'_{i+1}$};
+    \draw (A) node[color=black,anchor=south,shift={(0,5pt)}] {$U_{i-1}$};
+    \draw (B) node[color=black,anchor=south,shift={(0,5pt)}] {$U_{i}$};
+    \draw (C) node[color=black,anchor=south,shift={(0,5pt)}] {$U_{i+1}$};
 \end{tikzpicture}
 \end{figure}
 
@@ -90,27 +90,27 @@ It is fairly obvious to notice that any finite difference operator for any deriv
 The \textit{'error'} that accompanies \textit{'approximations'} in the method must be acccounted for. In this section, the truncation error in the derivative approximations is ascertained which will later help us deduce the error in PDE's solved using these approximations.
 \\[2mm]
 \textbf{The local truncation error for derivative approximations} is defined here as the difference between the exact value of the derivate and the approximated value at node $i$, it can be calculated using Taylor series expansions about $i$,\\[2mm]
-For Forward difference operator, 
+For Forward difference operator,\autocite{mitocw}\autocite{thomas2013numerical}
 \begin{align*}
-    \tau &\equiv \delta _ x^{+} U'_ i - {U'_ x}|_ i \\
-    &= \frac{1}{\sDelta x}\left( U'_ {i+1} - U'_{i}\right) - {U'_ x}|_i \\
-    &= \frac{1}{\sDelta x}\left[ \left( U'_ i + \sDelta x{U'_ x}|_ i + \frac{1}{2}(\sDelta x)^2{U'_{xx}}|_ i + \mcm{O}((\sDelta x)^3)\right) - U'_i \right] - {U'_ x}|_ i \\
-    &= \frac{1}{2}\sDelta x{U'_{xx}}|_ i + \mcm{O}((\sDelta x)^2) = \mcm{O}(\Delta x)
+    \tau &\equiv \delta _ x^{+} U_ i - {U_ x}|_ i \\
+    &= \frac{1}{\sDelta x}\left( U_ {i+1} - U_{i}\right) - {U_ x}|_i \\
+    &= \frac{1}{\sDelta x}\left[ \left( U_ i + \sDelta x{U_ x}|_ i + \frac{1}{2}(\sDelta x)^2{U_{xx}}|_ i + \mcm{O}((\sDelta x)^3)\right) - U_i \right] - {U_ x}|_ i \\
+    &= \frac{1}{2}\sDelta x{U_{xx}}|_ i + \mcm{O}((\sDelta x)^2) = \mcm{O}(\Delta x)
 \end{align*}
 For Backward difference operator, 
 \begin{align*}
-    \tau &\equiv \delta _ x^{-} U'_ i - {U'_ x}|_ i \\
-    &= \frac{1}{\sDelta x}\left( U'_ i - U'_{i-1}\right) - {U'_ x}|_i \\
-    &= \frac{1}{\sDelta x}\left[ U'_ i - \left( U'_ i - \sDelta x{U'_ x}|_ i + \frac{1}{2}(\sDelta x)^2{U'_{xx}}|_ i + \mcm{O}((\sDelta x)^3)\right)\right] - {U'_ x}|_ i \\
-    &= -\frac{1}{2}\sDelta x{U'_{xx}}|_ i + \mcm{O}((\sDelta x)^2) = \mcm{O}(\Delta x)  
+    \tau &\equiv \delta _ x^{-} U_ i - {U_ x}|_ i \\
+    &= \frac{1}{\sDelta x}\left( U_ i - U_{i-1}\right) - {U_ x}|_i \\
+    &= \frac{1}{\sDelta x}\left[ U_ i - \left( U_ i - \sDelta x{U_ x}|_ i + \frac{1}{2}(\sDelta x)^2{U_{xx}}|_ i + \mcm{O}((\sDelta x)^3)\right)\right] - {U_ x}|_ i \\
+    &= -\frac{1}{2}\sDelta x{U_{xx}}|_ i + \mcm{O}((\sDelta x)^2) = \mcm{O}(\Delta x)  
 \end{align*}
 For Central difference operator,
 \begin{align*}
-    \tau &\equiv \delta _ {2x} U'_ i - {U'_ x}|_ i \\
-    &= \frac{1}{{2 \sDelta } x}\left( U'_ {i+1} - U'_{i-1}\right) - {U'_ x}|_i \\
-    &= \frac{1}{2 \sDelta  x}\Bigg[ \left( U'_ i + \sDelta x{U'_ x}|_ i + \frac{1}{2}(\sDelta x)^2{U'_{xx}}|_ i + \frac{1}{6}(\sDelta x)^3{U'_{xxx}}|_ i + \frac{1}{12}(\sDelta x)^4{U'_{xxxx}}|_ i + \mcm{O}((\sDelta x)^5)\right) \\
-    &\qquad - \left( U'_ i - \sDelta x{U'_ x}|_ i + \frac{1}{2}(\sDelta x)^2{U'_{xx}}|_ i - \frac{1}{6}(\sDelta x)^3{U'_{xxx}}|_ i + \frac{1}{12}(\sDelta x)^4{U'_{xxxx}}|_ i +\mcm{O}((\sDelta x)^5)\right)\Bigg] - {U'_ x}|_ i \\
-    &= -\frac{1}{6}\Delta x^2 U'_{xxx_ i} + \mcm{O}((\sDelta x)^4) = \mcm{O}((\Delta x)^2)
+    \tau &\equiv \delta _ {2x} U_ i - {U_ x}|_ i \\
+    &= \frac{1}{{2 \sDelta } x}\left( U_ {i+1} - U_{i-1}\right) - {U_ x}|_i \\
+    &= \frac{1}{2 \sDelta  x}\Bigg[ \left( U_ i + \sDelta x{U_ x}|_ i + \frac{1}{2}(\sDelta x)^2{U_{xx}}|_ i + \frac{1}{6}(\sDelta x)^3{U_{xxx}}|_ i + \frac{1}{12}(\sDelta x)^4{U_{xxxx}}|_ i + \mcm{O}((\sDelta x)^5)\right) \\
+    &\qquad - \left( U_ i - \sDelta x{U_ x}|_ i + \frac{1}{2}(\sDelta x)^2{U_{xx}}|_ i - \frac{1}{6}(\sDelta x)^3{U_{xxx}}|_ i + \frac{1}{12}(\sDelta x)^4{U_{xxxx}}|_ i +\mcm{O}((\sDelta x)^5)\right)\Bigg] - {U_ x}|_ i \\
+    &= -\frac{1}{6}\Delta x^2 U_{xxx_ i} + \mcm{O}((\sDelta x)^4) = \mcm{O}((\Delta x)^2)
 \end{align*}
 where in the above expressions we assume that the Higher order derivatives of $U$ at $i$ are well defined. For a fairly small $\Delta x$ (less than 1) we can confidently say that $\bo(\Delta x^2)$ is samller than $\bo(\Delta x)$%
 \footnote{The definition of the "big $\bo$" notation says that if for given functions $f(x)$ and $g(x)$ for $x \in S$ where S is some subset of $\mathbf{R}$, there exists a positive constant A such that $|f(x)| \leq A|g(x)|$ $\forall$ $x \in S$, we say that $f(x)$ is the "big $\bo$" of $g(x)$ or that $f(x)$ is of order of $g(x)$, mathematically given by $f(x) = \bo(g(x))$}%
@@ -118,10 +118,10 @@ where in the above expressions we assume that the Higher order derivatives of $U
 
 Similarly, Approximation of second-order derivative,
 \begin{align*}
-    \tau &\equiv \delta^2_x U'_i - U'_{xx}|_i \\
-     &= \frac{1}{(\sDelta x)^2}(U'_{i+1}-2 U'_i + U'_{i-1})  - U'_{xx}|_i \\
-     &= \frac{1}{(\sDelta x)^2}\Bigg[ \left( U'_ i + \sDelta x{U'_ x}|_ i + \frac{1}{2}(\sDelta x)^2{U'_{xx}}|_ i + \frac{1}{6}(\sDelta x)^3{U'_{xxx}}|_ i + \frac{1}{12}(\sDelta x)^4{U'_{xxxx}}|_ i + \mcm{O}((\sDelta x)^5)\right) - 2 U'_i\\
-    & + \left( U'_ i - \sDelta x{U'_ x}|_ i + \frac{1}{2}(\sDelta x)^2{U'_{xx}}|_ i - \frac{1}{6}(\sDelta x)^3{U'_{xxx}}|_ i + \frac{1}{12}(\sDelta x)^4{U'_{xxxx}}|_ i +\mcm{O}((\sDelta x)^5)\right)\Bigg] - {U'_ {xx}}|_ i \\
+    \tau &\equiv \delta^2_x U_i - U_{xx}|_i \\
+     &= \frac{1}{(\sDelta x)^2}(U_{i+1}-2 U_i + U_{i-1})  - U_{xx}|_i \\
+     &= \frac{1}{(\sDelta x)^2}\Bigg[ \left( U_ i + \sDelta x{U_ x}|_ i + \frac{1}{2}(\sDelta x)^2{U_{xx}}|_ i + \frac{1}{6}(\sDelta x)^3{U_{xxx}}|_ i + \frac{1}{12}(\sDelta x)^4{U_{xxxx}}|_ i + \mcm{O}((\sDelta x)^5)\right) - 2 U_i\\
+    & + \left( U_ i - \sDelta x{U_ x}|_ i + \frac{1}{2}(\sDelta x)^2{U_{xx}}|_ i - \frac{1}{6}(\sDelta x)^3{U_{xxx}}|_ i + \frac{1}{12}(\sDelta x)^4{U_{xxxx}}|_ i +\mcm{O}((\sDelta x)^5)\right)\Bigg] - {U_ {xx}}|_ i \\
     &= \mcm{O}((\sDelta x)^2)
 \end{align*}
 Thus, the second-order derivative approximator is also second order accurate.
@@ -166,26 +166,26 @@ First we decompose our continous domain $\Omega$ of $U(x,y)$ to a discretised on
 \end{tikzpicture}
 \end{figure}
 \noindent
-Therefore we have,$U'_{i,j} = U'(x_i,y_j)$ and $\rho'_{i,j} = \rho'(x_i,y_j)$ $\forall \gs i \in \{0,1,\dots,N_x\} ; \gs j \in \{0,1,\dots,N_y\} $. \\[2mm] where $N_x = \frac{4}{h} $ and  $N_y = \frac{4.4}{h}$ \\[2mm]   
+Therefore we have,$U_{i,j} = U(x_i,y_j)$ and $\rho_{i,j} = \rho(x_i,y_j)$ $\forall \gs i \in \{0,1,\dots,N_x\} ; \gs j \in \{0,1,\dots,N_y\} $. \\[2mm] where $N_x = \frac{4}{h} $ and  $N_y = \frac{4.4}{h}$ \\[2mm]   
 We replace the second-order derivatives in partial differential equation (2.16) with central difference operators,
 \begin{align}
-    &\delta^2_x U'_{i,j} + \delta^2_y U'_{i,j} = - \frac{\rho'_{i,j} s^2}{\epsilon_0 \nu} \\
-    &\frac{1}{h^2}(U'_{i+1,j}+ U'_{i-1,j} -4 U'_{i,j} + U'_{i,j+1}+ U'_{i,j+1}) = - \frac{\rho'_{i,j} s^2}{\epsilon_0 \nu}
+    &\delta^2_x U_{i,j} + \delta^2_y U_{i,j} = - \frac{\rho'_{i,j} s^2}{\epsilon_0 \nu} \\
+    &\frac{1}{h^2}(U_{i+1,j}+ U_{i-1,j} -4 U_{i,j} + U_{i,j+1}+ U_{i,j-1}) = - \frac{\rho'_{i,j} s^2}{\epsilon_0 \nu}
 \end{align}
 
 After rearranging we obtain the useful relation,
 \begin{align} \label{eq:difference equation}
-    U'_{i,j} = \frac{1}{4} \left[ U'_{i+1,j}+ U'_{i-1,j} + U'_{i,j+1}+ U'_{i,j+1} + h^2\frac{\rho'_{i,j} s^2}{\epsilon_0 \nu} \right] \\ \gs \forall \gs i \in \{1,2,\dots,N_x-1\} ; \gs j \in \{0,1,\dots,N_y\} 
+    U_{i,j} = \frac{1}{4} \left[ U_{i+1,j}+ U_{i-1,j} + U_{i,j+1}+ U_{i,j-1} + h^2\frac{\rho'_{i,j} s^2}{\epsilon_0 \nu} \right] \\ \gs \forall \gs i \in \{1,2,\dots,N_x-1\} ; \gs j \in \{0,1,\dots,N_y\} 
 \end{align}
 
 The Dirichlet boundary conditions get translated to,
 \begin{align*}
-    U'_{i,j} = 5 \gs \forall \gs i \in \{0,N_x\} ; \gs j \in \{0,1,\dots,N_y\}
+    U_{i,j} = 5 \gs \forall \gs i \in \{0,N_x\} ; \gs j \in \{0,1,\dots,N_y\}
 \end{align*}
 and Neumann to,
 \begin{align*}
-    &U'_{i,j+1} = U'_{i,j-1} \gs \forall \gs j = N_y ; \gs i \in \{0,1,\dots,N_x\} \\
-    &U'_{i,j-1} = U'_{i,j+1} \gs \forall \gs j = 0 ; \gs i \in \{0,1,\dots,N_x\} 
+    &U_{i,j+1} = U_{i,j-1} \gs \forall \gs j = N_y ; \gs i \in \{0,1,\dots,N_x\} \\
+    &U_{i,j-1} = U_{i,j+1} \gs \forall \gs j = 0 ; \gs i \in \{0,1,\dots,N_x\} 
 \end{align*}
 \subsection{Iterative methods to solve linear algebraic equations}
 
@@ -193,19 +193,26 @@ In the last section we have discussed how to reduce a PDE to a linear combinatio
 \begin{equation} \label{linear system}
     A \mvec{x} = \mvec{b} 
 \end{equation}
-where A is an N × N matrix, b the given data vector and x the vector of N unknown interior mesh values, there is an implied one-dimensional ordering of these values which is somewhat unnatural and obscures the important property that only immediate neighbours are involved. Each row of the matrix A involves only a very small number of non-zero elements, commonly ﬁve or seven; moreover in many problems a suitable ordering of the unknowns will lead to a matrix in which these non-zero elements occur in a regular pattern. Instead of solving for this vector equation in matrix form we solve by applying the Finite difference equation to each node in the mesh which in practice is the same as solving the vector equation \ref{linear system} but without explicitly stating the matrices $A$ and $b$. Following sections describe the various methods we successfully employed for the same.\autocite{mortonpde}
+where A is an N × N matrix, b the given data vector and x the vector of N unknown interior mesh values, there is an implied one-dimensional ordering of these values which is somewhat unnatural and obscures the important property that only immediate neighbours are involved. Each row of the matrix A involves only a very small number of non-zero elements, commonly ﬁve or seven; moreover in many problems a suitable ordering of the unknowns will lead to a matrix in which these non-zero elements occur in a regular pattern. Instead of solving for this vector equation in matrix form we solve by applying the Finite difference equation to each node in the mesh which in practice is the same as solving the vector equation \ref{linear system} but without explicitly stating the matrices $A$ and $b$. Following sections describe the various methods we successfully employed for the same.\autocite{mortonpde}\autocite{tudortmundkuzmin}
 \subsubsection{Jacobi Method}
 Jacobi method starts with a set of intial guess values for the unknowns and then gets new value for the unkowns by substituting the quess values in the equations one at a time,the process is repeated with the newly produced value of the unkowns.\\[2mm]
 \begin{algorithm}[H]
-    \textbf{Jacobi Method (X,$\mathbf{S:(X^{(n)},P,h,i,j)} \mapsto x$,P,h,$\mathbf{\epsilon_r}$)}\\[-1pt]  
+    \textbf{Jacobi Method (X,P,h,$\mathbf{\epsilon_r}$)}\\[-1pt]  
     This verison of jacobi method is optimised for poisson on a uniformly structured rectangular mesh, It takes the initial guess values at all nodes, the stencil and iteratively solves the stencil over all interior nodes unitl the relative tolerance is reached.  \\[2mm]
-	\KwIn{ $\mathbf{X} :\gs k \times m $ matrix of initial guess values, value of step size $h$, a matrix containing the initial charge configuration $\mathbf{P}$, a mappping here described by the relation \ref{eq:difference equation}, N an upper bound on the number of iterations} 
-	\KwOut{An $ k \times m $ matrix containing the values of potential on all satisfying the relation \ref{eq:difference equation}} 
+	\KwIn{ $\mathbf{X^{(0)}} :\gs N_x \times N_y $ matrix of initial guess values, value of step size $h$, a matrix containing the initial charge configuration $\mathbf{P}$, N an upper bound on the number of iterations} 
+	\KwOut{$\mathbf{X^{(n*)}} $ matrix containing the values of potential on all satisfying the relation \ref{eq:difference equation}} 
     \For{n in $1,\dots N$}{ 
-		\For{i = $1,2,3,\cdots,N_x$}{
-            $U'_{i,j} = \frac{1}{4} \left[ U'_{i+1,j}+ U'_{i-1,j} + U'_{i,j+1}+ U'_{i,j+1} + h^2\frac{\rho'_{i,j} s^2}{\epsilon_0 \nu} \right]$
-            }
-        \If{$\max_{i,j}{\{\frac{X^{(n+1)} -X^{(n)}}{X^{(n+1)}}\}}\leq \epsilon_r$}{
+		\For{i = $1,2,3,\cdots,N_x-1$}{
+            \For{j = $0,1,2,\cdots,N_y$}{
+                \If{j = 0 }{
+                    $X^{(n)}_{i,j-1} = X^{(n)}_{i,j+1}$
+                }
+                \If{j = $N_y$ }{
+                    $X^{(n)}_{i,j+1} = X^{(n)}_{i,j-1}$
+                }
+            $X^{(n+1)}_{i,j} = \frac{1}{4} \left[ X^{(n)}_{i+1,j}+ X^{(n)}_{i-1,j} + X^{(n)}_{i,j+1}+ X^{(n)}_{i,j-1} + h^2\frac{P_{i,j} s^2}{\epsilon_0 \nu} \right]$
+        }}
+        \If{$\max_{i,j}{\{\frac{X^{(n+1)} -X^{{(n)}}}{X^{(n+1)}}\}}\leq \epsilon_r$}{
             return Output \\
             break
         }
@@ -216,41 +223,53 @@ Jacobi method starts with a set of intial guess values for the unknowns and then
 
 \subsubsection{Gauss-Seidel Method}
 The Gauss-Seidel method applies the stencil on the new unkowns as it iterates over the system of equations unlike Jacobi method which only works on the unknown values of the previous iteration.\\[2mm]
-\begin{algorithm}
-    \textbf{Gauss-Seidel Method (X,$\mathbf{S:(X^{(n)},P,h,i,j)} \mapsto x$,P,h,$\mathbf{\epsilon_r}$)}\\[-1pt]
+\begin{algorithm}[H]
+    \textbf{Gauss-Seidel Method (X,P,h,$\mathbf{\epsilon_r}$)}\\[-1pt]
     This verison of jacobi method is optimised for poisson on a uniformly structured rectangular mesh, It takes the initial guess values at all nodes, the stencil and iteratively solves the stencil over all interior nodes unitl the relative tolerance is reached.  \\[2mm]
-	\KwIn{ $\mathbf{X} :\gs k \times m $ matrix of initial guess values, value of step size $h$, a matrix containing the initial charge configuration $\mathbf{P}$, a mappping S described here by the relation \ref{eq:difference equation}, N an upper bound on the number of iterations} 
-	\KwOut{An $ k \times m $ matrix containing the values of potential on all satisfying the relation \ref{eq:difference equation}} 
-    \For{n in $1,\dots N$}{
-        set $X^{(n+1)} = X^{(n)}$ \\ 
-		\For{all the interior nodes and also the boundary nodes parallel to x-axis}{
-            $x^{(n+1)}_{i,j} = S(X^{(n+1)},P,h,i,j)$
-        }
-        \If{$\max_{i,j}{\{\frac{X^{(n+1)} -X^{(n)}}{X^{(n+1)}}\}}\leq \epsilon_r$}{
+	\KwIn{ $\mathbf{X^{(0)}} :\gs N_x \times N_y $ matrix of initial guess values, value of step size $h$, a matrix containing the initial charge configuration $\mathbf{P}$, N an upper bound on the number of iterations} 
+	\KwOut{$\mathbf{X^{(n*)}} $ matrix containing the values of potential on all satisfying the relation \ref{eq:difference equation}} 
+    \For{n in $1,\dots N$}{ 
+		\For{i = $1,2,3,\cdots,N_x-1$}{
+            \For{j = $0,1,2,\cdots,N_y$}{
+                \If{j = 0 }{
+                    $X^{(n+1)}_{i,j-1} = X^{(n)}_{i,j+1}$
+                }
+                \If{j = $N_y$ }{
+                    $X^{(n)}_{i,j+1} = X^{(n)}_{i,j-1}$
+                }
+            $X^{(n+1)}_{i,j} = \frac{1}{4} \left[ X^{(n)}_{i+1,j}+ X^{(n+1)}_{i-1,j} + X^{(n)}_{i,j+1}+ X^{(n+1)}_{i,j-1} + h^2\frac{P_{i,j} s^2}{\epsilon_0 \nu} \right]$
+        }}
+        \If{$\max_{i,j}{\{\frac{X^{(n+1)} -X^{{(n)}}}{X^{(n+1)}}\}}\leq \epsilon_r$}{
             return Output \\
             break
         }
     } 
     \caption{Jacobi Method}
 \end{algorithm}
+
+
 \subsubsection{Successive Over-Relaxation(SOR)}
-
-
 Successive over-relaxation or SOR is a method that belongs to a class of methods called Relaxation methods. 
 Such so-called relaxation methods reached a high state of development in the l940s One result was a modiﬁcation of the Gauss–Seidel procedure which is now called successive over-relaxation or the SOR method.
 Taking the recent values of the unknowns. We proceed by calculating the correction which would be given by the Gauss–Seidel iteration (iterating on new unknowns), and then multiply this correction by $\omega$ before adding to the previous value. The term over-relaxation then implies that $\omega>1$. \\[2mm]
 
-\begin{algorithm}
-    \textbf{S.O.R Method (X,$\mathbf{S:(X^{(n)},P,h,i,j)} \mapsto x$,P,h,$\mathbf{\epsilon_r}$)}\\[-1pt]
+\begin{algorithm}[H]
+    \textbf{S.O.R Method (X,P,h,$\mathbf{\epsilon_r},\omega$)}\\[-1pt]
     This verison of jacobi method is optimised for poisson on a uniformly structured rectangular mesh, It takes the initial guess values at all nodes, the stencil and iteratively solves the stencil over all interior nodes unitl the relative tolerance is reached.  \\[2mm]
-	\KwIn{ $\mathbf{X} :\gs k \times m $ matrix of initial guess values, value of step size $h$, a matrix containing the initial charge configuration $\mathbf{P}$, a mappping S described here by the relation \ref{eq:difference equation}, N an upper bound on the number of iterations} 
-	\KwOut{An $ k \times m $ matrix containing the values of potential on all satisfying the relation \ref{eq:difference equation}} 
-    \For{n in $1,\dots N$}{
-        set $X^{(n+1)} = X^{(n)}$ \\ 
-		\For{all the interior nodes and also the boundary nodes parallel to x-axis}{
-            $x^{(n+1)}_{i,j} = x^{(n)}_{i,j}+ \omega(S(X^{(n+1)},P,h,i,j)- x^{(n+1)}_{i,j})$
-        }
-        \If{$\max_{i,j}{\{\frac{X^{(n+1)} -X^{(n)}}{X^{(n+1)}}\}}\leq \epsilon_r$}{
+	\KwIn{ $\mathbf{X^{(0)}} :\gs N_x \times N_y $ matrix of initial guess values, value of step size $h$, a matrix containing the initial charge configuration $\mathbf{P}$, N an upper bound on the number of iterations,$\omega$ the relaxation factor} 
+	\KwOut{$\mathbf{X^{(n*)}} $ matrix containing the values of potential on all satisfying the relation \ref{eq:difference equation}} 
+    \For{n in $1,\dots N$}{ 
+		\For{i = $1,2,3,\cdots,N_x-1$}{
+            \For{j = $0,1,2,\cdots,N_y$}{
+                \If{j = 0 }{
+                    $X^{(n+1)}_{i,j-1} = X^{(n)}_{i,j+1}$
+                }
+                \If{j = $N_y$ }{
+                    $X^{(n)}_{i,j+1} = X^{(n)}_{i,j-1}$
+                }
+            $X^{(n+1)}_{i,j} = X^{(n)}_{i,j} + \omega\left(\frac{1}{4} \left[ X^{(n)}_{i+1,j}+ X^{(n+1)}_{i-1,j} + X^{(n)}_{i,j+1}+ X^{(n+1)}_{i,j-1} + h^2\frac{P_{i,j} s^2}{\epsilon_0 \nu} \right]-X^{(n)}_{i,j}\right)$
+        }}
+        \If{$\max_{i,j}{\{\frac{X^{(n+1)} -X^{{(n)}}}{X^{(n+1)}}\}}\leq \epsilon_r$}{
             return Output \\
             break
         }

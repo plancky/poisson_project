@@ -7,9 +7,9 @@ To remind ourselves, our problem consists of an interleaved capacitor which is c
 
 \begin{figure}[ht]
     \centering
-    \def\svgwidth{0.6\textwidth}
+    \def\svgwidth{0.5\textwidth}
     \import{../diagrams}{analysis.pdf_tex}
-    \caption{This diagram represents the region $\omega$ being studied, $\alpha_1,\alpha_2,\alpha_3,\alpha_4$ are the only unique regions in $\omega$ that were analysed.}
+    \caption{This diagram represents the region $\Omega$ being studied, $\alpha_1,\alpha_2,\alpha_3,\alpha_4$ are the only unique regions in $\omega$ that were analysed.}
     \label{}
 \end{figure}
 \begin{itemize}
@@ -25,32 +25,33 @@ To remind ourselves, our problem consists of an interleaved capacitor which is c
 
 \subsection{Results}
 Now that we have converted the problem into a system of linear equations by applying the relation \ref{eq:difference equation} to each node on the mesh and analysed the conversion, we move on to analyse the computational results obtained using three different iterative methods namely Jacobi, Gauss-Seidel and S.O.R to solve the system of linear equations.
+\newpage
 
-
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
-    \includegraphics[height= 70mm]{content/graphs/Jacobi_0125_map.png}
+    \includegraphics[width= 0.7\textwidth]{content/graphs/Jacobi_0125_map.png}
     \caption{Jacobi}
     \label{fig1}
 \end{figure}%
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
-    \includegraphics[height= 70mm]{content/graphs/Jacobi_0125_map.png}
-    \caption{Jacobi}
+    \includegraphics[width= 0.7\textwidth]{content/graphs/gauss_map.png}
+    \caption{Gauss-Seidel}
     \label{fig2:}
 \end{figure}%
-\begin{figure}[ht]
+
+\begin{figure}[H]
     \centering
-    \includegraphics[height= 70mm]{content/graphs/Jacobi_0125_map.png}
-    \caption{Jacobi}
+    \includegraphics[width= 0.7\textwidth]{content/graphs/sor_map.png}
+    \caption{SOR}
     \label{fig3:}
 \end{figure}%
-
-\paragraph{Comparison of Method}{%
-Since all the iterative methods we used have given us almost identical results so we will only compare them on the basis of number of iteration required so as to determine which method is more compuationally cheap and viable}
+\newpage 
+\subsection{Comparison of Methods}
+Since all the iterative methods we used have given us almost identical results so we will only compare them on the basis of number of iteration required so as to determine which method is more compuationally cheap and viable
     
-\begin{table}[ht]
+\begin{table}[h]
     \centering
     \begin{tabular}{|c|c|c|c|}
     \hline
@@ -66,7 +67,7 @@ Since all the iterative methods we used have given us almost identical results s
 \end{table}
 
 
-\begin{table}[ht]
+\begin{table}[h]
     \centering
     \begin{tabular}{|c|c|c|c|}
     \hline
@@ -88,9 +89,9 @@ In this section we analyse the results obtained for different values of relaxati
 \noindent
 \textbf{ Optimum value of Relaxation Factor } \\
 In Successive Over Relaxation we have to choose the value of a relaxation factor which is responsible for the rate of convergence of solution. It's value can be chosen anywhere between 1 to 2 i.e. relaxation factor or $\omega  \in [1,2]$. We observed the variation of No. of iterations required to reach a given tolerance with change in $ \omega $. The following graph represents the graph between number of itereations and value of $\omega$. \\
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{content/graphs/omega.png}
+    \includegraphics[width=0.7\textwidth]{content/graphs/omega.png}
     \caption{variation of number of iterations for convergence with relative tolerance=$10^{-8}$ and meshsize $h = 0.1$  }
     \label{omega variation}
 \end{figure}
