@@ -1,5 +1,6 @@
 \section{Theory}
-Our problem consists of identical infinitely-long thin metal plates $A_1,A_2,A_3,A_4,A_5,B_1,B_2,B_3 $ and $B_4$ are placed in an \textit{interleaved} arrangement as dipicted in fig1.(a) Group of plates $A_i$ and $B_i$ are connected to the terminal $A$ and $B$ , respectively, by means of gold wires. The terminals are connected to different potential sources $U_A$ and $U_B$ respectively. \\
+\subsection{Physical Problem}
+Our problem consists of identical infinitely-long thin metal plates $A_1,A_2,A_3,A_4,A_5,B_1,B_2,B_3 $ and $B_4$ are placed in an \textit{interleaved} arrangement as dipicted in figure \ref{fig:cap}. Group of plates $A_i$ and $B_i$ are connected to the terminal $A$ and $B$, respectively, by means of gold wires. The terminals are connected to different potential sources $U_A$ and $U_B$ respectively. \\
 This arrangement is called an interleaved capacitor, Our goal will be to approximate the potential distribution (in two dimensions considering symmetry along the the third axis which will be dropped) inside the capacitor after we disconnect the capacitor from sources, treating the interior plates as line charge distributions.
 \begin{align*}
     &U_A = 5V \\
@@ -39,10 +40,9 @@ Similarly on $B_i$,
     \def\svgwidth{0.6\textwidth}
     \import{../diagrams}{daigram.pdf_tex}
     \caption{Cross-sectional view of the region $\Omega$ in question.}
-    \label{fig:}
+    \label{fig:cross-section capacitor}
 \end{figure}
-
-Mathematical Formulation:\\
+\subsection{Mathematical Formulation}
 Let $U(x,y)$ and $\vec{E}(x,y)$ be the potential and Electric field distribution defined in the region of our arrangement $(x,y) \in \Omega := [0,4\mu m]\times[0,4.4\mu m]$ .\\
 We know from maxwell's laws that for static electric fields $\vec{\nabla} \cdot \vec{E} = \rho / \epsilon_0 $, $\vec{\nabla} \times \vec{E} = 0$
 \\
@@ -110,8 +110,8 @@ Now according to our given arrangement,
 \end{align}
 We get the following boundary conditions for the above boundary value problem,
 \begin{align}
-    & U(0,y) = +5/\nu \gs; \gs U(4,y) = +5/\nu \\ 
-    & U_y(x,0) = 0 \gs; \gs U_y(x,4.4) = 0 
+    & U'(0,y) = +5/\nu \gs; \gs U'(4,y) = +5/\nu \\ 
+    & U'_y(x,0) = 0 \gs; \gs U'_y(x,4.4) = 0 
 \end{align}
 
 %%%%%%%%%%%%%%%END%%%%%%%%%%%%%%%%%%%%%%

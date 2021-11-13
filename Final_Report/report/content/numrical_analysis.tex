@@ -25,7 +25,6 @@ To remind ourselves, our problem consists of an interleaved capacitor which is c
 
 \subsection{Results}
 Now that we have converted the problem into a system of linear equations by applying the relation \ref{eq:difference equation} to each node on the mesh and analysed the conversion, we move on to analyse the computational results obtained using three different iterative methods namely Jacobi, Gauss-Seidel and S.O.R to solve the system of linear equations.
-\newpage
 
 \begin{figure}[H]
     \centering
@@ -47,7 +46,6 @@ Now that we have converted the problem into a system of linear equations by appl
     \caption{SOR}
     \label{fig3:}
 \end{figure}%
-\newpage 
 \subsection{Comparison of Methods}
 Since all the iterative methods we used have given us almost identical results so we will only compare them on the basis of number of iteration required so as to determine which method is more compuationally cheap and viable
     
@@ -81,19 +79,20 @@ Since all the iterative methods we used have given us almost identical results s
 \caption{\centering Table comparing the computation time required for each method for a relative tolerance of $10^{-8}$}
 \label{computation_time}
 \end{table}
-
-So comparing all the method for computation under identical condition on the basis of number of iteration required for acheiving the required tolerance we can say $ \boldsymbol{SOR Method} $ is best method among all three iterative schemes used.
+\noindent
+Comparing all the methods for computation under identical conditions on the basis of number of iteration required for acheiving the required tolerance we can say  \textbf{SOR} Method is best method among all three iterative schemes used on all grounds.
 
 \subsubsection{Successive Over Relaxation (SOR)}
 In this section we analyse the results obtained for different values of relaxation factor. \\[2mm]
 \noindent
 \textbf{ Optimum value of Relaxation Factor } \\
-In Successive Over Relaxation we have to choose the value of a relaxation factor which is responsible for the rate of convergence of solution. It's value can be chosen anywhere between 1 to 2 i.e. relaxation factor or $\omega  \in [1,2]$. We observed the variation of number of iterations required to reach a given tolerance with change in $ \omega $. The following graph represents the graph between number of itereations and value of $\omega$. \\
+In Successive Over Relaxation we have to choose the value of a relaxation factor which is responsible for the rate of convergence of solution. Its value can be chosen anywhere between 1 and 2 i.e. relaxation factor or $\omega  \in [1,2]$. We observed the variation of number of iterations required to reach a given tolerance with change in $ \omega $. The following graph represents the graph between number of itereations and value of $\omega$. \\
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{content/graphs/omega.png}
-    \caption{variation of number of iterations for convergence with relative tolerance=$10^{-8}$ and meshsize $h = 0.1$  }
+    \caption{\centering variation of number of iterations for convergence with relative tolerance=$10^{-8}$ and meshsize $h = 0.1$  }
     \label{omega variation}
-\end{figure}
-From the graph we can see that the most optimum value of $ \omega $ is $1.90$ according to number of iterations required to reach the solution.
+\end{figure} 
+\noindent
+From the graph we can see that the most optimum value of $ \omega $ is around $1.90$ according to number of iterations required to reach the solution.
 

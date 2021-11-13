@@ -225,7 +225,7 @@ Jacobi method starts with a set of initial guess values for the unknowns and the
 The Gauss-Seidel method applies the stencil on the new unkowns as it iterates over the system of equations unlike Jacobi method which only works on the unknown values of the previous iteration.\\[2mm]
 \begin{algorithm}[H]
     \textbf{Gauss-Seidel Method (X,P,h,$\mathbf{\epsilon_r}$)}\\[-1pt]
-    This verison of jacobi method is optimised for poisson on a uniformly structured rectangular mesh, It takes the initial guess values at all nodes, the stencil and iteratively solves the stencil over all interior nodes unitl the relative tolerance is reached.  \\[2mm]
+    This verison of Gauss-Seidel method is optimised for poisson on a uniformly structured rectangular mesh, It takes the initial guess values at all nodes, the stencil and iteratively solves the stencil over all interior nodes unitl the relative tolerance is reached.  \\[2mm]
 	\KwIn{ $\mathbf{X^{(0)}} :\gs N_x \times N_y $ matrix of initial guess values, value of step size $h$, a matrix containing the initial charge configuration $\mathbf{P}$, N an upper bound on the number of iterations} 
 	\KwOut{$\mathbf{X^{(n*)}} $ matrix containing the values of potential on all satisfying the relation \ref{eq:difference equation}} 
     \For{n in $1,\dots N$}{ 
@@ -255,7 +255,7 @@ Taking the recent values of the unknowns. We proceed by calculating the correcti
 
 \begin{algorithm}[H]
     \textbf{S.O.R Method (X,P,h,$\mathbf{\epsilon_r},\omega$)}\\[-1pt]
-    This verison of jacobi method is optimised for poisson on a uniformly structured rectangular mesh, It takes the initial guess values at all nodes, the stencil and iteratively solves the stencil over all interior nodes unitl the relative tolerance is reached.  \\[2mm]
+    This verison of SOR method is optimised for poisson on a uniformly structured rectangular mesh, It takes the initial guess values at all nodes, the stencil and iteratively solves the stencil over all interior nodes unitl the relative tolerance is reached.  \\[2mm]
 	\KwIn{ $\mathbf{X^{(0)}} :\gs N_x \times N_y $ matrix of initial guess values, value of step size $h$, a matrix containing the initial charge configuration $\mathbf{P}$, N an upper bound on the number of iterations,$\omega$ the relaxation factor} 
 	\KwOut{$\mathbf{X^{(n*)}} $ matrix containing the values of potential on all satisfying the relation \ref{eq:difference equation}} 
     \For{n in $1,\dots N$}{ 

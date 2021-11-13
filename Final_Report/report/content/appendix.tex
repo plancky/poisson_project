@@ -1,0 +1,304 @@
+\section{Appendix}
+\subsection{Non-dimensionalisation}
+In this section we would like to non-dimensionalise Laplace equation. The general form of Laplace equation is:
+		\begin{center}
+			$$\mvec{\nabla}^2 \varphi(\mvec{r}) = 0$$
+		\end{center}
+		\noindent
+		or 
+		\begin{center}
+			\[  
+			\frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} = 0
+			\]
+		\end{center}
+		or 
+		\begin{center}
+			\[u_{xx} + u_{yy} = 0 \]
+		\end{center}
+	\noindent
+	where \textbf{$ u_{xx} $} represents the second order partial derivative of u with respect to x.
+	and $ u_{yy} $ represents second order partial derivative of u with respect to y.
+	In our case $ u = V $ so we need to non -dimensionalise the following equation:
+	\begin{center}
+			\[V_{xx} + V_{yy} = 0 \]
+	\end{center}
+	\noindent 
+	Now we will replace the dimensional variable with non-dimensional variables. Let \[\hat{V} = \frac{V}{V_s},  \hat{x} = \frac{x}{x_s},  \hat{y} = \frac{y}{y_s}\]
+	\noindent
+	here the $ \hat{V}, \hat{x}, \hat{y} $ are dimensionless variables and $ V_s, x_s, y_s$ are the scaling variables having the same unit as their counterparts.
+	\[  
+	\frac{\partial^2 V}{\partial x^2} = \frac{\partial}{\partial x} \Bigg({ \frac{\partial V}{\partial x}}\Bigg) \]
+	\[ = \frac{\partial}{\partial x} \bigg(\frac{\partial (\hat{V}V_s)}{\partial (\hat{x}x_s)}\bigg) \]
+	\[ = \frac{V_s}{x_s} \Big[{\frac{\partial}{\partial (x_s \hat{x})}} \Big({\frac{\partial \hat{V}}{\partial \hat{x}}}\Big)\Big]\]
+	\[ = \frac{V_s}{x_s^2} \Big[{\frac{\partial^2 \hat{V}}{\partial \hat{x^2}}}\Big]\]
+	\noindent
+	similarly, we can write for y as : 
+	\[\frac{V_s}{y_s^2} \Big[{\frac{\partial^2 \hat{V}}{\partial \hat{y^2}}}\Big]\]
+	\noindent
+	Now we can write our equation as:
+	\[ = \frac{V_s}{y_s^2} \Big[{\frac{\partial^2 \hat{V}}{\partial \hat{y^2}}}\Big] + \frac{V_s}{x_s^2} \Big[{\frac{\partial^2 \hat{V}}{\partial \hat{x^2}}}\Big] = 0 \]
+	So now if choose same magnitude for our scaling factor then we write our equation as:
+	\[ = \frac{V_s}{x_s^2} \Big[{\frac{\partial^2 \hat{V}}{\partial \hat{y^2}}} +  {\frac{\partial^2 \hat{V}}{\partial \hat{x^2}}}\Big] = 0 \]
+	\[ = {\frac{\partial^2 \hat{V}}{\partial \hat{y^2}}} +  {\frac{\partial^2 \hat{V}}{\partial \hat{x^2}}} = 0 \]
+	Hence so if we just use the same sacling factors for both x and y variable then we don't need to non-dimensionalise the Laplace equation.
+	\subsubsection{Poisson Equation}
+	\noindent
+	Now since the general form of Poisson Equation is as follows:
+	\begin{center}
+		$$\mvec{\nabla}^2 \varphi(\mvec{r}) =  f(\mvec{r})$$
+	\end{center}
+	\noindent
+	or 
+	\begin{center}
+		\[  
+		\frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} = - f({r})
+		\]
+	\end{center}
+	
+	So for our case we can write it as:
+	\[  
+	\frac{\partial^2 V}{\partial x^2} + \frac{\partial^2 V}{\partial y^2} =  -\frac{\rho}{\epsilon_0}
+	\]
+	Now following the same procedure  for LHS as done in case of Laplace equation we get:
+		\[  \frac{V_s}{x_s^2} \Big[{\frac{\partial^2 \hat{V}}{\partial \hat{y^2}}} +  {\frac{\partial^2 \hat{V}}{\partial \hat{x^2}}}\Big] =   \frac{-\rho}{\epsilon_0} \]
+	or
+		\[  {\frac{\partial^2 \hat{V}}{\partial \hat{y^2}}} +  {\frac{\partial^2 \hat{V}}{\partial \hat{x^2}}} =   \frac{-\rho}{\epsilon_0} \frac{x_s^2}{V_s} \]
+		Now we will choose the scaling factors such that the value of RHS becomes unity to ease our computation part and it will depend upon the question.
+		
+\subsection{Code}
+\subsubsection{Python Scripts}
+The file \textit{poisson.py} containing all our important methods and classes.
+\begin{lstlisting}[language=Python]
+from numba import jit
+import numpy as np
+import time as t
+import os
+
+def convert_gnuplotgrid3d(FILE):
+    f = open(FILE,'r')
+    prev_x = f.readline().split()[0]
+    lst1= ""
+    for line in f :
+        new_x = line.split(' ')[0]
+        if new_x!=prev_x:
+            lst1+="\n"+line
+            prev_x = new_x
+        else:
+            lst1+=line
+    f.close()
+    f2 =open(FILE,"w")
+    f2.write(lst1)
+    f2.close()
+
+class mesh:
+    def __init__(self,x=(0,1),y=(0,1),h=0.1,gtype="2D"):
+        self.x_dim,self.y_dim=int((x[1]-x[0])/h +1),int((y[1]-y[0])/h +1) 
+        self.y_dom=np.linspace(y[0],y[1],self.y_dim)
+        self.x_dom=np.linspace(x[0],x[1],self.x_dim)
+        self.h = h
+        self.omega = dict()
+        self.gtype= gtype 
+        self.X,self.Y = np.meshgrid(self.x_dom,self.y_dom)
+        if self.gtype == "1D":
+            self.grid=np.ones((self.x_dim,),dtype="double")
+        elif self.gtype == "2D":
+            self.grid=np.ones((self.y_dim,self.x_dim),dtype="double")
+
+    def dirichlet(self,x,excluded = "y"):
+        if self.gtype=="2D" and len(x)==4:
+            if excluded != "y":
+                self.grid[0,:],self.grid[-1,:] = x[2] , x[3]
+            if excluded !="x":
+                self.grid[:,0],self.grid[:,-1] =  x[0] , x[1]
+        elif self.gtype == "1D" and len(x)==2:
+            self.grid[0],self.grid[-1] = x[0] , x[1]
+        else:
+            raise ValueError("Expected {0} but recieved {1} Boundary conditions.".format(self.gtype[0],len(x)))
+    def get(self):
+        return(self.grid)
+    def set_loc(self,loc):
+        self.loc = os.getcwd()+f"/dats/{loc}"
+        try:
+            os.mkdir(self.loc)
+        except:
+            pass
+    def jacobi_poisson2d(self,p,nu=1,rtol=None):
+        solve = jacobi2d(self.grid,self.h,p,rtol)
+        self.u = solve[0]*nu
+        self.dat = np.array([self.X.flatten('F'),self.Y.flatten('F'),self.u.flatten('F')],dtype =float)
+        np.savetxt(f"{self.loc}/jacobi_poisson2d_{self.h}.dat",self.dat.T,fmt="%.20g")
+        convert_gnuplotgrid3d(f"{self.loc}/jacobi_poisson2d_{self.h}.dat")
+        return(solve)
+    def sor_poisson2d(self,p,w,nu=1,rtol=None):
+        solve = sor2dpoisson(self.grid,self.h,w,p,rtol)
+        self.u = solve[0]*nu
+        self.omega[w] = solve[1]
+        self.dat = np.array([self.X.flatten('F'),self.Y.flatten('F'),self.u.flatten('F')],dtype =float)
+        np.savetxt(f"{self.loc}/sor_poisson2d_{self.h}_{w}_{nu}.dat",self.dat.T,fmt="%.20g")
+        convert_gnuplotgrid3d(f"{self.loc}/sor_poisson2d_{self.h}_{w}_{nu}.dat")
+        return(solve)
+    
+    def save_omega(self):
+        np.savetxt(f"/home/planck/Desktop/secc_project_proposal/dats/{self.loc}/omega_variation.dat",
+        np.array([list(self.omega.keys()),list(self.omega.values())]).T)
+
+@jit("Tuple((f8[:,:],f8))(f8[:,:],f8,f8,f8[:,:],f8)",nopython=True,cache=True)
+def sor2dpoisson(x,h,overcf=1.9,p=None,rtol=None):
+    k,m = x.shape[0],x.shape[1]
+    if p is None :
+        p = np.zeros(x.shape)
+    if rtol is None :
+        rtol = h**2
+    for f in np.arange(1,1e+6,1):
+        new_x= x.copy()
+        for i in np.arange(0,k,1):
+            for j in np.arange(1,m-1,1):
+                left = new_x[i][j-1]
+                right = new_x[i][j+1]
+                ##Neumann 0 wrt y-axis at y_upper and y_lower bounds 
+                if i == k-1 :
+                    up = new_x[i-1][j]
+                else :
+                    up = new_x[i+1][j]
+                if i == 0 :
+                    down = new_x[i+1][j]
+                else:
+                    down = new_x[i-1][j]
+                new_x[i][j] = new_x[i][j] + ((up+down+right+left + h**2*p[i][j])/4 - new_x[i][j]) * overcf
+        er = np.abs((new_x - x )/ new_x).max()
+        if er<=rtol: 
+            break
+        else:
+            x = new_x.copy()
+    return(new_x,f)
+
+@jit("Tuple((f8[:,:],f8))(f8[:,:],f8,f8[:,:],f8)",nopython=True)
+def jacobi2d(x,h,p=None,rtol=None):
+    k,m = x.shape[0],x.shape[1]
+    if p is None :
+        p = np.zeros(x.shape)
+    if rtol is None :
+        rtol = h**2
+    for f in np.arange(1,1e+6,1):
+        new_x= x.copy()
+        for i in np.arange(0,k,1):
+            for j in np.arange(1,m-1,1):
+                left = x[i][j-1]
+                right = x[i][j+1]
+                ##Neumann 0 wrt y-axis at y_upper and y_lower bounds 
+                if i == k-1 :
+                    up = x[i-1][j]
+                else :
+                    up = x[i+1][j]
+                if i == 0 :
+                    down = x[i+1][j]
+                else:
+                    down = x[i-1][j]
+                new_x[i][j] = ((up+down+right+left + h**2*p[i][j])/4) 
+        er = np.abs((new_x - x) / new_x).max()
+        if er<=rtol: 
+            break
+        else:
+            x = new_x.copy()
+    return(new_x,f)
+
+if __name__ == "__main__":
+    pass
+
+\end{lstlisting}
+The file \textit{cap.py} utilizing all methods and classes to solve the main problem.
+\begin{lstlisting}[language=Python]
+from lib.poisson import *
+import numpy as np
+import time as t
+
+'''Set constants'''
+ep = 8.854e-12
+us = 1
+xs = 1
+'''Set Domain'''
+mm = mesh((0,4),(0,4.4),0.1)
+h = np.diff(mm.x_dom)[0]
+'''Set Dirichlet Boundary value conditions''' 
+'''
+------------upper_y_bound-----------
+lower                           upper
+_x_                             _x_
+bound                           bound
+------------lower_y_bound-----------
+'''
+#lower_bound_y = np.ones((mm.x_dim,))
+#upper_bound_y = np.ones((mm.x_dim,))
+lower_bound_x = np.ones((mm.y_dim,))*5/us
+upper_bound_x = np.ones((mm.y_dim,))*5/us
+mm.dirichlet([lower_bound_x,upper_bound_x,None,None])
+
+'''Set charge distributiion'''
+distri = np.zeros(mm.grid.shape)
+xr,yr = np.round_(mm.X,2),np.round_(mm.Y,2)
+bool_A = ((xr==2) | (xr==1) | (xr==3)) & (yr <=4) 
+bool_B = np.any([xr==0.5,xr==1.5,xr==2.5,xr==3.5],axis=0) & (yr >= 0.4) 
+distri[bool_A] = 2*1e+5*xs**2/us
+distri[bool_B] = -2*1e+5*xs**2/us
+
+'''Create a folder where data gets stored'''
+mm.set_loc("t2")
+
+#Solve poisson
+t1= t.time()
+s1=mm.sor_poisson2d(distri,1.9,nu=us,rtol=1e-8)
+print(s1[1])
+t2= t.time()
+s2=mm.sor_poisson2d(distri,1,nu=us,rtol=1e-8)
+t3= t.time()
+print(s2[1])
+s3=mm.jacobi_poisson2d(distri,us,rtol=1e-8)
+t4= t.time()
+print(s3[1])
+
+#mm.save_omega()
+print(t2-t1)
+print(t3-t2)
+print(t4-t3)
+
+# Variation of iterations with omega
+iter = []
+for i in np.arange(1,2,0.01):
+    iter.append(mm.sor_poisson2d(distri,i,nu=us,rtol=1e-8)[1])
+np.savetxt("omega_variation.dat",np.array([np.arange(1,2,0.01),iter]).T)
+    
+\end{lstlisting}
+\subsubsection{Gnuplot Scripts}
+For plotting variation of no of iterations with $omega$, 
+\begin{lstlisting}[language=Gnuplot]
+set title "Variation of iterations with omega h=0.1, rtol=1e-8"
+set xlabel "omeg "
+set ylabel "No. of iterations for convergence, rtol = e-8"
+set terminal pngcairo
+set terminal png font arial 30 size 2400,1300
+set xrange [1:2]
+set ytics 200
+set xtics 0.1
+set grid xtics,ytics 
+set output 'omega.png'
+plot 'dats/omega_variation.dat' notitle w lp    
+\end{lstlisting} 
+The following script plots the colourmap of the potential scalar field in region $\Omega$,
+\begin{lstlisting}[language=Gnuplot]
+set title "Successive Over-relaxation Method h = 0.0125"
+set xlabel "x "
+set ylabel "y "
+set zlabel "U (Volts)"
+set terminal pngcairo
+set terminal png font arial 32 size 2400,1300
+set xrange [0:4]
+set yrange [0:4.4]
+set samples 80,88
+set isosamples 80,88
+set view 50,50
+set pm3d at bs; set palette rgbformulae 30,31,32
+unset surface
+set view map
+set output 'sor_map.png'
+splot 'dats/dataset4_e-8/sor_poisson2d_0.0125_1_1.dat' notitle 
+\end{lstlisting}

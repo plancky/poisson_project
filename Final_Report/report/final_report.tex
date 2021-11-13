@@ -46,10 +46,30 @@
 \usepackage{float}
 \usepackage{caption,subcaption}
 
-%%Algorithm
+%%Algorithm and code
 \usepackage[vlined,commentsnumbered]{algorithm2e}
 %\usepackage{algpseudocode}
+\usepackage{listings}
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=4}
+\lstset{style=mystyle}
 
+%%table
 \numberwithin{equation}{section}
 \usepackage{tabularx,multirow}
 
@@ -79,7 +99,7 @@
 %%%%%%
 \begin{document}
 \baselineskip 0.7cm
-\title{\bf \color{black}Computational Techniques for solving the Poisson equation }
+\title{\bf \color{black}Computational techniques for solving the Poisson equation }
 \vskip 3cm
 \author{Akarsh Shukla  \\ (2020PHY1216) \and 
 Brahmanand Mishra \\ (2020PHY1184) \and 
@@ -99,11 +119,14 @@ Dr. Mamta and Dr. H. C. Ramo \\
 \pagenumbering{gobble}
 
 \newpage
-
+\topskip0pt
+\vspace*{\fill}
 \abstract{
-    The project report brings light to the application of finite difference method to computationally solve a physics problem belonging to a class of poisson equation. It covers the extensive analysis of various iterative schemes, namely Jacobi,Gauss-Seidel and SOR, used for solving the system of linear equations produced by finite difference method. This report also includes the conversion of physical problem which involves the study of the potential scalar field inside a interleaved parallel plate capacitor to a mathematical one by means of normalisation of variables. A brief discussion has been carried out on the local truncation error of finite difference approximations. Further, the iterative schemes have been analysed on the grounds of no. of iterations and computational time required for reaching relative tolerance. Results and practices carried out in the making of this report certainly lead the reader to beneficial educational insights into computational physics and its application. \\
-    This report is not meant to be a thorough investigation of the problem and should not be seen as a research project.
+    The project report brings light to the application of finite difference method to computationally solve a physics problem belonging to a class of poisson equation. It covers the extensive analysis of various iterative schemes, namely Jacobi,Gauss-Seidel and SOR, used for solving the system of linear equations produced by finite difference method. This report also includes the conversion of physical problem which involves the study of the potential scalar field inside a interleaved parallel plate capacitor to a mathematical one by means of normalisation of variables. A brief discussion has been carried out on the local truncation error of finite difference approximations. Further, the iterative schemes have been analysed on the grounds of number of iterations and computational time required for reaching relative tolerance. Results and practices carried out in the making of this report certainly lead the reader to beneficial educational insights into computational physics and its application. \\
+    This report is not meant to be a thorough investigation of the problem and should not be seen as a research project instead it should be seen as a motivating discussion on the topic demanding further enquiry in the future.
     }
+\vspace*{\fill}
+
 \newpage
 \tableofcontents
 \newpage
@@ -119,5 +142,6 @@ Dr. Mamta and Dr. H. C. Ramo \\
 \newpage
 \section{References}
 \printbibliography[heading = none]
-
+\newpage
+\input{content/appendix.tex}
 \end{document}

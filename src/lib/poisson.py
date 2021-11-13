@@ -128,7 +128,7 @@ def sor2dpoisson(x,h,overcf=1.9,p=None,rtol=None):
                     down = new_x[i-1][j]
                 new_x[i][j] = new_x[i][j] + ((up+down+right+left + h**2*p[i][j])/4 - new_x[i][j]) * overcf
         er = np.abs((new_x - x )/ new_x).max()
-        if er<=rtol: #Why relative error instead of abs ?# significant digits and Decimal places
+        if er<=rtol:
             break
         else:
             x = new_x.copy()
@@ -158,7 +158,7 @@ def jacobi2d(x,h,p=None,rtol=None):
                     down = x[i-1][j]
                 new_x[i][j] = ((up+down+right+left + h**2*p[i][j])/4) 
         er = np.abs((new_x - x) / new_x).max()
-        if er<=rtol: #Why relative error instead of abs ?# significant digits and Decimal places
+        if er<=rtol:
             break
         else:
             x = new_x.copy()
