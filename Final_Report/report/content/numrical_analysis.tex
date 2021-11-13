@@ -13,12 +13,12 @@ To remind ourselves, our problem consists of an interleaved capacitor which is c
     \label{}
 \end{figure}
 \begin{itemize}
-    \item \textbf{Symmetry: } Now since in our arrangement is symmetrical, the resulting solution obtained should also be symmetrical about the line $x = 2$. 
+    \item \textbf{Symmetry: } Now since  our arrangement is symmetrical, the resulting solution obtained should also be symmetrical about the line $x = 2$. 
     \item High Potential near the positively charged plates (i.e. the plates denoted by A  in the figure1) of capacitor and low potential near the negatively charged plates but we are considerig them in two dimension so they will behave as the "line charge distributions. Since we are ensuring the value at the boundary reamins constant at $ +5 volts $ so the distribution should contain a positive spike in value of potential at the location of $A_i$  having positive potential at the beginning and negative spike at places of negative potential
     \item  In region $ \alpha_2 $ potential is fixed at $ + 5 volts $ at $ x = 0 $ and stretches to $ x = 0.5 $ where $ B_1 $ was initially charged with $ - 5 volts $. We expect to see a decline in potential in region $ \alpha_2 $ due to initial conditions across x direction.
     \item The  $ B_1 $ plate extends for $ y \in (0.4, 4.4)  $ so we expect to see concentration of negative charges hence negative potential  for  higher values  of y where initially there was presence of negatively charged potential plate $ B_1 $ and a comparitively higher potential for $ \alpha_1 $ or lower values of y because it is surrounded by two positively charged plates.
-    \item for region $ \alpha_3   $  we expect to see a rise  in potential from $ x = 0.5 $ to $ x = 1 $  because it is surrounded by negatively charged potential plate at $ x = 0.5 $ and postively charged plate at  $ x = 1 $.
-    \item The plate $ A_2 $ ends at the boundary of $ \alpha_4 $ and it is surrounded by two negatively charged plates on both sides so we expect to see a concentration of negatively charged potential in region $ \alpha_4 $.
+    \item For region $ \alpha_3   $  we expect to see a rise  in potential from $ x = 0.5 $ to $ x = 1 $  because it is surrounded by negatively charged potential plate at $ x = 0.5 $ and postively charged plate at  $ x = 1 $.
+    \item The plate $ A_2 $ ends at the boundary of $ \alpha_4 $ and it is surrounded by two negatively charged plates on both sides so we expect to see a concentration of negatively charged potential in region $ \alpha_3 $.
     \item For region $ x \in (1 , 1.5) $ the trend should be similar to region $ \alpha_2 $ and for region $ x \in (1.5, 2) $ we expect  trend to be similar to $ \alpha_4 $ . 
     \item Now due to symmetry we expect to see the potential distribution after $ x = 2 $ same as before it with the line $ x = 2 $ as mirror
 \end{itemize}
@@ -88,12 +88,12 @@ So comparing all the method for computation under identical condition on the bas
 In this section we analyse the results obtained for different values of relaxation factor. \\[2mm]
 \noindent
 \textbf{ Optimum value of Relaxation Factor } \\
-In Successive Over Relaxation we have to choose the value of a relaxation factor which is responsible for the rate of convergence of solution. It's value can be chosen anywhere between 1 to 2 i.e. relaxation factor or $\omega  \in [1,2]$. We observed the variation of No. of iterations required to reach a given tolerance with change in $ \omega $. The following graph represents the graph between number of itereations and value of $\omega$. \\
+In Successive Over Relaxation we have to choose the value of a relaxation factor which is responsible for the rate of convergence of solution. It's value can be chosen anywhere between 1 to 2 i.e. relaxation factor or $\omega  \in [1,2]$. We observed the variation of number of iterations required to reach a given tolerance with change in $ \omega $. The following graph represents the graph between number of itereations and value of $\omega$. \\
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{content/graphs/omega.png}
     \caption{variation of number of iterations for convergence with relative tolerance=$10^{-8}$ and meshsize $h = 0.1$  }
     \label{omega variation}
 \end{figure}
-From the graph we can see that the most optimum value of $ \omega $ is $1.89$ according to number of iterations required to reach the solution.
+From the graph we can see that the most optimum value of $ \omega $ is $1.90$ according to number of iterations required to reach the solution.
 

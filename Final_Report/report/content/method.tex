@@ -59,7 +59,7 @@ Finite difference approximations are obtained by dropping the limit and can be w
 \end{flalign*}
 
 Where $\delta^+_{x} , \delta^-_{x} , \delta_{2x}$ are called the \textbf{finite diference operators} for approximating \textbf{first-order derivatives} and their expansion is called the \textbf{finite difference quotient}, each representing forward,backward and centered respectively.
-Second and Higher order finite difference Quotients can also be obtained,
+Second and Higher order finite difference Quotients can also be obtained using these these operators,
 \begin{align*}
     U_{xx}|_i &= \lim_{h \to 0} \frac{U_x(x_i+\frac{h}{2}) - U_x(x_i-\frac{h}{2})}{h} \\
     &= \lim_{h \to 0} \frac{1}{h} \left[{\frac{U(x+h) - U(x)}{h} - \frac{(U(x)- U(x-h))}{h}}\right]\\
@@ -87,7 +87,7 @@ The vector of coefficients of the function values at various nodes forms what is
 It is fairly obvious to notice that any finite difference operator for any derivative at any node is just a linear combination of the function values at various neighbourhood nodes.   
 
 \subsubsection{Local Truncation Error of Finite Difference Approximations}
-The \textit{'error'} that accompanies \textit{'approximations'} in the method must be acccounted for. In this section, the truncation error in the derivative approximations is ascertained which will later help us deduce the error in PDE's solved using these approximations.
+The \textit{"error"} that accompanies \textit{"approximations"} in the method must also be acccounted for. In this section, the truncation error in the derivative approximations is ascertained which will later help us deduce the error in PDE's solved using these approximations.
 \\[2mm]
 \textbf{The local truncation error for derivative approximations} is defined here as the difference between the exact value of the derivate and the approximated value at node $i$, it can be calculated using Taylor series expansions about $i$,\\[2mm]
 For Forward difference operator,\autocite{mitocw}\autocite{thomas2013numerical}
@@ -189,13 +189,13 @@ and Neumann to,
 \end{align*}
 \subsection{Iterative methods to solve linear algebraic equations}
 
-In the last section we have discussed how to reduce a PDE to a linear combination of function values at various nodes by means of the method of finite differences. If we let the function value at any node as an unknown variable then the stencil when applied to all interior nodes gives rise to a system of linear algebraic equations, which may be very large. A two-dimensional problem like ours may lead to a system of several thousand unknowns, and three-dimensional problems involving several hundred thousand unknowns are common in real engineering situations. The solution of such a system is a major problem in itself as traditional methods like Gaussian-elimination result in large computation times, we are therefore forced to employ faster methods. As we have seen above, the system of equations produced by a discretisation has many special features and an eﬃcient solution procedure must exploit these. The most obvious property of the system is that it is extremely sparse. Even when there are many thousand unknowns, each equation will involve one unknown and the unknowns at its immediate neighbourhood. In particular, if we write the equations in the conventional notation,
+In the last section we have discussed how to reduce a PDE to a linear combination of function values at various nodes by means of the method of finite differences. If we let the function value at any node as an unknown variable then the stencil when applied to all interior nodes gives rise to a system of linear algebraic equations, which may be very large. A two-dimensional problem like ours may lead to a system of several thousand unknowns and the three-dimensional problems involving several hundred thousand unknowns, are common in real engineering situations. The solution of such a system is a major problem in itself because traditional methods like Gaussian-elimination result in large computational times, we are therefore forced to employ faster methods. As we have seen above, the system of equations produced by a discretisation has many special features and an eﬃcient solution procedure must exploit these. The most obvious property of the system is that it is extremely sparse. Even when there are many thousand unknowns, each equation will involve one unknown and the unknowns at its immediate neighbourhood. In particular, if we write the equations in the conventional notation,
 \begin{equation} \label{linear system}
     A \mvec{x} = \mvec{b} 
 \end{equation}
 where A is an N × N matrix, b the given data vector and x the vector of N unknown interior mesh values, there is an implied one-dimensional ordering of these values which is somewhat unnatural and obscures the important property that only immediate neighbours are involved. Each row of the matrix A involves only a very small number of non-zero elements, commonly ﬁve or seven; moreover in many problems a suitable ordering of the unknowns will lead to a matrix in which these non-zero elements occur in a regular pattern. Instead of solving for this vector equation in matrix form we solve by applying the Finite difference equation to each node in the mesh which in practice is the same as solving the vector equation \ref{linear system} but without explicitly stating the matrices $A$ and $b$. Following sections describe the various methods we successfully employed for the same.\autocite{mortonpde}\autocite{tudortmundkuzmin}
 \subsubsection{Jacobi Method}
-Jacobi method starts with a set of intial guess values for the unknowns and then gets new value for the unkowns by substituting the quess values in the equations one at a time,the process is repeated with the newly produced value of the unkowns.\\[2mm]
+Jacobi method starts with a set of initial guess values for the unknowns and then gets new value for the unkowns by substituting the quess values in the equations one at a time,the process is repeated with the newly produced value of the unkowns.\\[2mm]
 \begin{algorithm}[H]
     \textbf{Jacobi Method (X,P,h,$\mathbf{\epsilon_r}$)}\\[-1pt]  
     This verison of jacobi method is optimised for poisson on a uniformly structured rectangular mesh, It takes the initial guess values at all nodes, the stencil and iteratively solves the stencil over all interior nodes unitl the relative tolerance is reached.  \\[2mm]
@@ -250,7 +250,7 @@ The Gauss-Seidel method applies the stencil on the new unkowns as it iterates ov
 
 \subsubsection{Successive Over-Relaxation(SOR)}
 Successive over-relaxation or SOR is a method that belongs to a class of methods called Relaxation methods. 
-Such so-called relaxation methods reached a high state of development in the l940s One result was a modiﬁcation of the Gauss–Seidel procedure which is now called successive over-relaxation or the SOR method.
+Such so-called "relaxation methods" reached a high state of development in the l940s One such result was a modiﬁcation of the Gauss–Seidel procedure which is now called successive over-relaxation or the SOR method.
 Taking the recent values of the unknowns. We proceed by calculating the correction which would be given by the Gauss–Seidel iteration (iterating on new unknowns), and then multiply this correction by $\omega$ before adding to the previous value. The term over-relaxation then implies that $\omega>1$. \\[2mm]
 
 \begin{algorithm}[H]
