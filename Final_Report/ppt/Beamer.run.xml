@@ -82,7 +82,7 @@
       <file>Beamer.bcf</file>
     </requires>
     <requires type="editable">
-      <file>../report/final_report.bib</file>
+      <file>../report/refs.bib</file>
     </requires>
   </external>
 </requests>

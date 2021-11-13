@@ -16,6 +16,10 @@
 */*.aux
 */*.out
 *.synctex.gz
+*.run.xml
+*.fdb_latexmk
+*.bbl
+*.bcf
 */*.fls
 */*.fdb_latexmk
 /src/lib/__pycache__/*.pyc
